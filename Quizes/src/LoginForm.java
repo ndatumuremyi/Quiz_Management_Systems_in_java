@@ -36,30 +36,32 @@ import javax.swing.JOptionPane;
 
  private Stage primaryStage=new Stage();
      @Override
-     public void start(Stage primaryStage) {
+     public void start(Stage primaryStage) 
+     {
      this.primaryStage=primaryStage;
       
-        BorderPane allpage=new BorderPane();
- Label label1=new Label("Quiz Management System");
+        BorderPane allpage=new BorderPane();// border pane to take all layouts of the page 
+ Label label1=new Label("Quiz Management System");//head
  label1.setId("title");
  label1.setMinWidth(primaryStage.getMinWidth());
   label1.setTextFill(Color.rgb(255, 255, 255));
 label1.setPadding(new Insets(1,4,15,50));
  allpage.setTop(label1);
  allpage.setLeft(login());
-allpage.setBottom(getBanner());
+allpage.setBottom(getBanner());//seting the positions of all nodes into the borderpane
  allpage.setRight(Signup());
    allpage.setId("border");
        
          Scene scene = new Scene(allpage, 1500, 700);
-         scene.getStylesheets().add("LoginForm.css");
+         scene.getStylesheets().add("LoginForm.css");//linking to external css file
          primaryStage.setTitle("Lgin Form");
         primaryStage.setScene(scene);
        
         primaryStage.show();
     }
 
- StackPane getBanner(){
+ StackPane getBanner()// function that provides the description
+ {
         StackPane about=new StackPane();
          TextArea description=new TextArea();
          description.setText(description.getText()+"\t\t \t\t In these days the learning procedures has been totally changed\n "
@@ -75,7 +77,7 @@ description.setEditable(false);
         
         return about;
  }
-   GridPane login()
+   GridPane login() // a function for logingin 
   
      {
         
@@ -93,31 +95,32 @@ description.setEditable(false);
       PasswordField passwordfield=new PasswordField();
       passwordfield.setPromptText("Enter the password");
      Label user=new Label("Login as ");
-      ComboBox as=new ComboBox();
+      ComboBox as=new ComboBox();//combobox to choose the loging person
       as.getItems().addAll("Admin","Instructor","Student");
-      as.setValue("Admin");
+      as.setValue("Admin");//setting the value as admin defaultly
       Button submit=new Button("Login..");
 
       loginpane.setPrefSize(700,400);
       
       GridPane.setHalignment(submit, HPos.RIGHT);
    
-     submit.setOnAction(e->{
-         if(as.getValue().equals("Admin"))
+     submit.setOnAction(e->//handeling the event after clicking login
+     {
+         if(as.getValue().equals("Admin"))//checking whether the user is admin and what to see if 
          {
-         if(email.getText().equals("Admin")&& passwordfield.getText().equals("admin"))
+         if(email.getText().equals("Admin")&& passwordfield.getText().equals("admin"))//default user name and password
        {
       
- AdminHomePage adminpage=new AdminHomePage();   
+ AdminHomePage adminpage=new AdminHomePage();   //creating the object of AdminHome page 
  
  Stage stage=new Stage();
  adminpage.start(stage);
- setLoggedInUser(email.getText());
+ setLoggedInUser(email.getText());//calling setloggedinuser and pass through the user name while loging in
  primaryStage.close();
        }
           else{
         
-     JOptionPane.showMessageDialog(null, "User name or password incorect !");
+     JOptionPane.showMessageDialog(null, "User name or password incorect !");//when error in authentiction found
    
           }  
         
@@ -125,7 +128,7 @@ description.setEditable(false);
          }
          
      });
-     loginpane.add(new Label("Login here"),0,0);
+     loginpane.add(new Label("Login here"),0,0);//positioning the nodes in a grid pane
      loginpane.add(username,0,1);
       loginpane.add(email,1,1);
        loginpane.add(password,0,2);
@@ -140,7 +143,7 @@ description.setEditable(false);
   
          
      }
-   GridPane Signup()
+   GridPane Signup()//signup function
    {
        
           GridPane signuppane=new GridPane();
@@ -164,7 +167,7 @@ description.setEditable(false);
     Emailfield.setPromptText("Enter your email address");
     Label user=new Label("Signup as ");
      ComboBox signup_as=new ComboBox();
-      signup_as.getItems().addAll("Admin","Instructor","Student");
+      signup_as.getItems().addAll("Admin","Instructor","Student");// choosing your status
       signup_as.setValue("Admin");
      
       Label PhoneNumber=new Label("Phone number");
@@ -201,10 +204,12 @@ description.setEditable(false);
       signuppane.add(user, 0, 3);
       signuppane.add(signup_as, 1, 3);
       
-      signup_as.setOnAction(new EventHandler() {
+      signup_as.setOnAction(new EventHandler() //what to see according to your status
+      {
               @Override
               public void handle(Event e) {
-                  if(signup_as.getValue().equals("Instructor")){
+                  if(signup_as.getValue().equals("Instructor"))//if your are instructor you have to fill as follow
+                  {
                       signuppane.add(PhoneNumber, 0, 4);
                       signuppane.add(PhoneNumberfield, 1, 4);
                       signuppane.add(Course, 2, 4);
@@ -223,22 +228,14 @@ description.setEditable(false);
       
       return signuppane;
    }
-   public void Close(Stage st)
-   {
-       
-   
-       JOptionPane.showMessageDialog(null, "App is closed !");
-           st.close();  
-       }
-       
-         
-   
+
        
            
        
    
    
-  public void setLoggedInUser(String user) {
+  public void setLoggedInUser(String user)//returns the person that loggedin
+  {
        loggedInUser = user;
        Alert alert = new Alert(Alert.AlertType.INFORMATION);
        alert.setTitle("Successful login");
