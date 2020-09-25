@@ -1,11 +1,10 @@
 
- import static com.sun.glass.ui.Cursor.setVisible;
-import java.awt.Checkbox;
-import java.util.Optional;
 
  import javafx.application.Application;
- import javafx.event.ActionEvent;
- import javafx.event.EventHandler;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 
  import javafx.geometry.Insets;
@@ -15,19 +14,17 @@ import javafx.scene.control.Alert;
 
  import javafx.scene.control.Button;
 
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 
  import javafx.scene.control.Label;
  import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
  import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.TilePane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -36,135 +33,86 @@ import javax.swing.JOptionPane;
  public class LoginForm extends Application {
     public Button bt=new Button("Close",new ImageView("image/close Jframe.png"));
   private String loggedInUser;
- public  Label student=new Label("Student");
-public Label instructor=new Label("Instructor");
- private final Label admin=new Label("Admin");
+
  private Stage primaryStage=new Stage();
      @Override
      public void start(Stage primaryStage) {
      this.primaryStage=primaryStage;
       
-        BorderPane border=new BorderPane();
+        BorderPane allpage=new BorderPane();
  Label label1=new Label("Quiz Management System");
  label1.setId("title");
+ label1.setMinWidth(primaryStage.getMinWidth());
   label1.setTextFill(Color.rgb(255, 255, 255));
 label1.setPadding(new Insets(1,4,15,50));
- border.setTop(label1);
- border.setCenter(getNav());
- //border.setBottom(getBanner());
-   border.setId("border");
+ allpage.setTop(label1);
+ allpage.setLeft(login());
+allpage.setBottom(getBanner());
+ allpage.setRight(Signup());
+   allpage.setId("border");
        
-         Scene scene = new Scene(border, 1500, 700);
+         Scene scene = new Scene(allpage, 1500, 700);
          scene.getStylesheets().add("LoginForm.css");
          primaryStage.setTitle("Lgin Form");
         primaryStage.setScene(scene);
-        //primaryStage.setFullScreen(true);
-          //primaryStage.setFullScreenExitHint("out");
+       
         primaryStage.show();
     }
- private   HBox getNav()
-    {
-     HBox hBox = new HBox(15);
- hBox.setPadding(new Insets(15, 15, 15, 15));
- 
 
-Label[] Users = {student,instructor ,admin};
-for (Label user: Users) {
-    user.setId("labels");
- HBox.setMargin(user, new Insets(0, 0, 0, 15));
- hBox.getChildren().add(user);
-    }
-
-bt.setOnMousePressed(e->Close(primaryStage));
- 
-hBox.getChildren().add(bt);
-hBox.setId("nav");
-bt.setTextFill(Color.RED);
-bt.setAlignment(Pos.TOP_RIGHT);
-bt.setId("close");
- student.setOnMouseClicked(e->login(student));
-  instructor.setOnMouseClicked(e->login(instructor));
-   admin.setOnMouseClicked(e->login(admin));
- 
-
-         return hBox;
-         
-     }
- HBox getBanner(){
-        HBox pn=new HBox();
-         
-       ImageView imageView = new ImageView(new Image("image/banner.png"));
-        pn.setBackground(Background.EMPTY);
-        pn.getChildren().add(imageView);
-        pn.setId("banner");
+ StackPane getBanner(){
+        StackPane about=new StackPane();
+         TextArea description=new TextArea();
+         description.setText(description.getText()+"\t\t \t\t In these days the learning procedures has been totally changed\n "
+                 + "\t\t \t\t Now we are accessing all courses and quizes without the need of face to face meeting \n\n"
+                 + " \t\t \t\t Through this Application Student can remotely do the quizes assigned by their teachers remotely\n\n  \t\t \t\t You all welcome to this app Whoever you are... ");
+        about.getChildren().add(description);
+        description.setId("text");
+description.setEditable(false);
+        about.setId("banner");
         
-      
-        return pn;
+        
+     
+        
+        return about;
  }
-   public Label login(Label lb)
+   GridPane login()
   
      {
-        Stage st=new Stage();
         
-      GridPane pane=new GridPane();
-      pane.setAlignment(Pos.CENTER);
-    pane.setPadding(new Insets(11.5, 12.5, 13.5, 14.5));
-    pane.setHgap(5.5);
-   pane.setVgap(5.5);
-      Label username=new Label("UserName");
-   TextField tx1=new TextField();
-    tx1.setPromptText("Enter the user name");
+      
+      GridPane loginpane=new GridPane();
+      loginpane.setAlignment(Pos.CENTER);
+   loginpane.setPadding(new Insets(11.5, 12.5, 13.5, 14.5));
+    loginpane.setHgap(5.5);
+   loginpane.setVgap(5.5);
+      Label username=new Label("Email");
+   TextField email=new TextField();
+    email.setPromptText("Enter your email");
    
       Label password=new Label("Password");
-      PasswordField pass=new PasswordField();
-      pass.setPromptText("Enter the password");
-      //Label showpassword=new Label("Show password");
-     //CheckBox show=new CheckBox();
-      
-      Button submit=new Button("Submit");
+      PasswordField passwordfield=new PasswordField();
+      passwordfield.setPromptText("Enter the password");
+     Label user=new Label("Login as ");
+      ComboBox as=new ComboBox();
+      as.getItems().addAll("Admin","Instructor","Student");
+      as.setValue("Admin");
+      Button submit=new Button("Login..");
 
-      pane.setPrefSize(700,400);
+      loginpane.setPrefSize(700,400);
       
       GridPane.setHalignment(submit, HPos.RIGHT);
-    /*show.setOnAction(e->{
-  
-        if(show.isSelected())
-        {
-         if(show.isSelected()){
-            
-           pass.setPromptText(pass.getText());
-           pass.setText("");
-           pass.setDisable(true);
-           
-            
-        }
-        else
-        {
-           pass.setText(pass.getPromptText());
-           pass.setPromptText(""); 
-           pass.setDisable(false);
-        }
-        }
-    });
-  try{
-    Connection con=Connections.getcon();
-    }
-    catch(Exception ex)
-    {
-        
-    } */
+   
      submit.setOnAction(e->{
-         if(lb==admin)
+         if(as.getValue().equals("Admin"))
          {
-      
-         if(tx1.getText().equals("Admin")&& pass.getText().equals("admin"))
+         if(email.getText().equals("Admin")&& passwordfield.getText().equals("admin"))
        {
       
  AdminHomePage adminpage=new AdminHomePage();   
  
  Stage stage=new Stage();
  adminpage.start(stage);
- setLoggedInUser(tx1.getText());
+ setLoggedInUser(email.getText());
  primaryStage.close();
        }
           else{
@@ -173,50 +121,108 @@ bt.setId("close");
    
           }  
         
-        st.close();
-     
+        
          }
+         
      });
-     
-  if(lb==admin){
-     pane.add(username,0,0);
-      pane.add(tx1,1,0);
-       pane.add(password,0,1);
-        pane.add(pass,1,1);
-      //  pane.add(showpassword,0,2);
-       // pane.add(show,1,2);
-        pane.add(submit, 0, 2);
-  }
-  else
-  {
-      Label createacount=new Label("Don't have acount ?");
-       Label create=new Label("Signup");
-       create.setId("signup");
-       create.setTextFill(Color.BURLYWOOD);
-    pane.add(username,0,0);
-      pane.add(tx1,1,0);
-       pane.add(password,0,1);
-        pane.add(pass,1,1);
-      //  pane.add(showpassword,0,2);
-        //pane.add(show,1,2);
-        pane.add(submit, 2, 2);
-        pane.add(createacount,0,3);
-        pane.add(create,1,3);
-         create.setOnMousePressed(e->{
-             Signup signup=new Signup();
-             Stage stage=new Stage();
-             signup.start(stage);
-         });
-  }
-       Scene scene = new Scene(pane, 400, 250);
-       
-        boolean add = scene.getStylesheets().add("LoginForm.css");
-         st.setTitle("Lgin Form");
-         st.setScene(scene);
-       st.centerOnScreen();
-         st.show();
-        return lb; 
+     loginpane.add(new Label("Login here"),0,0);
+     loginpane.add(username,0,1);
+      loginpane.add(email,1,1);
+       loginpane.add(password,0,2);
+        loginpane.add(passwordfield,1,2);
+
+        loginpane.add(user, 0, 3);
+
+           loginpane.add(as, 1, 3);
+                 loginpane.add(submit, 2, 3);
+  
+         return loginpane;
+  
+         
      }
+   GridPane Signup()
+   {
+       
+          GridPane signuppane=new GridPane();
+      signuppane.setAlignment(Pos.CENTER);
+    signuppane.setPadding(new Insets(11.5, 12.5, 13.5,5));
+    signuppane.setHgap(5.5);
+   signuppane.setVgap(5.5);
+      Label Fname=new Label("First name");
+   TextField Fnamefield=new TextField();
+    Fnamefield.setPromptText("Enter the first name");
+      Label Lname=new Label("Sur name");
+   TextField Lnamefield=new TextField();
+    Lnamefield.setPromptText("Enter the Last name");
+    Label gender=new Label("Gender");
+    ComboBox select=new ComboBox();
+    ObservableList<String> options =FXCollections.observableArrayList("Male","Female","Other");
+    select.setItems(options);
+    select.setValue("Male");
+      Label Email=new Label("Email");
+   TextField Emailfield=new TextField();
+    Emailfield.setPromptText("Enter your email address");
+    Label user=new Label("Signup as ");
+     ComboBox signup_as=new ComboBox();
+      signup_as.getItems().addAll("Admin","Instructor","Student");
+      signup_as.setValue("Admin");
+     
+      Label PhoneNumber=new Label("Phone number");
+   TextField PhoneNumberfield=new TextField();
+    PhoneNumberfield.setPromptText("Enter the phone number");
+    Label Course=new Label("Course");
+    TextField coursefield=new TextField();
+    coursefield.setPromptText("Enter the Course");
+     Label level=new Label("Level");
+    TextField levelfield=new TextField();
+   levelfield.setPromptText("Enter the Level");
+     Label Password=new Label("Password");
+      PasswordField passwordfield=new PasswordField();
+      passwordfield.setPromptText("Enter the password");
+     Label Password2=new Label("Verify Password");
+      PasswordField verify=new PasswordField();
+      verify.setPromptText("Enter the password");
+       Button sign=new Button("Submit");
+
+     signuppane.setPrefSize(700,400);
+      
+      GridPane.setHalignment(sign, HPos.RIGHT);
+      Label regist =new Label("Register here:");
+      regist.setTextFill(Color.DARKCYAN);
+        signuppane.add(regist,1,0);
+  signuppane.add(Fname,0,1);
+      signuppane.add(Fnamefield,1,1);
+      signuppane.add(Lname, 2, 1);
+      signuppane.add(Lnamefield, 3, 1);
+      signuppane.add(Email, 0, 2);
+      signuppane.add(Emailfield, 1, 2);
+      signuppane.add(gender, 2, 2);
+      signuppane.add(select,3,2);
+      signuppane.add(user, 0, 3);
+      signuppane.add(signup_as, 1, 3);
+      
+      signup_as.setOnAction(new EventHandler() {
+              @Override
+              public void handle(Event e) {
+                  if(signup_as.getValue().equals("Instructor")){
+                      signuppane.add(PhoneNumber, 0, 4);
+                      signuppane.add(PhoneNumberfield, 1, 4);
+                      signuppane.add(Course, 2, 4);
+                      signuppane.add(coursefield, 3, 4);
+                      signuppane.add(level, 0, 5);
+                      signuppane.add(levelfield, 1, 5);
+                      signuppane.add(Password, 2, 5);
+                      signuppane.add(passwordfield, 3, 5);
+                      signuppane.add(Password2, 0, 6);
+                      signuppane.add(verify, 1, 6);
+                      signuppane.add(sign, 2, 6);
+                      signuppane.requestLayout();
+                  }       }
+          });
+     
+      
+      return signuppane;
+   }
    public void Close(Stage st)
    {
        
