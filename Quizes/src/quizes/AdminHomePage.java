@@ -5,7 +5,6 @@ package quizes;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.beans.property.SimpleStringProperty;
@@ -28,70 +27,71 @@ import javax.swing.JOptionPane;
  *
  * @author Kwizera
  */
-public class AdminHomePage extends Application{
-  private  Stage primarStage;
+public class AdminHomePage extends Application {
+
+    private Stage primarStage;
+
     public void start(Stage primaryStage) {
-      
-        this.primarStage=primaryStage;
-       BorderPane border=new BorderPane();
- Label label1=new Label("Quiz Management System");
- label1.setId("title");
-label1.setPadding(new Insets(1,4,15,50));
- border.setTop(label1);
- border.setCenter(getNav());
- 
-         border.setId("border");
-       
-         Scene scene = new Scene(border, 1500, 700);
-         scene.getStylesheets().add("LoginForm.css");
-         primaryStage.setTitle("Lgin Form");
+
+        this.primarStage = primaryStage;
+        BorderPane border = new BorderPane();
+        Label label1 = new Label("Quiz Management System");
+        label1.setId("title");
+        label1.setPadding(new Insets(1, 4, 15, 50));
+        border.setTop(label1);
+        border.setCenter(getNav());
+
+        border.setId("border");
+
+        Scene scene = new Scene(border, 1500, 700);
+        scene.getStylesheets().add("LoginForm.css");
+        primaryStage.setTitle("Lgin Form");
         primaryStage.setScene(scene);
-      //  primaryStage.setFullScreen(true);
-      scene.getStylesheets().add("LoginForm.css");
+        //  primaryStage.setFullScreen(true);
+        scene.getStylesheets().add("LoginForm.css");
         primaryStage.show();
-        
+
     }
-private   HBox getNav()
-    {
-     HBox hBox = new HBox(15);
- hBox.setPadding(new Insets(15, 15, 15, 15));
- 
- Label student=new Label("Student Description");
-Label instructor=new Label("Instructor Description");
-Label addinstructor=new Label("Add_Instructor");
-Label updateinstructor=new Label("update_instructor");
-Label delete=new Label("Delete_instructor");
-Label logout=new Label("Logout");
-logout.setId("logout");
-Label[] Menu = {instructor ,addinstructor,updateinstructor,delete,student,logout};
-for (Label menu: Menu) {
-    menu.setId("menu");
- HBox.setMargin(menu, new Insets(0, 0, 0, 15));
- hBox.getChildren().add(menu);
-    }
+
+    private HBox getNav() {
+        HBox hBox = new HBox(15);
+        hBox.setPadding(new Insets(15, 15, 15, 15));
+
+        Label student = new Label("Student Description");
+        Label instructor = new Label("Instructor Description");
+        Label addinstructor = new Label("Add_Instructor");
+        Label updateinstructor = new Label("update_instructor");
+        Label delete = new Label("Delete_instructor");
+        Label logout = new Label("Logout");
+        logout.setId("logout");
+        Label[] Menu = {instructor, addinstructor, updateinstructor, delete, student, logout};
+        for (Label menu : Menu) {
+            menu.setId("menu");
+            HBox.setMargin(menu, new Insets(0, 0, 0, 15));
+            hBox.getChildren().add(menu);
+        }
 //hBox.getChildren().add(bt);
-hBox.setId("nav");
-logout.setOnMousePressed(e->{
-  int a= JOptionPane.showConfirmDialog(null, "Do you realy want to logout","selected",JOptionPane.YES_NO_OPTION);
-  if(a==0)
-  {
-      JOptionPane.showMessageDialog(null, "you are loging out !");
-      primarStage.close();
-      LoginForm back=new LoginForm();
-      Stage st=new Stage();
-      back.start(st);
-  }
-});
- addinstructor.setOnMousePressed(e->{
-     Add_Instructor inst=new Add_Instructor();
-     Stage instStage=new Stage();
-     instStage.setX(350);
-     instStage.setY(160);
-     instStage.setWidth(500);
-          instStage.setWidth(700);
-     inst.start(instStage);
-});
-return hBox;
+        hBox.setId("nav");
+        logout.setOnMousePressed(e -> {
+            int a = JOptionPane.showConfirmDialog(null, "Do you realy want to logout", "selected", JOptionPane.YES_NO_OPTION);
+            if (a == 0) {
+                JOptionPane.showMessageDialog(null, "you are loging out !");
+                primarStage.close();
+                LoginForm back = new LoginForm();
+                Stage st = new Stage();
+                back.start(st);
+            }
+        });
+        addinstructor.setOnMousePressed(e -> {
+            Add_Instructor inst = new Add_Instructor();
+            Stage instStage = new Stage();
+            instStage.setX(350);
+            instStage.setY(160);
+            instStage.setWidth(500);
+            instStage.setWidth(700);
+            inst.start(instStage);
+        });
+        return hBox;
     }
 
     /**
@@ -100,7 +100,5 @@ return hBox;
     public static void main(String[] args) {
         launch(args);
     }
-    
-}
- 
 
+}

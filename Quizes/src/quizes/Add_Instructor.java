@@ -1,7 +1,6 @@
 package quizes;
 
-
-import Project.Connections;
+import DatabaseConfiguration.Connections;
 import java.awt.HeadlessException;
 import java.sql.*;
 import javafx.application.Application;
@@ -28,61 +27,59 @@ import javafx.stage.Stage;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.swing.JOptionPane;
- 
-public class Add_Instructor extends Application{
- 
+
+public class Add_Instructor extends Application {
+
     private TableView<Instructor> table = new TableView<Instructor>();
-    private final ObservableList<Instructor> data =
-            FXCollections.observableArrayList(
-            );
+    private final ObservableList<Instructor> data
+            = FXCollections.observableArrayList();
     final HBox hb = new HBox();
- 
+
     public static void main(String[] args) {
         launch(args);
     }
- 
-    
+
     @Override
     public void start(Stage stage) {
-        Group gr=new Group();
+        Group gr = new Group();
         Scene scene = new Scene(gr);
         scene.getStylesheets().add("LoginForm.css");
         gr.setAutoSizeChildren(true);
         stage.setTitle("Add an Instructor");
-         stage.setWidth(700);
+        stage.setWidth(700);
         stage.setHeight(1000);
         final Label label = new Label("Add Instructor");
         label.setFont(new Font("Arial", 30));
-        
-         label.setId("table");
+
+        label.setId("table");
         table.setEditable(true);
- 
+
         TableColumn firstNameCol = new TableColumn("First Name");
         firstNameCol.setMinWidth(100);
         firstNameCol.setCellValueFactory(
                 new PropertyValueFactory<Instructor, String>("firstName"));
- 
+
         TableColumn lastNameCol = new TableColumn("Last Name");
         lastNameCol.setMinWidth(100);
         lastNameCol.setCellValueFactory(
                 new PropertyValueFactory<Instructor, String>("lastName"));
- 
+
         TableColumn emailCol = new TableColumn("Email");
         emailCol.setMinWidth(200);
         emailCol.setCellValueFactory(
                 new PropertyValueFactory<Instructor, String>("email"));
-  TableColumn coursecol = new TableColumn("Course");
+        TableColumn coursecol = new TableColumn("Course");
         coursecol.setMinWidth(100);
         coursecol.setCellValueFactory(
                 new PropertyValueFactory<Instructor, String>("course"));
-  TableColumn yearCol = new TableColumn("Year Level");
+        TableColumn yearCol = new TableColumn("Year Level");
         yearCol.setMinWidth(50);
         yearCol.setCellValueFactory(
                 new PropertyValueFactory<Instructor, String>("year"));
- 
+
         table.setItems(data);
-        table.getColumns().addAll(firstNameCol, lastNameCol, emailCol,coursecol,yearCol);
- 
+        table.getColumns().addAll(firstNameCol, lastNameCol, emailCol, coursecol, yearCol);
+
         final TextField addFirstName = new TextField();
         addFirstName.setPromptText("First Name");
         addFirstName.setMaxWidth(firstNameCol.getPrefWidth());
@@ -92,150 +89,142 @@ public class Add_Instructor extends Application{
         final TextField addEmail = new TextField();
         addEmail.setMaxWidth(emailCol.getPrefWidth());
         addEmail.setPromptText("Email");
-        final TextField addCourse=new TextField();
+        final TextField addCourse = new TextField();
         addCourse.setPromptText("Course");
         addCourse.setMaxWidth(coursecol.getPrefWidth());
-         final TextField addYear=new TextField();
+        final TextField addYear = new TextField();
         addYear.setPromptText("Year");
         addYear.setMaxWidth(yearCol.getPrefWidth());
-        
-        final Button addButton = new Button("Add"); 
-    
+
+        final Button addButton = new Button("Add");
+
         addButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                boolean b=true;
-                if(!isValid(addEmail.getText()))
-                {
-                    b=false;
-                     JOptionPane.showMessageDialog(null, "Email is not Valid !"); 
+                boolean b = true;
+                if (!isValid(addEmail.getText())) {
+                    b = false;
+                    JOptionPane.showMessageDialog(null, "Email is not Valid !");
                 }
-                if(addFirstName.getText().equals("")||addLastName.getText().length()<1|| 
-                   addEmail.getText()==null || addCourse.getText()==null||addYear.getText()==null )
-                {
-                    b=false;
+                if (addFirstName.getText().equals("") || addLastName.getText().length() < 1
+                        || addEmail.getText() == null || addCourse.getText() == null || addYear.getText() == null) {
+                    b = false;
                     JOptionPane.showMessageDialog(null, "Please fill all the Fields !");
                 }
-                if(b==true){
-                                  try{
-                                     
-   Connection con=Connections.getcon();
+                if (b == true) {
+                    try {
 
-    Statement st= con.createStatement();
-    st.executeUpdate("INSERT INTO `instructors`(`FName`, `LName`, `Email`, `Course`, `Class`,`Phone_number`) VALUES"
-            + "('"+addFirstName.getText()+"','"+addLastName.getText()+"','"+addEmail.getText()+"','"+addCourse.getText()+"','"+addYear.getText()+"','0788722091')");
-    
-    JOptionPane.showMessageDialog(null, "inserted!");
-    
-                                  }
-    catch( HeadlessException | SQLException ex)
-    {
-      JOptionPane.showMessageDialog(null, ex.getMessage());  
-    }
-                data.add(new Instructor(
-                        addFirstName.getText(),
-                        addLastName.getText(),
-                        addEmail.getText(),
-                        addCourse.getText(),
-                        addYear.getText()));
-                addFirstName.clear();
-                addLastName.clear();
-                addEmail.clear();
-                addCourse.clear();
-                addYear.clear();
-  
-              }
-               
+                        
+
+                        Statement st = Connections.getConnection();
+                        st.executeUpdate("INSERT INTO `instructors`(`FName`, `LName`, `Email`, `Course`, `Class`,`Phone_number`) VALUES"
+                                + "('" + addFirstName.getText() + "','" + addLastName.getText() + "','" + addEmail.getText() + "','" + addCourse.getText() + "','" + addYear.getText() + "','0788722091')");
+
+                        JOptionPane.showMessageDialog(null, "inserted!");
+
+                    } catch (HeadlessException | SQLException ex) {
+                        JOptionPane.showMessageDialog(null, ex.getMessage());
+                    }
+                    data.add(new Instructor(
+                            addFirstName.getText(),
+                            addLastName.getText(),
+                            addEmail.getText(),
+                            addCourse.getText(),
+                            addYear.getText()));
+                    addFirstName.clear();
+                    addLastName.clear();
+                    addEmail.clear();
+                    addCourse.clear();
+                    addYear.clear();
+
+                }
+
             }
-           
-            
-            
+
         });
- 
-        hb.getChildren().addAll(addFirstName, addLastName, addEmail,addCourse,addYear,addButton);
+
+        hb.getChildren().addAll(addFirstName, addLastName, addEmail, addCourse, addYear, addButton);
         hb.setSpacing(3);
- 
+
         final VBox vbox = new VBox();
         vbox.setSpacing(5);
         vbox.setPadding(new Insets(10, 0, 0, 10));
         vbox.getChildren().addAll(label, table, hb);
- 
+
         ((Group) scene.getRoot()).getChildren().addAll(vbox);
- 
+
         stage.setScene(scene);
-        
-        
+
         stage.show();
     }
- 
-  public static  class Instructor {
- 
+
+    public static class Instructor {
+
         private final SimpleStringProperty firstName;
         private final SimpleStringProperty lastName;
         private final SimpleStringProperty email;
- private final SimpleStringProperty course;
- private final SimpleStringProperty year;
-        private Instructor(String fName, String lName, String email,String course,String year) {
+        private final SimpleStringProperty course;
+        private final SimpleStringProperty year;
+
+        private Instructor(String fName, String lName, String email, String course, String year) {
             this.firstName = new SimpleStringProperty(fName);
             this.lastName = new SimpleStringProperty(lName);
             this.email = new SimpleStringProperty(email);
-            this.course=new SimpleStringProperty(course);
-            this.year=new SimpleStringProperty(year);
+            this.course = new SimpleStringProperty(course);
+            this.year = new SimpleStringProperty(year);
         }
- 
+
         public String getFirstName() {
             return firstName.get();
         }
- 
+
         public void setFirstName(String fName) {
             firstName.set(fName);
         }
- 
+
         public String getLastName() {
             return lastName.get();
         }
- 
+
         public void setLastName(String fName) {
             lastName.set(fName);
         }
- 
+
         public String getEmail() {
             return email.get();
         }
- 
+
         public void setEmail(String em) {
             email.set(em);
         }
-        
+
         public String getCourse() {
             return course.get();
         }
- 
+
         public void setCourse(String courses) {
             course.set(courses);
         }
-        
+
         public String getYear() {
             return year.get();
         }
- 
+
         public void setYear(String y) {
             year.set(y);
         }
-        
+
     }
-  static boolean isValid(String email) {
-      boolean result=true;
-      try{
-          InternetAddress emailAddress=new InternetAddress(email);
-          emailAddress.validate();
-      }
-      catch(AddressException ex)
-      {
-          result=false;
-      }
-      return result;
-   }
+
+    static boolean isValid(String email) {
+        boolean result = true;
+        try {
+            InternetAddress emailAddress = new InternetAddress(email);
+            emailAddress.validate();
+        } catch (AddressException ex) {
+            result = false;
+        }
+        return result;
+    }
 
 }
- 

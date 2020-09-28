@@ -183,6 +183,9 @@ public class Forms {
         register.getStyleClass().add("title");
         signUpPane.getChildren().addAll(register,Fname, Fnamefield, Lname, Lnamefield, Email, Emailfield, gender,
                 select, user,signup_as);
+        
+        VBox instructorForm = instructorForms();
+        VBox studentForm = studentForms();
   
       
         signup_as.setOnAction(new EventHandler() //what to see according to your status
@@ -191,15 +194,20 @@ public class Forms {
                  public void handle(Event e) {
                     if(signup_as.getValue().equals("Instructor"))//if your are instructor you have to fill as follow
                         {
-                            signUpPane.getChildren().remove(studentForms());
-                            signUpPane.getChildren().addAll(instructorForms());
+                            signUpPane.getChildren().remove(studentForm);
+                            
+                            signUpPane.getChildren().add(instructorForm);
                                                   
                             signUpPane.requestLayout();
                         }
                     else if(signup_as.getValue().equals("Student")){
-                        signUpPane.getChildren().remove(instructorForms());
-                        signUpPane.getChildren().addAll(studentForms());
+                        signUpPane.getChildren().remove(instructorForm);
+                        signUpPane.getChildren().add(studentForm);
                         
+                    }
+                    else{
+                        signUpPane.getChildren().remove(studentForm);
+                        signUpPane.getChildren().remove(instructorForm);
                     }
                  }
             });
