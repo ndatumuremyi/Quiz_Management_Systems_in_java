@@ -1,3 +1,5 @@
+package quizes;
+
 
 import Project.Connections;
 import java.awt.HeadlessException;

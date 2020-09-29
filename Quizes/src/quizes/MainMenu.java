@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package quizes;
 
-/**
- *
- * @author paterne
- */
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -36,7 +27,7 @@ public final class MainMenu extends MenuBar{
     Menu aboutUs = new Menu("about Us"); 
     public MainMenu(){
         addItems();
-        getMenus().addAll(fileMenu, viewMenu, aboutUs, help);
+        boolean addAll = getMenus().addAll(fileMenu, viewMenu, aboutUs, help);
         setStyle("-fx-font-size:13px");
         
         zoomIn.setOnAction(eh ->{

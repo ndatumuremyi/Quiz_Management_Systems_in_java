@@ -1,16 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package quizes;
+
+
 
 /**
  *
  * @author paterne
  */
 
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -18,9 +14,6 @@ import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 
 import javafx.scene.control.Button;
 
@@ -28,16 +21,9 @@ import javafx.scene.control.ComboBox;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
  
@@ -183,6 +169,9 @@ public class Forms {
         register.getStyleClass().add("title");
         signUpPane.getChildren().addAll(register,Fname, Fnamefield, Lname, Lnamefield, Email, Emailfield, gender,
                 select, user,signup_as);
+        
+        VBox instructorForm = instructorForms();
+        VBox studentForm = studentForms();
   
       
         signup_as.setOnAction(new EventHandler() //what to see according to your status
@@ -191,15 +180,20 @@ public class Forms {
                  public void handle(Event e) {
                     if(signup_as.getValue().equals("Instructor"))//if your are instructor you have to fill as follow
                         {
-                            signUpPane.getChildren().remove(studentForms());
-                            signUpPane.getChildren().addAll(instructorForms());
+                            signUpPane.getChildren().remove(studentForm);
+                            
+                            signUpPane.getChildren().add(instructorForm);
                                                   
                             signUpPane.requestLayout();
                         }
                     else if(signup_as.getValue().equals("Student")){
-                        signUpPane.getChildren().remove(instructorForms());
-                        signUpPane.getChildren().addAll(studentForms());
+                        signUpPane.getChildren().remove(instructorForm);
+                        signUpPane.getChildren().add(studentForm);
                         
+                    }
+                    else{
+                        signUpPane.getChildren().remove(studentForm);
+                        signUpPane.getChildren().remove(instructorForm);
                     }
                  }
             });
