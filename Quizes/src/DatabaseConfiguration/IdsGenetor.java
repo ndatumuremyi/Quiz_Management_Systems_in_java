@@ -11,6 +11,7 @@ package DatabaseConfiguration;
  */
 import java.sql.*;
 
-public class Connect {
+public class IdsGenetor { 
+    
     
 }

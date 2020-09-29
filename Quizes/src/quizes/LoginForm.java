@@ -43,7 +43,7 @@ public class LoginForm extends Application {
         
         ScrollPane scroll = new ScrollPane(allpage);
 
-        Scene scene = new Scene(scroll, 1500, 700);
+        Scene scene = new Scene(scroll);
         scene.getStylesheets().add("style.css");//linking to external css file
         primaryStage.setTitle("Lgin Form");
         primaryStage.setScene(scene);
