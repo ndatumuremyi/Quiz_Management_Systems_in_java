@@ -48,7 +48,7 @@ public class Add_Instructor extends Application{
     public void start(Stage stage) {
         Group gr=new Group();
         Scene scene = new Scene(gr);
-        scene.getStylesheets().add("LoginForm.css");
+        scene.getStylesheets().add("quizes/LoginForm.css");
         gr.setAutoSizeChildren(true);
         stage.setTitle("Add an Instructor");
          stage.setWidth(700);

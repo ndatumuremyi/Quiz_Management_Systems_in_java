@@ -39,11 +39,11 @@ label1.setPadding(new Insets(1,4,15,50));
          border.setId("border");
        
          Scene scene = new Scene(border, 1500, 700);
-         scene.getStylesheets().add("LoginForm.css");
+         
          primaryStage.setTitle("Lgin Form");
         primaryStage.setScene(scene);
       //  primaryStage.setFullScreen(true);
-      scene.getStylesheets().add("LoginForm.css");
+      scene.getStylesheets().add("quizes/LoginForm.css");
         primaryStage.show();
         
     }

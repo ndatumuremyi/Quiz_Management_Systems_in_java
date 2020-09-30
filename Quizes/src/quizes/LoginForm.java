@@ -44,7 +44,7 @@ public class LoginForm extends Application {
         ScrollPane scroll = new ScrollPane(allpage);
 
         Scene scene = new Scene(scroll, 1500, 700);
-        scene.getStylesheets().add("style.css");//linking to external css file
+        scene.getStylesheets().add("quizes/style.css");//linking to external css file
         primaryStage.setTitle("Lgin Form");
         primaryStage.setScene(scene);
 
