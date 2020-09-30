@@ -10,9 +10,11 @@ package quizes;
 
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -76,15 +78,15 @@ logout.setOnMousePressed(e->{
       back.start(st);
   }
 });
- addinstructor.setOnMousePressed(e->{
+ addinstructor.setOnMousePressed((MouseEvent e) -> {
      Add_Instructor inst=new Add_Instructor();
      Stage instStage=new Stage();
      instStage.setX(350);
      instStage.setY(160);
      instStage.setWidth(500);
-          instStage.setWidth(700);
+     instStage.setWidth(700);
      inst.start(instStage);
-});
+     });
 return hBox;
     }
 

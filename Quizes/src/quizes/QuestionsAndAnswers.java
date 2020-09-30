@@ -15,6 +15,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -28,6 +30,7 @@ public class QuestionsAndAnswers extends Application {
 Stage primaryStage=new Stage();
     @Override
     public void start(Stage primaryStage) {
+        this.primaryStage=primaryStage;
 
         try {
             StackPane root = new StackPane();
@@ -56,6 +59,7 @@ Stage primaryStage=new Stage();
         VBox AnswersPane = new VBox();
 
         AnswersPane.setPadding(new Insets(20, 12.5, 20, 14.5));
+        AnswersPane.setSpacing(10.5);
 
         ArrayList<String> RealAnswer = new ArrayList<>();
         
@@ -85,7 +89,7 @@ Stage primaryStage=new Stage();
                         TextField posibleAnswers = new TextField();//textField where the proposed answers are writen
                         posibleAnswers.setPromptText("Enter the choice " + (i + 1));
 
-                        CheckBox choose = new CheckBox("choose correct answer " + (i + 1));  //checkbox to tick where the real answers are
+                        CheckBox choose = new CheckBox("choose correct as answer  " + (i + 1));  //checkbox to tick where the real answers are
 
                         //inputs.add(input);
                         AnswersPane.getChildren().add(choose);
@@ -169,25 +173,29 @@ Stage primaryStage=new Stage();
                                     //Save.setDisable(true);//setting save button disabled
                                 });
                                // }
+                               Button clear=new Button("clear");
                                Button Addnew=new Button("Add new");
                                Addnew.setOnAction(add->{
                                     primaryStage.close();
-                         StackPane root = new StackPane();
-            root.getChildren().add(getAnswers());
-
-            Scene scene = new Scene(root, 600, 400);
-
-            primaryStage.setTitle("Proved the quiz!");
-            primaryStage.setScene(scene);
-            primaryStage.show();
+                        questioning.setPromptText("Enter the other question");
+                                     primaryStage.show();
                                });
-                    
+                    clear.setOnAction(clearing->{
+                        questioning.clear();
+                          for (int v = 0; v < number; v++)
+                                       {
+                                            
+                                       answers.get(v).clear();
+                                         choices.get(v).setSelected(false);
+                                         
+                                   } 
+                    });
 Button Exit=new Button("Exit");
 Exit.setOnAction(exit->{
-  int n=  JOptionPane.showConfirmDialog(null, "Do you realy want to stop giving quiz?");
+  int n=  JOptionPane.showConfirmDialog(null, "Do you realy want to stop giving quiz?","",JOptionPane.YES_NO_OPTION);
     if(n==0){
-       
-    System.exit(0);
+        primaryStage.close();
+   
     }
     if(n==1)
     { 
@@ -195,11 +203,14 @@ Exit.setOnAction(exit->{
         JOptionPane.showMessageDialog(null, "Stay tuned to giving quiz!");
     }
 });
-                    AnswersPane.getChildren().add(Save);
+         HBox Actions=new HBox(); 
+         Actions.setPadding(new Insets(10,5,10,5));
+         Actions.setSpacing(0xa);//spacing value in hexadecimal
+         Actions.getChildren().addAll(Save,Addnew,clear,Exit);
+
+AnswersPane.getChildren().add(Actions);
                  
-               
-AnswersPane.getChildren().add(Addnew);
-AnswersPane.getChildren().add(Exit);
+
                   AddQuestion.setDisable(true);//setting start quiz button disabled
                                 
                 });
