@@ -15,14 +15,14 @@ public class Connections {
         try{
             Class.forName("com.mysql.jdbc.Driver");
             
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/javabook", "scott", "tiger");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/qms", "scott", "tiger");
             Statement statement = connection.createStatement();
             
             return statement;
         }
         
         catch (ClassNotFoundException | SQLException ex){
-            
+            System.out.println("fail to connect to database");
         }
         return null;
         
