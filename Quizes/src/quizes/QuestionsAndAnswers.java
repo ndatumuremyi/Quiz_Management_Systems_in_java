@@ -1,7 +1,7 @@
 package quizes;
 
 
-import quizes.Project.Connections;
+import DatabaseConfiguration.Connections;
 import java.awt.HeadlessException;
 import java.sql.*;
 import java.util.ArrayList;

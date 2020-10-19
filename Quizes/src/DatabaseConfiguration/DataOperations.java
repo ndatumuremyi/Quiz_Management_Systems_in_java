@@ -15,8 +15,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 public class DataOperations {
     
-    Statement statement = Connections.getConnection();
-    
+    Connection con = Connections.getcon();
+    Statement statement;
+
+    public DataOperations() {
+        try {
+            this.statement = con.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(DataOperations.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     /*
     **********************************************************************************************************************

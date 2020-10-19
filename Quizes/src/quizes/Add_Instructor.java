@@ -3,7 +3,7 @@ package quizes;
 
 
 
-import quizes.Project.Connections;
+import DatabaseConfiguration.Connections;
 import java.awt.HeadlessException;
 import java.sql.*;
 import javafx.application.Application;

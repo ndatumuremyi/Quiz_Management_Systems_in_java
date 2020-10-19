@@ -6,7 +6,7 @@ package quizes;
  *
  * @author paterne
  */
-
+import DatabaseConfiguration.Connections;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -72,7 +72,7 @@ public class Forms {
     loginPane.setPrefSize(700,400);
       
     GridPane.setHalignment(submit, HPos.RIGHT);
-      Connection con=quizes.Project.Connections.getcon();
+      Connection con=Connections.getcon();
                     
                     Statement st= con.createStatement();
                     
@@ -88,7 +88,7 @@ public class Forms {
                     String username1 = result.getString("Name");
                     String password1 = result.getString("password");
                     setUsername(username1);
-                    GetUserName User=new GetUserName();
+                    GetUserName User=new GetUserName();//creating an instance of Getuser class
                     User.setLoggedinUser(getuser());
                     AdminHomePage adminpage=new AdminHomePage();   //creating the object of AdminHome page
                     adminpage.setLoggedinUser(User.DisplayLoggedin());
