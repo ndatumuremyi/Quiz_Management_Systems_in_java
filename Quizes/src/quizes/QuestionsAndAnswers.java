@@ -1,21 +1,18 @@
 package quizes;
 
 
-import Project.Connections;
+import quizes.Project.Connections;
 import java.awt.HeadlessException;
 import java.sql.*;
 import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -86,16 +83,19 @@ Stage primaryStage=new Stage();
                     ArrayList<TextField> answers = new ArrayList<>();
 
                     for (int i = 0; i < number; i++) {
+                        HBox Answerspane=new HBox();
                         TextField posibleAnswers = new TextField();//textField where the proposed answers are writen
                         posibleAnswers.setPromptText("Enter the choice " + (i + 1));
 
                         CheckBox choose = new CheckBox("choose correct as answer  " + (i + 1));  //checkbox to tick where the real answers are
 
                         //inputs.add(input);
-                        AnswersPane.getChildren().add(choose);
+Answerspane.getChildren().addAll(choose,posibleAnswers);
+                        //AnswersPane.getChildren().add(choose);
                         choices.add(choose);
-                        AnswersPane.getChildren().add(posibleAnswers);
+                       // AnswersPane.getChildren().add(posibleAnswers);
                         answers.add(posibleAnswers);
+                        AnswersPane.getChildren().add(Answerspane);
                         
                     }
                         
@@ -129,24 +129,24 @@ Stage primaryStage=new Stage();
                                             Statement statement =con.createStatement(); //creating statement
                                             statement.executeUpdate("INSERT INTO quizes(Question) VALUES ('" + Problem + "');");//sql queries
                                              String coma=" ";
-                                            /*StringBuilder getproposedanswers=new StringBuilder();
+                                            StringBuilder getproposedanswers=new StringBuilder();
                                             for (String proposed : ProposedAnswers) {
                                                 getproposedanswers.append(coma);
                                                 getproposedanswers.append(proposed);
                                                coma=","; 
 
                                             }
-                                           */
-                                            statement.executeUpdate("UPDATE quizes SET ProposedAnswers = ('" + ProposedAnswers.toString() + "')where Question='" + Problem + "';");
-                                           /* StringBuilder getreal=new StringBuilder();
+                                           
+                                            statement.executeUpdate("UPDATE quizes SET ProposedAnswers = ('" + getproposedanswers.toString() + "')where Question='" + Problem + "';");
+                                            StringBuilder getreal=new StringBuilder();
                                             for (String Real : RealAnswer) {
                                              
                                               getreal.append(coma);
                                                getreal.append(Real);
                                                 coma=",";
                                             }
-                                            */
-                                            statement.executeUpdate("UPDATE quizes SET Answer=('" + RealAnswer.toString() + "')where Question='" + Problem + "';");
+                                            
+                                            statement.executeUpdate("UPDATE quizes SET Answer=('" + getreal.toString() + "')where Question='" + Problem + "';");
 
                                             JOptionPane.showMessageDialog(null, "Saved successfully !");//if data are saved
 

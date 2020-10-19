@@ -8,17 +8,24 @@ package quizes;
  * and open the template in the editor.
  */
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
+import static sun.management.snmp.jvminstr.JvmThreadInstanceEntryImpl.ThreadStateMap.Byte0.runnable;
 
 /**
  *
@@ -26,15 +33,25 @@ import javax.swing.JOptionPane;
  */
 public class AdminHomePage extends Application{
   private  Stage primarStage;
+   BorderPane border;
+   VBox logged;
+  @Override
     public void start(Stage primaryStage) {
       
         this.primarStage=primaryStage;
-       BorderPane border=new BorderPane();
+       border=new BorderPane();
  Label label1=new Label("Quiz Management System");
  label1.setId("title");
 label1.setPadding(new Insets(1,4,15,50));
  border.setTop(label1);
  border.setCenter(getNav());
+
+                            VBox user=getLoggedinUser();
+                          
+                            border.setLeft(user);
+      
+
+ 
  
          border.setId("border");
        
@@ -75,7 +92,11 @@ logout.setOnMousePressed(e->{
       primarStage.close();
       LoginForm back=new LoginForm();
       Stage st=new Stage();
-      back.start(st);
+      try {
+          back.start(st);
+      } catch (SQLException ex) {
+          Logger.getLogger(AdminHomePage.class.getName()).log(Level.SEVERE, null, ex);
+      }
   }
 });
  addinstructor.setOnMousePressed((MouseEvent e) -> {
@@ -97,6 +118,16 @@ return hBox;
         launch(args);
     }
     
+ 
+   public void setLoggedinUser(VBox user)
+   {
+       this.logged=user;
+       
+   }
+    public VBox getLoggedinUser()
+   {
+       return logged;
+   }
 }
  
 

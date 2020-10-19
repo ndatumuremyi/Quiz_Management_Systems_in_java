@@ -1,5 +1,6 @@
 package quizes;
 
+import java.sql.SQLException;
 import javafx.application.Application;
 
 import javafx.scene.Scene;
@@ -20,15 +21,15 @@ public class LoginForm extends Application {
     public Button bt = new Button("Close");
     private String loggedInUser; //this valiable store logged in user
 
-    private Stage primaryStage = new Stage();
+    public Stage primaryStage = new Stage();
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws SQLException {
         this.primaryStage = primaryStage;
 
         BorderPane allpage = new BorderPane();// border pane to take all layouts of the page 
 
-        Label title = new Label("Quiz Management System");//head
+        Label title = new Label();//head
         title.setId("mainTitle");
         title.setMinWidth(primaryStage.getMinWidth());
         Pane footer = footer();
@@ -64,6 +65,7 @@ public class LoginForm extends Application {
         about.setId("banner");
 
         return about;
+        
     }
 
     // a function for logingin
@@ -77,8 +79,13 @@ public class LoginForm extends Application {
         alert.setContentText(s);
         alert.show();
     }
+    public void closewindow()
+    {
+      this.primaryStage.close();
+    }
 
     public static void main(String[] args) {
         launch(args);
+        
     }
 }

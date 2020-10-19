@@ -3,7 +3,7 @@ package quizes;
 
 
 
-import Project.Connections;
+import quizes.Project.Connections;
 import java.awt.HeadlessException;
 import java.sql.*;
 import javafx.application.Application;
@@ -12,7 +12,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -24,7 +23,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javax.mail.internet.AddressException;
@@ -33,7 +31,7 @@ import javax.swing.JOptionPane;
  
 public class Add_Instructor extends Application{
  
-    private TableView<Instructor> table = new TableView<Instructor>();
+    private final TableView<Instructor> table = new TableView<>();
     private final ObservableList<Instructor> data =
             FXCollections.observableArrayList(
             );
@@ -103,37 +101,35 @@ public class Add_Instructor extends Application{
         
         final Button addButton = new Button("Add"); 
     
-        addButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                boolean b=true;
-                if(!isValid(addEmail.getText()))
-                {
-                    b=false;
-                     JOptionPane.showMessageDialog(null, "Email is not Valid !"); 
+        addButton.setOnAction((ActionEvent e) -> {
+            boolean b=true;
+            if(!isValid(addEmail.getText()))
+            {
+                b=false;
+                JOptionPane.showMessageDialog(null, "Email is not Valid !");
+            }
+            if(addFirstName.getText().equals("")||addLastName.getText().length()<1|| 
+                    addEmail.getText()==null || addCourse.getText()==null||addYear.getText()==null )
+            {
+                b=false;
+                JOptionPane.showMessageDialog(null, "Please fill all the Fields !");
+            }
+            if(b==true){
+                try{
+                    
+                    Connection con=Connections.getcon();
+                    
+                    Statement st= con.createStatement();
+                    st.executeUpdate("INSERT INTO `instructors`(`FName`, `LName`, `Email`, `Course`, `Class`,`Phone_number`) VALUES"
+                            + "('"+addFirstName.getText()+"','"+addLastName.getText()+"','"+addEmail.getText()+"','"+addCourse.getText()+"','"+addYear.getText()+"','0788722091')");
+                    
+                    JOptionPane.showMessageDialog(null, "inserted!");
+                    
                 }
-                if(addFirstName.getText().equals("")||addLastName.getText().length()<1|| 
-                   addEmail.getText()==null || addCourse.getText()==null||addYear.getText()==null )
+                catch( HeadlessException | SQLException ex)
                 {
-                    b=false;
-                    JOptionPane.showMessageDialog(null, "Please fill all the Fields !");
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
                 }
-                if(b==true){
-                                  try{
-                                     
-   Connection con=Connections.getcon();
-
-    Statement st= con.createStatement();
-    st.executeUpdate("INSERT INTO `instructors`(`FName`, `LName`, `Email`, `Course`, `Class`,`Phone_number`) VALUES"
-            + "('"+addFirstName.getText()+"','"+addLastName.getText()+"','"+addEmail.getText()+"','"+addCourse.getText()+"','"+addYear.getText()+"','0788722091')");
-    
-    JOptionPane.showMessageDialog(null, "inserted!");
-    
-                                  }
-    catch( HeadlessException | SQLException ex)
-    {
-      JOptionPane.showMessageDialog(null, ex.getMessage());  
-    }
                 data.add(new Instructor(
                         addFirstName.getText(),
                         addLastName.getText(),
@@ -145,13 +141,8 @@ public class Add_Instructor extends Application{
                 addEmail.clear();
                 addCourse.clear();
                 addYear.clear();
-  
-              }
-               
+
             }
-           
-            
-            
         });
  
         hb.getChildren().addAll(addFirstName, addLastName, addEmail,addCourse,addYear,addButton);

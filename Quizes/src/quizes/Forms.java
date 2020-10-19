@@ -7,8 +7,15 @@ package quizes;
  * @author paterne
  */
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -28,10 +35,11 @@ import javafx.stage.Stage;
 import javax.swing.JOptionPane;
  
 public class Forms {
+    private TextField email;
     String[] classes = {"S1","S2","S3","S4MPC","S5MPC","S6MPC"};
  
  
-    VBox login()  {
+    VBox login() throws SQLException  {
       /* **********************************************************************************************************
     *********************************************************************************************************
    
@@ -49,7 +57,7 @@ public class Forms {
     loginPane.setPadding(new Insets(11.5, 12.5, 13.5, 14.5));
     
     Label username=new Label("Email");
-    TextField email=new TextField();
+     email=new TextField();
     email.setPromptText("Enter your email");
    
     Label password=new Label("Password");
@@ -64,33 +72,61 @@ public class Forms {
     loginPane.setPrefSize(700,400);
       
     GridPane.setHalignment(submit, HPos.RIGHT);
-    
-    //handeling the event after clicking login
-    submit.setOnAction(e->{
-        //checking whether the user is admin and what to see if
-         if(as.getValue().equals("Admin"))
-             {
-                 //default user name and password
-                 if(email.getText().equals("Admin")&& passwordfield.getText().equals("admin"))
-                    {
+      Connection con=quizes.Project.Connections.getcon();
                     
-      
-                         AdminHomePage adminpage=new AdminHomePage();   //creating the object of AdminHome page 
- 
+                    Statement st= con.createStatement();
+                    
+                     
+                    
+    //handeling the event after clicking loginString username1;
+    submit.setOnAction(new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent e) {
+            try {
+                String query="SELECT * FROM `admin` WHERE `Name`='"+email.getText()+"'and password='"+passwordfield.getText()+"'";
+             ResultSet  result= st.executeQuery(query);
+             if(as.getValue().equals("Admin"))
+            {
+               if(result.next())
+                    {
+                        String username=result.getString("Name");
+                        String password=result.getString("password");
+                        setUsername(username);
+                        GetUserName User=new GetUserName();
+                        User.setLoggedinUser(getuser());
+                        
+                        AdminHomePage adminpage=new AdminHomePage();   //creating the object of AdminHome page
+                        adminpage.setLoggedinUser(User.DisplayLoggedin());
+                        
                         Stage stage=new Stage();
+                        
                         adminpage.start(stage);
- //                       LoginForm.setLoggedInUser(email.getText());//calling setloggedinuser and pass through the user name while loging in
- //                         primaryStage.close();
+                        //                       LoginForm.setLoggedInUser(email.getText());//calling setloggedinuser and pass through the user name while loging in
+                        //                         primaryStage.close();
+                        
                     }
-                else{
-        
+                    
+                    else{
+                        
                         JOptionPane.showMessageDialog(null, "User name or password incorect !");//when error in authentiction found
-   
-                }  
-        
-        
+                        
+                    }  
+            } }
+             catch (SQLException ex) {
+                Logger.getLogger(Forms.class.getName()).log(Level.SEVERE, null, ex);
             }
-         
+            
+            //checking whether the user is admin and what to see if
+           
+                
+                
+                
+                    //default user name and password
+                   
+                }
+                
+            
+        
     });
      Label loginHere = new Label("Login here");
      loginHere.getStyleClass().add("title");
@@ -120,6 +156,24 @@ public class Forms {
     
     
 }
+        /* 
+    
+    Returning te username
+    
+    */
+    String user;
+    public void setUsername(String str)
+    {
+        
+        user=str;
+    }
+    public String getuser()
+    {
+        return user;
+    }
+ 
+    
+    
     VBox Signup()//signup function
    {
      /* **********************************************************************************************************
