@@ -32,7 +32,7 @@ import static sun.management.snmp.jvminstr.JvmThreadInstanceEntryImpl.ThreadStat
  * @author Kwizera
  */
 public class AdminHomePage extends Application{
-  private  Stage primarStage;
+   private Stage primarStage;
    BorderPane border;
    VBox logged;
   @Override
@@ -85,19 +85,7 @@ for (Label menu: Menu) {
 //hBox.getChildren().add(bt);
 hBox.setId("nav");
 logout.setOnMousePressed(e->{
-  int a= JOptionPane.showConfirmDialog(null, "Do you realy want to logout","selected",JOptionPane.YES_NO_OPTION);
-  if(a==0)
-  {
-      JOptionPane.showMessageDialog(null, "you are loging out !");
-      primarStage.close();
-      LoginForm back=new LoginForm();
-      Stage st=new Stage();
-      try {
-          back.start(st);
-      } catch (SQLException ex) {
-          Logger.getLogger(AdminHomePage.class.getName()).log(Level.SEVERE, null, ex);
-      }
-  }
+ new GetUserName().Logout(primarStage);
 });
  addinstructor.setOnMousePressed((MouseEvent e) -> {
      Add_Instructor inst=new Add_Instructor();

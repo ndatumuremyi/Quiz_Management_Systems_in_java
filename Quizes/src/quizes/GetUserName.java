@@ -5,15 +5,21 @@
  */
 package quizes;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Kwizera
  */
 public class GetUserName {
+    Stage stage;
     String UserName;
  VBox user=new VBox();
  /* Method to set the loggedin person and add it 
@@ -37,6 +43,23 @@ public class GetUserName {
        loggeduser.getChildren().addAll(new ImageView("quizes/image/user.png"),getLoggedinUser());
      
        return loggeduser;
+   }
+   public void Logout(Stage stage)
+   {
+        int a= JOptionPane.showConfirmDialog(null, "Do you realy want to logout","Logout",JOptionPane.YES_NO_OPTION);
+  if(a==0)
+  {
+      JOptionPane.showMessageDialog(null, "you are loging out !");
+ 
+    stage.close();
+      LoginForm back=new LoginForm();
+      Stage st=new Stage();
+      try {
+          back.start(st);
+      } catch (SQLException ex) {
+          Logger.getLogger(AdminHomePage.class.getName()).log(Level.SEVERE, null, ex);
+      }
+  }
    }
  
     
