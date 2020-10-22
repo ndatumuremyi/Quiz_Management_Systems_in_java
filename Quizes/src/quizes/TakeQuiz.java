@@ -5,19 +5,22 @@ package quizes;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import DatabaseConfiguration.Connections;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -60,8 +63,8 @@ public class TakeQuiz extends Application {
             {
                 ArrayList<String> Problems=new ArrayList<>();
                 try{
-                 
                  Statement st=Connections.getConnection();
+                 
                  ResultSet Result=st.executeQuery("SELECT `Question` FROM `quizes`");
                  while(Result.next())
                  {
@@ -75,61 +78,65 @@ public class TakeQuiz extends Application {
                                  StudentQuizAssessment.getChildren().add(new Label(result1.getString(2)));
              StudentQuizAssessment.getChildren().add(AddNew);
              ArrayList<String> Answers=new ArrayList<>();
-             // ArrayList<String> ProposedAnswers=new ArrayList<>();
-               ArrayList<String> RealAnswers=new ArrayList<>();
-                     
+             ArrayList<String> ProposedAnswers=new ArrayList<>();
                
-               
-               
-               
-               
-               
-               
-               
-               
-               
-               
-               
-               
-               
-               
-               
-               
-               
-                             ResultSet result2=st.executeQuery("select Question,ProposedAnswers,Answer from quizes");
-                             
-                             
-                             
-                         
-                         
-                    AddNew.setOnAction(add->{ 
+                      ResultSet result2=st.executeQuery("select Question,ProposedAnswers,Answer from quizes where QuestionNumber>'"+5+"'");
+                     AddNew.setOnAction(add->{ 
                      try {
                          String quest=new String();
                          Label question=new Label();
                          String proposed =new String();
                          Label proposing=new Label();
-                         
-                         
-                         
-                         
-                         if(result2.next())
+                           ArrayList<CheckBox> CheckBoxchoices = new ArrayList<>();
+                           ArrayList<RadioButton> RadioButtonchoice = new ArrayList<>();
+                           List<String> proposedelements = new ArrayList<>();
+                           List<String> RealAnswers=new ArrayList<>();
+                   if(result2.next())
                          {
                              quest=result2.getString(1);
                              Answers.add(quest);
                              question.setText(quest);
                              String answer=result2.getString(3);
-                             
+                             String Real[]=answer.split(",");
+                             RealAnswers=Arrays.asList(Real);
                              proposed=result2.getString(2);
                              
-                             proposing.setText(proposed);
+                            
+                            String elments[]=proposed.split(",");
+                            proposedelements=Arrays.asList(elments);
+                         
                              
                          }
                          
-                         
-                         
-                         
                          StudentQuizAssessment.getChildren().add(question);
-                         StudentQuizAssessment.getChildren().add(proposing); 
+                         
+                                  //checkbox to tick where the real answers are
+                                  if(RealAnswers.size()>1)
+                                  {
+                           
+                           for(int i=0;i<proposedelements.size();i++)  
+                           {
+                               HBox Answerspane=new HBox();
+                                CheckBox choose = new CheckBox( );
+                               Answerspane.getChildren().addAll(choose,new Label(proposedelements.get(i)));
+                            
+                         StudentQuizAssessment.getChildren().add( Answerspane); 
+                           }
+                                  }
+                                  else
+                                  {
+                     
+                                      for(int i=0;i<proposedelements.size();i++){
+                                            HBox Answerspane=new HBox();
+     RadioButton choose = new RadioButton( proposedelements.get(i));
+    RadioButtonchoice.add(choose);
+        ToggleGroup gr=new ToggleGroup();
+         RadioButtonchoice.get(i).setToggleGroup(gr);
+       
+        Answerspane.getChildren().add( choose);
+         StudentQuizAssessment.getChildren().add( Answerspane);
+
+                                  }}
                      } catch (SQLException ex) {
                          Logger.getLogger(TakeQuiz.class.getName()).log(Level.SEVERE, null, ex);
                      }

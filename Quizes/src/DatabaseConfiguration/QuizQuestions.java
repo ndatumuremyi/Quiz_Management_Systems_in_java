@@ -5,6 +5,11 @@
  */
 package DatabaseConfiguration;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author paterne
@@ -14,6 +19,11 @@ public class QuizQuestions extends Table{
     private String questionId;
     private String answerId;
     private String quizCode;
+    
+    private Questions question;
+    private Answers answer;
+    private Quizes quiz;
+    
     QuizQuestions(){
         super.tableName = "quizquestions";
         questionId = answerId = quizCode = "";
@@ -40,5 +50,50 @@ public class QuizQuestions extends Table{
     }
     public void setQuizCode(String quizCode){
         this.quizCode = quizCode;
+    }
+    
+    
+    
+    
+    public Questions getQuestion(){
+        return this.question;
+    }
+    public void findQuestion(){
+        ResultSet output = DataOperations.find(new ConditionalData("Questions", "QtId", this.questionId));
+        try {
+            while(output.next()){
+                question.setBelongInChap(output.getString("BelongInChap"));
+                question.setCreatedOn(output.getString("CreatedOn"));
+                question.setPreparedByIns(output.getString("prepatedByIns"));
+                question.setPreparedForLevel(output.getString("PreparedForLevel"));
+                question.setQtId(output.getString("QtId"));
+                question.setQuestion(output.getString("Question"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Answers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public Answers getAnswer(){
+        return this.answer;
+    }
+    public void findAnswer(){
+//        ResultSet output = DataOperations.find(new ConditionalData("answers"))
+    }
+    public Quizes getQuiz(){
+        return this.quiz;
+    }
+    public void findQuiz(){
+        ResultSet output = DataOperations.find(new ConditionalData("quizes", "QzId", this.questionId));
+        try {
+            while(output.next()){
+                quiz.setAttemptDate(output.getString("AttemptDate"));
+                quiz.setClassPreparedFor(output.getString("ClassPreparedFor"));
+                quiz.setCreator(output.getString("Creator"));
+                quiz.setQuizCode(output.getString("QuizCode"));
+                quiz.setType(output.getString("Type"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(QuizQuestions.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

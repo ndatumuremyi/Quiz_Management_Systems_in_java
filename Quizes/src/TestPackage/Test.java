@@ -5,6 +5,8 @@
  */
 package TestPackage;
 
+import DatabaseConfiguration.ConditionalData;
+import DatabaseConfiguration.DataOperations;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -14,13 +16,7 @@ import java.util.Collections;
  */
 public class Test {
     public static void main(String[] args){
-        ArrayList<Object> list;
-        list = new ArrayList<>();
-        
-        list.add(new DatabaseConfiguration.Levels());
-        list.add("there");
-        list.add(12);
-        System.out.println(list);
-        System.out.println(list.getClass());
+        ConditionalData condition = new ConditionalData("student","school","Gs remera");
+        DataOperations.find(condition, condition);
     }
 }

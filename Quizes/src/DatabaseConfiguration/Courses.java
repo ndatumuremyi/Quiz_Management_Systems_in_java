@@ -5,6 +5,11 @@
  */
 package DatabaseConfiguration;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author paterne
@@ -14,6 +19,7 @@ public class Courses extends Table{
     private String csId;
     private String courseName;
     private String level;
+    private Levels cLevel;
     
     public Courses(){
         super.tableName = "courses";
@@ -40,5 +46,19 @@ public class Courses extends Table{
     }
     public void setLevel(String level){
         this.level = level;
+    }
+    public Levels getCLevel(){
+        return this.cLevel;
+    }
+    public void findCLevel(){
+        ResultSet output = DataOperations.find(new ConditionalData("levels", "LevelName", this.level));
+        try {
+            while(output.next()){
+                cLevel.setInFull(output.getString("InFull"));
+                cLevel.setLevelName(output.getString("LevelName"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Courses.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

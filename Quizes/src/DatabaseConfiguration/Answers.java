@@ -5,6 +5,11 @@
  */
 package DatabaseConfiguration;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author paterne
@@ -13,7 +18,8 @@ public class Answers extends Table {
     private String ansId;
     private String questionId;
     private String answer;
-    private String isItCorrect; 
+    private String isItCorrect;
+    private Questions question;
     
     public Answers(String questionId, String answer, String isItCorrect){
         this.answer = answer;
@@ -51,5 +57,24 @@ public class Answers extends Table {
     }
     public void setIsItCorrect(String isItCorrect){
         this.isItCorrect = isItCorrect;
+    }
+    public Questions getQuestion(){
+        return question;
+    }
+    public void findQuestion(){
+        ResultSet output = DataOperations.find(new ConditionalData("Questions", "QtId", this.questionId));
+        try {
+            while(output.next()){
+                question.setBelongInChap(output.getString("BelongInChap"));
+                question.setCreatedOn(output.getString("CreatedOn"));
+                question.setPreparedByIns(output.getString("prepatedByIns"));
+                question.setPreparedForLevel(output.getString("PreparedForLevel"));
+                question.setQtId(output.getString("QtId"));
+                question.setQuestion(output.getString("Question"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Answers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 }

@@ -5,6 +5,11 @@
  */
 package DatabaseConfiguration;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author paterne
@@ -12,10 +17,15 @@ package DatabaseConfiguration;
 public class Questions extends Table{
     
     private String qtId;
+    private String question;
     private String preparedByIns;
     private String belongInChap;
     private String preparedForLevel;
     private String createdOn;
+    
+    private Levels level;
+    private Instructor instructor;
+    private Chapters chapter;
     
     Questions(){
         super.tableName = "questions";
@@ -33,6 +43,12 @@ public class Questions extends Table{
     }
     public void setQtId(String qtId){
         this.qtId = qtId;
+    }
+    public String getQuestion(){
+        return this.question;
+    }
+    public void setQuestion(String question){
+        this.question = question;
     }
     public String getPreparedByIns(){
         return this.preparedByIns;
@@ -57,5 +73,58 @@ public class Questions extends Table{
     }
     public void setCreatedOn(String createdOn){
         this.createdOn = createdOn;
+    }
+    
+    
+    public Levels getLevel(){
+        return this.level;
+    }
+    public void findLevel(){
+        ResultSet output = DataOperations.find(new ConditionalData("levels", "LevelName", this.preparedForLevel));
+        try {
+            while(output.next()){
+                level.setInFull(output.getString("InFull"));
+                level.setLevelName(output.getString("LevelName"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Questions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public Instructor getInstructor(){
+        return this.instructor;
+    }
+    public void findInstructor(){
+        ResultSet output = DataOperations.find(new ConditionalData("Instructor","InsId" ,this.preparedByIns));
+        try {
+            while(output.next()){
+                instructor.setCourse(output.getString("Course"));
+                instructor.setDegree(output.getString("Degree"));
+                instructor.setFirstName(output.getString("FirstName"));
+                instructor.setInsId(output.getString("InsId"));
+                instructor.setLastName(output.getString("LastName"));
+                instructor.setNationalId(output.getString("NationalId"));
+                instructor.setPassword(output.getString("Password"));
+                instructor.setSchool(output.getString("School"));
+                instructor.setStatus(output.getString("Status"));
+                instructor.setUserName(output.getString("UserName"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Questions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public Chapters getChapter(){
+        return this.chapter;
+    }
+    public void findChapter(){
+        ResultSet output = DataOperations.find(new ConditionalData("chapters", "CpId",this.belongInChap));
+        try {
+            while(output.next()){
+                chapter.setChapterName(output.getString("ChapterName"));
+                chapter.setCourseId(output.getString("CourseId"));
+                chapter.setCpId(output.getString("CpId"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Questions.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

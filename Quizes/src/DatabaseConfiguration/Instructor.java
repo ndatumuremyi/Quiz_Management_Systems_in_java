@@ -5,6 +5,11 @@
  */
 package DatabaseConfiguration;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author paterne
@@ -21,6 +26,9 @@ public class Instructor extends Table{
     private String password;
     private String degree;
     private String status;
+    
+    private Courses iCourse;
+    private Schools iSchool;
     
     public Instructor(){
         super.tableName = "instructor";
@@ -108,6 +116,42 @@ public class Instructor extends Table{
     }
     public void setStatus(String status){
         this.status = status;
+    }
+        
+    public Schools getISchool(){
+        return this.iSchool;
+    }
+    public void findISchool(){
+        ResultSet output = DataOperations.find(new ConditionalData("schools", "ShId", this.school));
+        try {
+            while(output.next()){
+                iSchool.setCell(output.getString("Cell"));
+                iSchool.setDistrict(output.getString("District"));
+                iSchool.setHeadMasterId(output.getString("HeadMasterId"));
+                iSchool.setProvence(output.getString("Provence"));
+                iSchool.setSchoolName(output.getString("SchoolName"));
+                iSchool.setSector(output.getString("Sector"));
+                iSchool.setShId(output.getString("ShId"));
+                iSchool.setType(output.getString("Type"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Instructor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public Courses getICourse(){
+        return this.iCourse;
+    }
+    public void findICourse(){
+        ResultSet output = DataOperations.find(new ConditionalData("courses", "CsId", this.course));
+        try {
+            while(output.next()){
+                iCourse.setCourseName(output.getString("CourseName"));
+                iCourse.setCsId(output.getString("CsId"));
+                iCourse.setLevel(output.getString("Level"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Instructor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

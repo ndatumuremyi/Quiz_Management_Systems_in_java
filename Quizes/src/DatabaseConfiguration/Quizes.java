@@ -5,6 +5,11 @@
  */
 package DatabaseConfiguration;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author paterne
@@ -15,6 +20,9 @@ public class Quizes extends Table{
     private String classPreparedFor;
     private String attemptDate;
     private String creator;
+    
+    private Instructor instructor;
+    private Classes qClass;
     
     Quizes(){
         super.tableName = "quizes";
@@ -57,4 +65,45 @@ public class Quizes extends Table{
     public void setCreator(String creator){
         this.creator = creator;
     }
+    
+    
+    public Instructor getInstructor(){
+        return this.instructor;
+    }
+    public void findInstructor(){
+        ResultSet output = DataOperations.find(new ConditionalData("instructor","InId", this.creator));
+        try {
+            while(output.next()){
+                instructor.setCourse(output.getString("Course"));
+                instructor.setDegree(output.getString("Degree"));
+                instructor.setFirstName(output.getString("FirstName"));
+                instructor.setInsId(output.getString("InsId"));
+                instructor.setLastName(output.getString("LastName"));
+                instructor.setNationalId(output.getString("NationalId"));
+                instructor.setPassword(output.getString("Password"));
+                instructor.setSchool(output.getString("School"));
+                instructor.setStatus(output.getString("Status"));
+                instructor.setUserName(output.getString("UserName"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Classes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public Classes getPreClass (){
+        return this.qClass;
+    }
+    public void findPreClass(){
+        ResultSet output = DataOperations.find(new ConditionalData("classes", "ClId", this.classPreparedFor));
+        try {
+            while(output.next()){
+                qClass.setClId(output.getString("ClId"));
+                qClass.setClassLevel(output.getString("ClassLevel"));
+                qClass.setInstructorId(output.getString("InstructorId"));
+                qClass.setSchoolId(output.getString("SchoolId"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Quizes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }

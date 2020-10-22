@@ -17,6 +17,7 @@ public class HeadMaster extends Table{
     private String sex;
     private String degree;
     private String tel;
+    private Schools school;
     
     
     
@@ -91,6 +92,12 @@ public class HeadMaster extends Table{
     }
     public String getTel(){
         return this.tel;
+    }
+    public Schools getSchool(){
+        return this.school;
+    }
+    public void findSchool(){
+//        ResultSet output = DataOperations.find(new ConditionalData("schools", "ShId", this.));
     }
     
     

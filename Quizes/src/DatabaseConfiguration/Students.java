@@ -5,6 +5,11 @@
  */
 package DatabaseConfiguration;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author paterne
@@ -21,6 +26,10 @@ public class Students extends Table{
     private String userName;
     private String password;
     private String status;
+    
+    private Schools school;
+    private Classes sClass;
+    
     public Students(){
         super.tableName = "students";
     }
@@ -104,5 +113,42 @@ public class Students extends Table{
     }
     public void setStatus(String status){
         this.status = status;
+    }
+    
+    public Classes getSClass(){
+        return this.sClass;
+    }
+    public void findSClass(){
+        ResultSet output = DataOperations.find(new ConditionalData("classes", "ClId", this.studentClass));
+        try {
+            while(output.next()){
+                sClass.setClId(output.getString("ClId"));
+                sClass.setClassLevel(output.getString("ClassLevel"));
+                sClass.setInstructorId(output.getString("InstructorId"));
+                sClass.setSchoolId(output.getString("SchoolId"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Quizes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public Schools getSchool(){
+        return this.school;
+    }
+    public void findSchool(){
+        ResultSet output = DataOperations.find(new ConditionalData("schools","ShId", this.studentSchool));
+        try {
+            while(output.next()){
+                school.setCell(output.getString("Cell"));
+                school.setDistrict(output.getString("District"));
+                school.setHeadMasterId(output.getString("HeadMasterId"));
+                school.setProvence(output.getString("Provence"));
+                school.setSchoolName(output.getString("SchoolName"));
+                school.setSector(output.getString("Sector"));
+                school.setShId(output.getString("ShId"));
+                school.setType(output.getString("Type"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Classes.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

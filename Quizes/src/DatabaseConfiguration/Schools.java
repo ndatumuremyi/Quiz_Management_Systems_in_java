@@ -5,6 +5,11 @@
  */
 package DatabaseConfiguration;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author paterne
@@ -18,6 +23,8 @@ public class Schools extends Table{
     private String sector;
     private String cell;
     private String type;
+    
+    private HeadMaster headmaster;
     
     Schools(){
         super.tableName = "schools";
@@ -80,5 +87,24 @@ public class Schools extends Table{
     }
     public void setType(String type){
         this.type = type;
+    }
+    
+    public HeadMaster getHeadMaster(){
+        return this.headmaster;
+    }
+    public void findHeadMaster(){
+        ResultSet output = DataOperations.find(new ConditionalData("headmaster", "HmId", this.headMasterId));
+        try {
+            while(output.next()){
+                headmaster.setDegree(output.getString("Degree"));
+                headmaster.setFirstName(output.getString("FirstName"));
+                headmaster.setLastName(output.getString("LastName"));
+                headmaster.setNationalId(output.getString("NationalId"));
+                headmaster.setSex(output.getString("Sex"));
+                headmaster.setTel(output.getString("Tel"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Schools.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
