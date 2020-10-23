@@ -54,7 +54,7 @@ public class GetUserName {
   if(a==0)
   {
       JOptionPane.showMessageDialog(null, "you are loging out !");
- 
+ UserName=null;
     stage.close();
       LoginForm back=new LoginForm();
       Stage st=new Stage();

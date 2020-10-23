@@ -76,9 +76,32 @@ and open the template in the editor.
     
     
 }
+#logout{
+    -fx-alignment: CENTER_RIGHT;
+        -fx-padding:7; 
+    -fx-cursor:wait;
+    -fx-font-size: 15pt;
+    -fx-font-family:Italic;
+    -fx-font-weight: bold; 
+}
 #logout:hover
 {
-    
+   -fx-background-color: whitesmoke; 
+   -fx-font-size: 20pt;
+}
+#Exit{
+    -fx-alignment: CENTER_RIGHT;
+        -fx-padding:7; 
+    -fx-cursor:wait;
+    -fx-font-size: 15pt;
+    -fx-font-family:Italic;
+    -fx-font-weight: bold; 
+}
+#Exit:hover
+{
+  
+  -fx-font-size: 20pt;
+   -fx-background-color: whitesmoke; 
 }
 #table{
     -fx-background-color:yellowgreen;
