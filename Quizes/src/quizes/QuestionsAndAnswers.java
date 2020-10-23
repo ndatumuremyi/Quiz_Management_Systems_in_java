@@ -125,8 +125,8 @@ Answerspane.getChildren().addAll(choose,posibleAnswers);
                                         }
                                         }
                                         try {
-                                             Connection con=Connections.getcon();
-                                            Statement statement =con.createStatement(); //creating statement
+                                              
+                                            Statement statement =Connections.getcon(); //creating statement
                                             statement.executeUpdate("INSERT INTO quizes(Question) VALUES ('" + Problem + "');");//sql queries
                                              String coma=" ";
                                             StringBuilder getproposedanswers=new StringBuilder();

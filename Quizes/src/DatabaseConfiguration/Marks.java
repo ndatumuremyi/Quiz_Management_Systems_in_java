@@ -5,6 +5,11 @@
  */
 package DatabaseConfiguration;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author paterne
@@ -17,6 +22,10 @@ public class Marks extends Table{
     private String courseId;
     private String marks;
     private String workedAt;
+    
+    private Courses course;
+    private Students student;
+    private Quizes quiz;
     
     public Marks(){
         super.tableName = "marks";
@@ -65,5 +74,66 @@ public class Marks extends Table{
     }
     public void setWorkedAt(String workedAt){
         this.workedAt = workedAt;
+    }
+    
+    
+    
+    public Courses getCourse(){
+        return this.course;
+    }
+    public void findCourse(){
+        ResultSet output = DataOperations.find(new ConditionalData("courses", "CsId", this.courseId));
+      
+        try {
+            while(output.next()){
+                course.setCourseName(output.getString("CourseName"));
+                course.setCsId(output.getString("CsId"));
+                course.setLevel(output.getString("Level"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Marks.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    public Quizes getQuiz(){
+        return this.quiz;
+    }
+    public void findQuiz(){
+        ResultSet output = DataOperations.find(new ConditionalData("quizes","QuizCode", this.quizCode));
+        try {
+            while(output.next()){
+                quiz.setAttemptDate(output.getString("AttemptDate"));
+                quiz.setClassPreparedFor(output.getString("ClassPreparedFor"));
+                quiz.setCreator(output.getString("Creator"));
+                quiz.setQuizCode(output.getString("QuizCode"));
+                quiz.setType(output.getString("Type"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Marks.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public Students getStudent(){
+        return this.student;
+    }
+    public void findStudent(){
+        ResultSet output = DataOperations.find(new ConditionalData("Students","RegNo", this.studentReg));
+        try {
+            while(output.next()){
+                student.setAddress(output.getString("Address"));
+                student.setAge(output.getString("Age"));
+                student.setFirstName(output.getString("FirstName"));
+                student.setLastName(output.getString("LastName"));
+                student.setPassword(output.getString("Password"));
+                student.setRegNo(output.getString("RegNo"));
+                student.setSex(output.getString("Sex"));
+                student.setStatus(output.getString("Status"));
+                student.setStudentClass(output.getString("StudentClass"));
+                student.setStudentSchool(output.getString("StudentSchool"));
+                student.setUserName(output.getString("UserName"));
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Marks.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

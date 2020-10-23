@@ -72,23 +72,23 @@ public class Forms {
     loginPane.setPrefSize(700,400);
       
     GridPane.setHalignment(submit, HPos.RIGHT);
-      Connection con=Connections.getcon();
-                    
-                    Statement st= con.createStatement();
-                    
+     
                      
                     
     //handeling the event after clicking loginString username1;
     submit.setOnAction((ActionEvent e) -> {
         try {
-            String query="SELECT * FROM `admin` WHERE `Name`='"+email.getText()+"'and password='"+passwordfield.getText()+"'";
-            ResultSet  result= st.executeQuery(query);
+           
             if (as.getValue().equals("Admin")) {
-                if (result.next()) {
-                    String username1 = result.getString("Name");
-                    String password1 = result.getString("password");
-                    setUsername(username1);
-                    GetUserName User=new GetUserName();//creating an instance of Getuser class
+                  GetUserName User=new GetUserName();//creating an instance of Getuser class
+                  String tabelname="admin";
+                  
+            String UserName= User.AuthenticateUser(tabelname,email.getText(), passwordfield.getText());
+                 if (!UserName.isEmpty())
+                 {
+                    
+                    setUsername(UserName);
+                   
                     User.setLoggedinUser(getuser());
                     AdminHomePage adminpage=new AdminHomePage();   //creating the object of AdminHome page
                     adminpage.setLoggedinUser(User.DisplayLoggedin());
@@ -96,13 +96,18 @@ public class Forms {
                     adminpage.start(stage);
                     //                       LoginForm.setLoggedInUser(email.getText());//calling setloggedinuser and pass through the user name while loging in
                     //                         primaryStage.close();
-                } else {
+                }
+        
+            else {
+                     
                     JOptionPane.showMessageDialog(null, "User name or password incorect !");//when error in authentiction found
                 }
-            }
-        }catch (SQLException ex) {
+            } 
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, e);
             Logger.getLogger(Forms.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         
         //checking whether the user is admin and what to see if
         

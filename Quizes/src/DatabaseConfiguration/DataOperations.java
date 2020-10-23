@@ -11,20 +11,13 @@ package DatabaseConfiguration;
  */
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 public class DataOperations {
     
-    Connection con = Connections.getcon();
-    Statement statement;
-
-    public DataOperations() {
-        try {
-            this.statement = con.createStatement();
-        } catch (SQLException ex) {
-            Logger.getLogger(DataOperations.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    static Statement statement = Connections.getcon();
+    
     
     /*
     **********************************************************************************************************************
@@ -382,7 +375,31 @@ public class DataOperations {
         */
         
         for(String column : columns){
-            
+           
+        }
+    }
+    
+    
+    public static ResultSet find(ConditionalData... datas){
+        
+        String query = "select * from ";
+        String tables = "";
+        String conditions = "";
+        
+        for(ConditionalData data : datas){
+            tables += data.getTableName() +",";
+            conditions += data.getTableName()+'.'+data.getColumnName()+"=\""+data.getValue()+"\" or ";
+        }
+        tables = tables.substring(0, tables.length()-1);
+        conditions = conditions.substring(0, conditions.length()-3);
+        query += tables + " where " + conditions +";";
+        
+        try {
+            ResultSet output = statement.executeQuery(query);
+            return output;
+        } catch (SQLException ex) {
+            Logger.getLogger(DataOperations.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
     }
         

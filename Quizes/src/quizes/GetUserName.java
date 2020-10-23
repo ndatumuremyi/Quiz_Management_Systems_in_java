@@ -5,7 +5,11 @@
  */
 package quizes;
 
+import DatabaseConfiguration.Connections;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.Label;
@@ -61,6 +65,24 @@ public class GetUserName {
       }
   }
    }
- 
+   
+   public String AuthenticateUser(String TabelName,String UserName,String UserPassword) throws SQLException//User Authentiction funtion
+   {
+       
+        Statement st= Connections.getcon();
+                    
+      String query="SELECT * FROM "+TabelName+" WHERE `UserName`='"+UserName+"'and password='"+UserPassword+"'"; 
+      ResultSet  result= st.executeQuery(query);
+      String username1 = null;
+      if (result.next())
+                 {
+                     username1 = result.getString("UserName");
+                    String password1 = result.getString("password");
+                 }
+      
+  
+     return username1; 
+   
     
+}
 }

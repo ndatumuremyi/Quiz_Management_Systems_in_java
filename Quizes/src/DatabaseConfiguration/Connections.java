@@ -11,14 +11,14 @@ import java.sql.*;
  */
 public class Connections {
 
-    public static Connection getcon(){
+    public static Statement getcon(){
         try{
             Class.forName("com.mysql.jdbc.Driver");
             
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Quiz_Management_System","root","");
+            Statement statement=connection.createStatement();
             
-            
-            return  connection;
+            return  statement;
         }
         
         catch (ClassNotFoundException | SQLException ex){
