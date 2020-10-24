@@ -109,6 +109,7 @@ public class DataOperations {
                         questions.setPreparedByIns(output.getString("PreparedByIns"));
                         questions.setPreparedForLevel(output.getString("PreparedForLevel"));
                         questions.setQtId(output.getString("QtId"));
+                        questions.setQuestion(output.getString("question"));
                         
                         result.add(questions);
                         return result;
@@ -363,7 +364,8 @@ public class DataOperations {
     
     
     
-    public void select(String tableName, String... columns){
+    public void select(String tableName, String... columns)
+    {
         /*
         **********************************************************************************************************************
         **********************************************************************************************************************
@@ -374,7 +376,8 @@ public class DataOperations {
         **********************************************************************************************************************
         */
         
-        for(String column : columns){
+        for(String column : columns)
+        {
            
         }
     }

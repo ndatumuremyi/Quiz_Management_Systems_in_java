@@ -7,17 +7,22 @@ package quizes;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Kwizera
  */
-public class Admin
+public final class Admin
 {
     TabPane AdminTabs=new TabPane();
     Tab InstructorTab=new Tab("Instructor");
@@ -36,6 +41,27 @@ Label Headmasters=new Label("HeadMaster Description");
 Label addHeadmaster=new Label("Add_HeadMaster");
 Label updateHeadMaster=new Label("update_Student");
 Label deleteHeadmaster=new Label("Delete_HeadMaster");
+
+MenuBar AdminMenu=new MenuBar();
+ // file menu
+    Menu fileMenu = new Menu("file");
+    
+    //file menu items
+    MenuItem exit = new MenuItem("Exit");
+     MenuItem logout = new MenuItem("Logout");
+    // view menu
+    Menu viewMenu = new Menu("view");
+     
+   
+    // view menu items
+    MenuItem zoomIn = new MenuItem("zoom in");
+    MenuItem zoomOut = new MenuItem("zoom out ");
+     MenuItem Manage = new MenuItem("Manage Users");
+    // help menu
+    Menu help = new Menu("help");
+    
+    // about us 
+    Menu aboutUs = new Menu("about Us"); 
     public Admin()
     {
         Label[] InstMenu = {instructor ,addinstructor,updateinstructor,deleteInst};
@@ -77,10 +103,46 @@ addinstructor.setOnMousePressed((MouseEvent e) -> {
      instStage.setWidth(700);
      inst.start(instStage);
      });
+
+ addItems();
+        AdminMenu.getMenus().addAll( viewMenu, aboutUs,help,fileMenu);
+        
+        
     }
     
     public TabPane GetTabs()
     {
        return  AdminTabs;
     }
+    public MenuBar GetMenuBar(Stage stage,BorderPane borderpane)
+    {
+ 
+
+logout.setOnAction(e->
+{
+    
+ new GetUserName().Logout(stage);
+});
+exit.setOnAction(e->
+{int a= JOptionPane.showConfirmDialog(null, "Do you realy want to close","Closing Prompt",JOptionPane.YES_NO_OPTION);
+ if(a==0)
+ {
+   JOptionPane.showMessageDialog(null, "Closing app..");
+   System.exit(0);
+ }
+   
+}
+);
+ Manage.setOnAction(e->borderpane.setCenter(GetTabs()));
+        return AdminMenu;
+    }
+     public void addItems()
+     {
+        
+        fileMenu.getItems().addAll(exit,logout);
+        viewMenu.getItems().add(Manage);
+        
+        
+    }
+    
 }

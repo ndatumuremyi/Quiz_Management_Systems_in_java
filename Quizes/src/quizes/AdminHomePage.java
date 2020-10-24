@@ -13,14 +13,11 @@ import static javafx.application.Application.launch;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -38,47 +35,31 @@ public class AdminHomePage extends Application{
  Label label1=new Label("Quiz Management System");
  label1.setId("title");
 label1.setPadding(new Insets(1,4,15,50));
- border.setTop(label1);
+ 
  //border.setCenter(getNav());
- Label logout=new Label("Logout");
-logout.setId("logout");
-logout.setOnMousePressed(e->{
- new GetUserName().Logout(primarStage);
-});
-Label Exit=new Label("Close application");
-logout.setId("logout");
-Exit.setId("Exit");
-Exit.setOnMousePressed(e->{
-int a= JOptionPane.showConfirmDialog(null, "Do you realy want to close","Closing Prompt",JOptionPane.YES_NO_OPTION);
- if(a==0)
- {
-   JOptionPane.showMessageDialog(null, "Closing app..");
-   System.exit(0);
- }
-});
+  VBox user=getLoggedinUser();
+  HBox hbox=new HBox();
+  Admin admin=new Admin();
+ 
+//TabPane tabs=admin.GetTabs();
 
- Admin admin=new Admin();
- Tab logoutTab=new Tab("Options");
-HBox optionpane=new HBox();
-HBox.setMargin(logout, new Insets(0, 0, 0, 15));
-HBox.setMargin(Exit, new Insets(0, 0, 0, 15));
-optionpane.getChildren().addAll(logout,Exit);
+  MenuBar AdminMenu=admin.GetMenuBar(primarStage,border);
+  hbox.getChildren().add(user);
+  hbox.getChildren().add(AdminMenu);
+hbox.getStyleClass().add("adminmenu");
 
- logoutTab.setContent(optionpane);
- admin.AdminTabs.getTabs().add(logoutTab);
-TabPane tabs=admin.GetTabs();
-border.setCenter(tabs);
+border.setRight(hbox);
+VBox topmenu=new VBox();
+topmenu.getChildren().addAll(label1,hbox);
+border.setTop(topmenu);
 
 
-
-                            VBox user=getLoggedinUser();
-                          
-                            border.setLeft(user);
-      
 
  
- 
-         border.setId("border");
+//border.setCenter(tabs);
+
+border.setLeft(user);
+       border.setId("border");
        
          Scene scene = new Scene(border, 1500, 700);
          
@@ -86,6 +67,7 @@ border.setCenter(tabs);
         primaryStage.setScene(scene);
       //  primaryStage.setFullScreen(true);
       scene.getStylesheets().add("quizes/LoginForm.css");
+      scene.getStylesheets().add("quizes/style.css");
         primaryStage.show();
         
     }
