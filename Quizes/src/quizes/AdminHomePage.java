@@ -58,7 +58,6 @@ border.setTop(topmenu);
  
 //border.setCenter(tabs);
 
-border.setLeft(user);
        border.setId("border");
        
          Scene scene = new Scene(border, 1500, 700);

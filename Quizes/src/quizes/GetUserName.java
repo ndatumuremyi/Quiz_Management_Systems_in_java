@@ -79,6 +79,8 @@ public class GetUserName {
                      username1 = result.getString("UserName");
                     String password1 = result.getString("password");
                  }
+      else
+          JOptionPane.showMessageDialog(null, "User Name or password Incorrect !");
       
   
      return username1; 

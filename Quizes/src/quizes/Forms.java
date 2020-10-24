@@ -98,10 +98,6 @@ public class Forms {
                     //                         primaryStage.close();
                 }
         
-            else {
-                     
-                    JOptionPane.showMessageDialog(null, "User name or password incorect !");//when error in authentiction found
-                }
             } 
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, e);
