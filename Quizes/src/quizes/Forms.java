@@ -39,7 +39,7 @@ public class Forms {
     String[] classes = {"S1","S2","S3","S4MPC","S5MPC","S6MPC"};
  
  Stage formsStage;
-    VBox login() throws SQLException  {
+    VBox login(Stage Loginstage) throws SQLException  {
       /* **********************************************************************************************************
     *********************************************************************************************************
    
@@ -84,7 +84,7 @@ public class Forms {
                   String tabelname="admin";
                   
             String UserName= User.AuthenticateUser(tabelname,email.getText(), passwordfield.getText());
-                 if (!UserName.isEmpty())
+                 if (UserName!=null)
                  {
                     
                     setUsername(UserName);
@@ -92,8 +92,10 @@ public class Forms {
                     User.setLoggedinUser(getuser());
                     AdminHomePage adminpage=new AdminHomePage();   //creating the object of AdminHome page
                     adminpage.setLoggedinUser(User.DisplayLoggedin());
+                    Loginstage.close();
                     Stage stage=new Stage();
                     adminpage.start(stage);
+                    
                     //                       LoginForm.setLoggedInUser(email.getText());//calling setloggedinuser and pass through the user name while loging in
                     //                         primaryStage.close();
                 }

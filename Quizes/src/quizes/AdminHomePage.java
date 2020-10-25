@@ -23,7 +23,8 @@ import javafx.stage.Stage;
  *
  * @author Kwizera
  */
-public class AdminHomePage extends Application{
+public class AdminHomePage extends Application
+{
    private Stage primarStage;
    BorderPane border;
    VBox logged;
@@ -48,7 +49,7 @@ label1.setPadding(new Insets(1,4,15,50));
   hbox.getChildren().add(AdminMenu);
 hbox.getStyleClass().add("adminmenu");
 
-border.setRight(hbox);
+//border.setRight(hbox);
 VBox topmenu=new VBox();
 topmenu.getChildren().addAll(label1,hbox);
 border.setTop(topmenu);
@@ -61,6 +62,7 @@ border.setTop(topmenu);
        border.setId("border");
        
          Scene scene = new Scene(border, 1500, 700);
+         
          
          primaryStage.setTitle("Lgin Form");
         primaryStage.setScene(scene);

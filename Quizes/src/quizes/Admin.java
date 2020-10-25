@@ -5,6 +5,8 @@
  */
 package quizes;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -39,7 +41,7 @@ Label updateStudent=new Label("update_Student");
 Label deleteStudent=new Label("Delete_Student");
 Label Headmasters=new Label("HeadMaster Description");
 Label addHeadmaster=new Label("Add_HeadMaster");
-Label updateHeadMaster=new Label("update_Student");
+Label updateHeadMaster=new Label("update_HeadMaster");
 Label deleteHeadmaster=new Label("Delete_HeadMaster");
 
 MenuBar AdminMenu=new MenuBar();
@@ -118,10 +120,11 @@ addinstructor.setOnMousePressed((MouseEvent e) -> {
     {
  
 
-logout.setOnAction(e->
-{
-    
- new GetUserName().Logout(stage);
+logout.setOnAction(new EventHandler<ActionEvent>() {
+    @Override
+    public void handle(ActionEvent e) {
+        new GetUserName().Logout(stage);
+    }
 });
 exit.setOnAction(e->
 {int a= JOptionPane.showConfirmDialog(null, "Do you realy want to close","Closing Prompt",JOptionPane.YES_NO_OPTION);

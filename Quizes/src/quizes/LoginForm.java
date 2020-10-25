@@ -37,7 +37,7 @@ public class LoginForm extends Application {
         MainMenu mainmenu = new MainMenu(); //menu
         Forms forms = new Forms();
         allpage.setTop(mainmenu);
-        allpage.setLeft(forms.login());
+        allpage.setLeft(forms.login(primaryStage));
         allpage.setBottom(footer);//seting the positions of all nodes into the borderpane
         allpage.setRight(forms.Signup());
         allpage.setId("border");

@@ -22,7 +22,7 @@ public class Connections {
         }
         
         catch (ClassNotFoundException | SQLException ex){
-            System.out.println("fail to connect to database");
+            System.out.println("fails to connect to database");
         }
         return null;
         
