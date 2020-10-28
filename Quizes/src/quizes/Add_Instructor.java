@@ -50,7 +50,7 @@ public class Add_Instructor extends Application{
         gr.setAutoSizeChildren(true);
         stage.setTitle("Add an Instructor");
          stage.setWidth(700);
-        stage.setHeight(1000);
+        stage.setHeight(900);
         final Label label = new Label("Add Instructor");
         label.setFont(new Font("Arial", 30));
         
@@ -117,9 +117,8 @@ public class Add_Instructor extends Application{
             if(b==true){
                 try{
                     
-                    Statement st=Connections.getConnection();
-                    
-                    
+                      Statement st= Connections.getConnection();
+                      
                     st.executeUpdate("INSERT INTO `instructors`(`FName`, `LName`, `Email`, `Course`, `Class`,`Phone_number`) VALUES"
                             + "('"+addFirstName.getText()+"','"+addLastName.getText()+"','"+addEmail.getText()+"','"+addCourse.getText()+"','"+addYear.getText()+"','0788722091')");
                     
