@@ -30,17 +30,14 @@ public class DataOperations {
     */
     public void insert(String tableName, ArrayList<String> valiables,ArrayList<String> values){
         String query="insert into "+tableName+"(";
-        for(String variable : valiables){
-                query += variable+',';
-            }
+        query = valiables.stream().map((variable) -> variable+',').reduce(query, String::concat);
             query = query.substring(0, query.length()-1)+ ")values(\"";
-            for(String value : values){
-                query +=value +"\",\"";
-            }
+            query = values.stream().map((value) -> value +"\",\"").reduce(query, String::concat);
             query = query.substring(0, query.length()-2)+ ");";
         try{
-            System.out.println(query);
+            
             statement.executeUpdate(query);
+            System.out.println(query);
         //    return true;
         }
         catch (SQLException ex){

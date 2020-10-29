@@ -8,6 +8,7 @@ package quizes;
  * and open the template in the editor.
  */
 
+import java.sql.SQLException;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.geometry.Insets;
@@ -29,7 +30,7 @@ public class AdminHomePage extends Application
    BorderPane border;
    VBox logged;
   @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws SQLException {
       
         this.primarStage=primaryStage;
        border=new BorderPane();
@@ -45,14 +46,19 @@ label1.setPadding(new Insets(1,4,15,50));
 //TabPane tabs=admin.GetTabs();
 
   MenuBar AdminMenu=admin.GetMenuBar(primarStage,border);
-  hbox.getChildren().add(user);
   hbox.getChildren().add(AdminMenu);
+  hbox.getChildren().addAll(label1,user);
+ hbox.setSpacing(10);
+  
+  
 hbox.getStyleClass().add("adminmenu");
 
 //border.setRight(hbox);
 VBox topmenu=new VBox();
-topmenu.getChildren().addAll(label1,hbox);
+topmenu.getChildren().add(hbox);
 border.setTop(topmenu);
+
+
 
 
 
