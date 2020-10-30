@@ -61,7 +61,7 @@ public class GetUserName {
             try {
                 back.start(st);
             } catch (SQLException ex) {
-                Logger.getLogger(AhomePag.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AdminHomePage.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

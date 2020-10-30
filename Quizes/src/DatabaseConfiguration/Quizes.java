@@ -25,10 +25,14 @@ public class Quizes extends Table{
     private Classes qClass;
     
     Quizes(){
-        super.tableName = "quizes";
+        defaultData();
+        
+        
         quizCode = type = classPreparedFor = attemptDate = creator = "";
     }
     Quizes( String quizCode, String type, String classPreparedFor, String attemptDate, String creator){
+        defaultData();
+        
         this.quizCode = quizCode;
         this.type = type;
         this.classPreparedFor = classPreparedFor;
@@ -104,6 +108,21 @@ public class Quizes extends Table{
         } catch (SQLException ex) {
             Logger.getLogger(Quizes.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    private void defaultData(){
+        columns.add("QuizCode");
+        columns.add("Type");
+        columns.add("ClassPreparedFor");
+        columns.add("AttemptDate");
+        columns.add("Creator");
+        
+        values.add(quizCode);
+        values.add(type);
+        values.add(classPreparedFor);
+        values.add(attemptDate);
+        values.add(creator);
+        
+        super.tableName = "quizes";
     }
     
 }

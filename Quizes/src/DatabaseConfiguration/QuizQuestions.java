@@ -25,10 +25,14 @@ public class QuizQuestions extends Table{
     private Quizes quiz;
     
     QuizQuestions(){
-        super.tableName = "quizquestions";
+        defaultData();
+        
+        
         questionId = answerId = quizCode = "";
     }
     QuizQuestions(String questionId, String answerId, String quizCode){
+        defaultData();
+        
         this.questionId = questionId;
         this.answerId = answerId;
         this.quizCode = quizCode;
@@ -95,5 +99,16 @@ public class QuizQuestions extends Table{
         } catch (SQLException ex) {
             Logger.getLogger(QuizQuestions.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    private void defaultData(){
+        columns.add("QuestionId");
+        columns.add("AnswerId");
+        columns.add("QuizCode");
+        
+        values.add(questionId);
+        values.add(answerId);
+        values.add(quizCode);
+        
+        super.tableName = "quizquestions";
     }
 }

@@ -14,13 +14,14 @@ import java.util.ArrayList;
 public class Table {
     String tableName;
     DataOperations operation = new DataOperations();
-    ArrayList<String> valiables = new ArrayList<>();
+    ArrayList<String> columns = new ArrayList<>();
     ArrayList<String> values = new ArrayList<>();
+
     
     public void save(){
-        if(values.size()==valiables.size() ){
+        if(values.size()==columns.size() ){
             
-            operation.insert(tableName, valiables, values);
+            operation.insert(tableName, columns, values);
             System.out.println("well inserted");
         }
         else{

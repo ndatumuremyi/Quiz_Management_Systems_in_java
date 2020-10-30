@@ -87,7 +87,7 @@ public class Forms {
                         setUsername(UserName);
 
                         User.setLoggedinUser(this.user);
-                        AhomePag adminpage = new AhomePag();   //creating the object of AdminHome page
+                        AdminHomePage adminpage = new AdminHomePage();   //creating the object of AdminHome page
                         adminpage.setLoggedinUser(User.DisplayLoggedin());
                         Loginstage.close();
                         Stage stage = new Stage();

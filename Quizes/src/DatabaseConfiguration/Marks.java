@@ -28,10 +28,14 @@ public class Marks extends Table{
     private Quizes quiz;
     
     public Marks(){
-        super.tableName = "marks";
+        defaultData();
+        
+        
         mkId = studentReg = quizCode = courseId = marks = workedAt = "";
     }
     public Marks(String mkId, String studentReg, String quizCode,String courseId, String marks, String workedAt){
+        defaultData();
+        
         this.mkId = mkId;
         this.studentReg = studentReg;
         this.quizCode = quizCode;
@@ -135,5 +139,22 @@ public class Marks extends Table{
         } catch (SQLException ex) {
             Logger.getLogger(Marks.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    private void defaultData(){
+        columns.add("MkId");
+        columns.add("StudentReg");
+        columns.add("QuizCode");
+        columns.add("CourseId");
+        columns.add("Marks");
+        columns.add("WorkedAt");
+        
+        values.add(mkId);
+        values.add(studentReg);
+        values.add(quizCode);
+        values.add(courseId);
+        values.add(marks);
+        values.add(workedAt);
+        
+        super.tableName = "marks";
     }
 }

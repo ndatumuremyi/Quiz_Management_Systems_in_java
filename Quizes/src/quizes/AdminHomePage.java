@@ -5,6 +5,7 @@ package quizes;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import java.sql.SQLException;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.geometry.Insets;
@@ -20,7 +21,7 @@ import javafx.stage.Stage;
  *
  * @author Kwizera
  */
-public class AhomePag extends Application {
+public class AdminHomePage extends Application {
 
     private Stage primarStage;
     BorderPane border;
@@ -36,19 +37,25 @@ public class AhomePag extends Application {
         label1.setPadding(new Insets(1, 4, 15, 50));
 
         //border.setCenter(getNav());
-        //VBox user = getLoggedinUser();
+        
         HBox hbox = new HBox();
         Admin admin = new Admin();
 
 //TabPane tabs=admin.GetTabs();
         MenuBar AdminMenu = admin.GetMenuBar(primarStage, border);
-        hbox.getChildren().add(logged);
+//        hbox.getChildren().add(logged);
         hbox.getChildren().add(AdminMenu);
+          hbox.getChildren().addAll(label1 /*, logged */);
+ hbox.setSpacing(10);
+  
+  
         hbox.getStyleClass().add("adminmenu");
+        
+        
 
 //border.setRight(hbox);
         VBox topmenu = new VBox();
-        topmenu.getChildren().addAll(label1, hbox);
+        topmenu.getChildren().add(hbox);
         border.setTop(topmenu);
 
 //border.setCenter(tabs);

@@ -16,7 +16,12 @@ import java.util.Collections;
  */
 public class Test {
     public static void main(String[] args){
-        ConditionalData condition = new ConditionalData("student","school","Gs remera");
-        DataOperations.find(condition, condition);
+//        ConditionalData condition = new ConditionalData("student","school","Gs remera");
+//        DataOperations.find(condition, condition);
+        String s = "10";
+        char c = 'd';
+        
+        System.out.println();
+        
     }
 }

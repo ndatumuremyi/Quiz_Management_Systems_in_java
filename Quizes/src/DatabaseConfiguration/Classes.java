@@ -20,18 +20,23 @@ public class Classes extends Table{
     private String classLevel;
     private String schoolId;
     private String instructorId;
+    
     private Levels level;
     private Schools school;
     private Instructor instructor;
     
     public Classes(){
-        super.tableName = "classes";
+        defaultData();
+        
+        
         clId = "";
         classLevel = "";
         schoolId = "";
         instructorId = "";
     }
     public Classes(String clId, String classLevel, String schoolId, String instructorId){
+        defaultData();
+        
         this.clId = clId;
         this.classLevel = classLevel;
         this.schoolId = schoolId;
@@ -116,6 +121,19 @@ public class Classes extends Table{
         } catch (SQLException ex) {
             Logger.getLogger(Classes.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    private void defaultData(){
+        columns.add("ClId");
+        columns.add("ClassLevel");
+        columns.add("SchoolId");
+        columns.add("InstructorId");
+        
+        values.add(clId);
+        values.add(classLevel);
+        values.add(schoolId);
+        values.add(instructorId);
+        
+        super.tableName = "classes";
     }
     
 }

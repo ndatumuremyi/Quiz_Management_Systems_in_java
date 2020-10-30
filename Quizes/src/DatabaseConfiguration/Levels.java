@@ -15,11 +15,15 @@ public class Levels extends Table{
     private String inFull;
     
     public Levels(){
-        super.tableName = "levels";
+        defaultData();
+        
+        
         levelName = "";
         inFull = "";
     }
     public Levels(String levelName, String inFull){
+        defaultData();
+        
         this.levelName = levelName;
         this.inFull = inFull;
     }
@@ -37,6 +41,15 @@ public class Levels extends Table{
     }
     public void setInFull(String inFull){
         this.inFull = inFull;
+    }
+    private void defaultData(){
+        columns.add("LevelName");
+        columns.add("InFull");
+        
+        values.add(levelName);
+        values.add(inFull);
+        
+        super.tableName = "levels";
     }
     
 }

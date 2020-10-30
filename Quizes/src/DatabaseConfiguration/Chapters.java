@@ -19,15 +19,20 @@ public class Chapters extends Table{
     private String cpId;
     private String chapterName;
     private String courseId;
+    
     private Courses course;
     
     public Chapters(){
-        super.tableName = "chapters";
+        defaultData();
+        
+        
         cpId = "";
         chapterName = "";
         courseId = "";
     }
     public Chapters(String chapterName, String courseId){
+        defaultData();
+        
         this.chapterName = chapterName;
         this.courseId = courseId;
     }
@@ -63,5 +68,18 @@ public class Chapters extends Table{
         } catch (SQLException ex) {
             Logger.getLogger(Chapters.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    private void defaultData(){
+        values.add(cpId);
+        values.add(cpId);
+        values.add(chapterName);
+        values.add(courseId);
+        
+        columns.add("CpId");
+        columns.add("CpId");
+        columns.add("ChapterName");
+        columns.add("CourseId");
+        
+        super.tableName = "chapters";
     }
 }

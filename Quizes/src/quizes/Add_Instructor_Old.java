@@ -6,6 +6,7 @@ package quizes;
 import DatabaseConfiguration.Connections;
 import java.awt.HeadlessException;
 import java.sql.*;
+import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -23,11 +24,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.swing.JOptionPane;
  
-public class Add_Instructor{
+public class Add_Instructor_Old extends Application{
  
     private final TableView<Instructor> table = new TableView<>();
     private final ObservableList<Instructor> data =
@@ -40,13 +42,15 @@ public class Add_Instructor{
     }
  
     
-    
-    public Group AddInst() {
+    @Override
+    public void start(Stage stage) {
         Group gr=new Group();
         Scene scene = new Scene(gr);
         scene.getStylesheets().add("quizes/LoginForm.css");
         gr.setAutoSizeChildren(true);
-      
+        stage.setTitle("Add an Instructor");
+         stage.setWidth(700);
+        stage.setHeight(900);
         final Label label = new Label("Add Instructor");
         label.setFont(new Font("Arial", 30));
         
@@ -63,8 +67,7 @@ public class Add_Instructor{
         lastNameCol.setCellValueFactory(
                 new PropertyValueFactory<Instructor, String>("lastName"));
  
-        TableColumn emailCol;
-        emailCol = new TableColumn("Email");
+        TableColumn emailCol = new TableColumn("Email");
         emailCol.setMinWidth(200);
         emailCol.setCellValueFactory(
                 new PropertyValueFactory<Instructor, String>("email"));
@@ -151,7 +154,10 @@ public class Add_Instructor{
  
         ((Group) scene.getRoot()).getChildren().addAll(vbox);
  
-       return gr;
+        stage.setScene(scene);
+        
+        
+        stage.show();
     }
  
   public static  class Instructor {

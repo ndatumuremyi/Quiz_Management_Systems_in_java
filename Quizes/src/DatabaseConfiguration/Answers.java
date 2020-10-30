@@ -19,16 +19,21 @@ public class Answers extends Table {
     private String questionId;
     private String answer;
     private String isItCorrect;
+    
     private Questions question;
     
     public Answers(String questionId, String answer, String isItCorrect){
+        defaultData();
+                
         this.answer = answer;
         this.questionId = questionId;
         this.isItCorrect =isItCorrect;
-        super.tableName = "answers";
+        
     }
 
     Answers() {
+        defaultData();
+                
         questionId = null;
         answer = null;
         isItCorrect = null;
@@ -76,5 +81,18 @@ public class Answers extends Table {
             Logger.getLogger(Answers.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    }
+    private void defaultData(){
+        columns.add("AnsId");
+        columns.add("QuestionId");
+        columns.add("Answer");
+        columns.add("IsItCorrect");
+        
+        values.add(ansId);
+        values.add(questionId);
+        values.add(answer);
+        values.add(isItCorrect);
+        
+        super.tableName = "answers";
     }
 }

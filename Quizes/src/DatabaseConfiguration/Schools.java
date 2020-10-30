@@ -27,10 +27,14 @@ public class Schools extends Table{
     private HeadMaster headmaster;
     
     Schools(){
-        super.tableName = "schools";
+        defaultData();
+        
+        
     }
     Schools(String shId, String schoolName, String headMasterId, String provence, String district, 
             String sector, String cell, String type){
+        defaultData();
+        
         this.shId = shId;
         this.schoolName = schoolName;
         this.headMasterId = headMasterId;
@@ -106,5 +110,26 @@ public class Schools extends Table{
         } catch (SQLException ex) {
             Logger.getLogger(Schools.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    private void defaultData(){
+        columns.add("ShId");
+        columns.add("SchoolName");
+        columns.add("HeadMasterId");
+        columns.add("Provence");
+        columns.add("District");
+        columns.add("Sector");
+        columns.add("Cell");
+        columns.add("Type");
+        
+        values.add(shId);
+        values.add(schoolName);
+        values.add(headMasterId);
+        values.add(provence);
+        values.add(district);
+        values.add(sector);
+        values.add(cell);
+        values.add(type);
+        
+        super.tableName = "schools";
     }
 }

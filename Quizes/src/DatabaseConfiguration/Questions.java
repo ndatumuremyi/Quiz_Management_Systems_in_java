@@ -28,10 +28,14 @@ public class Questions extends Table{
     private Chapters chapter;
     
     Questions(){
-        super.tableName = "questions";
+        defaultData();
+        
+        
         qtId =  preparedByIns = belongInChap = preparedForLevel = createdOn = "";
     }
     Questions(String qtId, String preparedByIns, String belongInChap, String preparedForLevel, String createdOn){
+        defaultData();
+        
         this.qtId = qtId;
         this.preparedByIns = preparedByIns;
         this.belongInChap = belongInChap;
@@ -126,5 +130,22 @@ public class Questions extends Table{
         } catch (SQLException ex) {
             Logger.getLogger(Questions.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    private void defaultData(){
+        columns.add("QtId");
+        columns.add("Question");
+        columns.add("PreparedByIns");
+        columns.add("BelongInChap");
+        columns.add("PreparedForLevel");
+        columns.add("CreatedOn");
+        
+        values.add(qtId);
+        values.add(question);
+        values.add(preparedByIns);
+        values.add(belongInChap);
+        values.add(preparedForLevel);
+        values.add(createdOn);
+        
+        super.tableName = "questions";
     }
 }

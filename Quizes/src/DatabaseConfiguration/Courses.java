@@ -19,12 +19,17 @@ public class Courses extends Table{
     private String csId;
     private String courseName;
     private String level;
+    
     private Levels cLevel;
     
     public Courses(){
-        super.tableName = "courses";
+        defaultData();
+        
+        
     }
     public Courses(String csId, String courseName, String level){
+        defaultData();
+        
         this.csId = csId;
         this.courseName = courseName;
         this.level = level;
@@ -60,5 +65,16 @@ public class Courses extends Table{
         } catch (SQLException ex) {
             Logger.getLogger(Courses.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    private void defaultData(){
+        columns.add("CsId");
+        columns.add("CourseName");
+        columns.add("Level");
+        
+        values.add(csId);
+        values.add(courseName);
+        values.add(level);
+        
+        super.tableName = "courses";
     }
 }

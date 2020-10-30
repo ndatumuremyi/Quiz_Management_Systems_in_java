@@ -402,6 +402,10 @@ public class DataOperations {
             return null;
         }
     }
+    public String lowerFC(String string){
+        return string.substring(0,1).toLowerCase() + string.substring(1);
+    }
+            
         
     
 }

@@ -6,6 +6,7 @@
 package DatabaseConfiguration;
 
 
+
 /**
  *
  * @author paterne
@@ -17,37 +18,25 @@ public class HeadMaster extends Table{
     private String sex;
     private String degree;
     private String tel;
+    
     private Schools school;
+    
+    /**
+     *
+     */
+    public final static String []VALIABLES = {"firstName", "lastName","nationalId","sex", "degree", "tel"};
+    
     
     
     
     
     public HeadMaster(){
-        super.tableName = "headmaster";
-        valiables.add("FirstName");
-        valiables.add("LastName");
-        valiables.add("NationalId");
-        valiables.add("Sex");
-        valiables.add("Degree");
-        valiables.add("Tel");
-        
+        defaultData();
     }
     public HeadMaster(String firstName, String lastName, String nationalId, String sex, String degree, String tel){
         
         
-        valiables.add("FirstName");
-        valiables.add("LastName");
-        valiables.add("NationalId");
-        valiables.add("Sex");
-        valiables.add("Degree");
-        valiables.add("Tel");
-        
-        values.add(firstName);
-        values.add(lastName);
-        values.add(nationalId);
-        values.add(sex);
-        values.add(degree);
-        values.add(tel);
+        defaultData();
         
         
         this.firstName = firstName;
@@ -98,6 +87,28 @@ public class HeadMaster extends Table{
     }
     public void findSchool(){
 //        ResultSet output = DataOperations.find(new ConditionalData("schools", "ShId", this.));
+    }
+    public static String[] getValiables(){
+        
+        
+        
+        return VALIABLES;
+    }
+    private void defaultData(){
+        super.tableName = "headmaster";
+        columns.add("FirstName");
+        columns.add("LastName");
+        columns.add("NationalId");
+        columns.add("Sex");
+        columns.add("Degree");
+        columns.add("Tel");
+        
+        values.add(firstName);
+        values.add(lastName);
+        values.add(nationalId);
+        values.add(sex);
+        values.add(degree);
+        values.add(tel);
     }
     
     

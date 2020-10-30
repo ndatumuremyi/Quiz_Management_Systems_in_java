@@ -31,10 +31,13 @@ public class Students extends Table{
     private Classes sClass;
     
     public Students(){
-        super.tableName = "students";
+        defaultData();
+        
+        
     }
     public Students(String regNo, String firstName, String lastName, String studentClass, String sex, String age,
             String studentSchool, String address, String userName, String password, String status){
+        defaultData();
         
         this.regNo = regNo;
         this.firstName = firstName;
@@ -150,5 +153,32 @@ public class Students extends Table{
         } catch (SQLException ex) {
             Logger.getLogger(Classes.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    private void defaultData(){
+        columns.add("RegNo");
+        columns.add("FirstName");
+        columns.add("LastName");
+        columns.add("StudentClass");
+        columns.add("Sex");
+        columns.add("Age");
+        columns.add("StudentSchool");
+        columns.add("Address");
+        columns.add("UserName");
+        columns.add("Password");
+        columns.add("Status");
+        
+        values.add(regNo);
+        values.add(firstName);
+        values.add(lastName);
+        values.add(studentClass);
+        values.add(sex);
+        values.add(age);
+        values.add(studentSchool);
+        values.add(address);
+        values.add(userName);
+        values.add(password);
+        values.add(status);
+        
+        super.tableName = "students";
     }
 }

@@ -31,7 +31,9 @@ public class Instructor extends Table{
     private Schools iSchool;
     
     public Instructor(){
-        super.tableName = "instructor";
+        defaultData();
+        
+        
         inId = "";
         firstName = "";
         lastName = "";
@@ -46,6 +48,8 @@ public class Instructor extends Table{
     }
     public Instructor(String insId, String firstName, String lastName, String course, String nationalId, String school,
             String userName, String password, String degree, String status){
+        defaultData();
+        
         this.inId = insId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -152,6 +156,32 @@ public class Instructor extends Table{
         } catch (SQLException ex) {
             Logger.getLogger(Instructor.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    private void defaultData(){
+        
+        columns.add("InId");
+        columns.add("FirstName");
+        columns.add("LastName");
+        columns.add("Course");
+        columns.add("NationalId");
+        columns.add("School");
+        columns.add("UserName");
+        columns.add("Password");
+        columns.add("Degree");
+        columns.add("Status");
+        
+        values.add(inId);
+        values.add(firstName);
+        values.add(lastName);
+        values.add(course);
+        values.add(nationalId);
+        values.add(school);
+        values.add( userName);
+        values.add( password);
+        values.add( degree);
+        values.add( status);
+        
+        super.tableName = "instructor";
     }
     
 }
