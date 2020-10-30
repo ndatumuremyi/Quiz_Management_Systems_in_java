@@ -23,7 +23,7 @@ public class Chapters extends Table{
     private Courses course;
     
     public Chapters(){
-        defaultData();
+        super.tableName = "chapters";
         
         
         cpId = "";
@@ -31,10 +31,11 @@ public class Chapters extends Table{
         courseId = "";
     }
     public Chapters(String cpId, String chapterName, String courseId){
-        defaultData();
-        values.add(cpId);
-        values.add(chapterName);
-        values.add(courseId);
+        cvalues.put("CpId", cpId);
+        cvalues.put("ChapterName", chapterName);
+        cvalues.put("CourseId", courseId);
+        
+        super.tableName = "chapters";
         
         this.cpId = cpId;
         this.chapterName = chapterName;
@@ -44,8 +45,8 @@ public class Chapters extends Table{
         return cpId;
     }
     public void setCpId(String cpId){
-        values.remove(this.cpId);
-        values.add(cpId);
+        cvalues.put("CpId", cpId);
+        
         
         this.cpId = cpId;
     }
@@ -53,8 +54,8 @@ public class Chapters extends Table{
         return chapterName;
     }
     public void setChapterName(String chapterName){
-        values.remove(this.chapterName);
-        values.add(chapterName);
+        cvalues.put("ChapterName", chapterName);
+        
         
         this.chapterName = chapterName;
     }
@@ -62,8 +63,7 @@ public class Chapters extends Table{
         return courseId;
     }
     public void setCourseId(String courseId){
-        values.remove(this.courseId);
-        values.add(courseId);
+        cvalues.put("CourseId", courseId);
         
         this.courseId = courseId;
     }
@@ -82,14 +82,5 @@ public class Chapters extends Table{
             Logger.getLogger(Chapters.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    private void defaultData(){
-        
-        
-        columns.add("CpId");
-        columns.add("CpId");
-        columns.add("ChapterName");
-        columns.add("CourseId");
-        
-        super.tableName = "chapters";
-    }
+    
 }

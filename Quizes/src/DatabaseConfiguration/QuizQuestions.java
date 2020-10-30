@@ -25,16 +25,19 @@ public class QuizQuestions extends Table{
     private Quizes quiz;
     
     QuizQuestions(){
-        defaultData();
+        super.tableName = "quizquestions";
         
         
         questionId = answerId = quizCode = "";
     }
     QuizQuestions(String questionId, String answerId, String quizCode){
-        defaultData();
-        values.add(questionId);
-        values.add(answerId);
-        values.add(quizCode);
+        cvalues.put("QuestionId", questionId);
+        cvalues.put("AnswerId", answerId);
+        cvalues.put("QuizCode", quizCode);
+        
+        
+        
+        super.tableName = "quizquestions";
         
         this.questionId = questionId;
         this.answerId = answerId;
@@ -44,8 +47,8 @@ public class QuizQuestions extends Table{
         return this.questionId;
     }
     public void setQuestionId(String questionId){
-        values.remove(this.questionId);
-        values.add(questionId);
+        cvalues.put("QuestionId", questionId);
+        
         
         this.questionId = questionId;
     }
@@ -53,8 +56,8 @@ public class QuizQuestions extends Table{
         return this.answerId;
     }
     public void setAnswerId(String answerId){
-        values.remove(this.answerId);
-        values.add(answerId);
+        cvalues.put("AnswerId", answerId);
+        
         
         this.answerId = answerId;
     }
@@ -62,8 +65,7 @@ public class QuizQuestions extends Table{
         return this.quizCode;
     }
     public void setQuizCode(String quizCode){
-        values.remove(this.quizCode);
-        values.add(quizCode);
+        cvalues.put("QuizCode", quizCode);
         
         this.quizCode = quizCode;
     }
@@ -111,14 +113,5 @@ public class QuizQuestions extends Table{
         } catch (SQLException ex) {
             Logger.getLogger(QuizQuestions.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    private void defaultData(){
-        columns.add("QuestionId");
-        columns.add("AnswerId");
-        columns.add("QuizCode");
-        
-        
-        
-        super.tableName = "quizquestions";
     }
 }

@@ -31,24 +31,27 @@ public class Students extends Table{
     private Classes sClass;
     
     public Students(){
-        defaultData();
+        super.tableName = "students";
         
         
     }
     public Students(String regNo, String firstName, String lastName, String studentClass, String sex, String age,
             String studentSchool, String address, String userName, String password, String status){
-        defaultData();
-        values.add(regNo);
-        values.add(firstName);
-        values.add(lastName);
-        values.add(studentClass);
-        values.add(sex);
-        values.add(age);
-        values.add(studentSchool);
-        values.add(address);
-        values.add(userName);
-        values.add(password);
-        values.add(status);
+        cvalues.put("RegNo", regNo);
+        cvalues.put("FirstName", firstName);
+        cvalues.put("LastName", lastName);
+        cvalues.put("StudentClass", studentClass);
+        cvalues.put("Sex", sex);
+        cvalues.put("Age", age);
+        cvalues.put("StudentSchool", studentSchool);
+        cvalues.put("Address", address);
+        cvalues.put("UserName", userName);
+        cvalues.put("Password", password);
+        cvalues.put("Status", status);
+        
+        
+        
+        super.tableName = "students";
         
         this.regNo = regNo;
         this.firstName = firstName;
@@ -66,8 +69,8 @@ public class Students extends Table{
         return this.regNo;
     }
     public void setRegNo(String regNo){
-        values.remove(this.regNo);
-        values.add(regNo);
+        cvalues.put("RegNo", regNo);
+        
         
         this.regNo = regNo;
     }
@@ -75,8 +78,8 @@ public class Students extends Table{
         return this.firstName;
     }
     public void setFirstName(String firstName){
-        values.remove(this.firstName);
-        values.add(firstName);
+        cvalues.put("FirstName", firstName);
+        
         
         this.firstName = firstName;
     }
@@ -84,8 +87,8 @@ public class Students extends Table{
         return this.lastName;
     }
     public void setLastName(String lastName){
-        values.remove(this.lastName);
-        values.add(lastName);
+        cvalues.put("LastName", lastName);
+        
         
         this.lastName = lastName;
     }
@@ -93,8 +96,8 @@ public class Students extends Table{
         return this.studentClass;
     }
     public void setStudentClass(String studentClass){
-        values.remove(this.studentClass);
-        values.add(studentClass);
+        cvalues.put("StudentClass", studentClass);
+        
         
         this.studentClass = studentClass;
     }
@@ -102,8 +105,8 @@ public class Students extends Table{
         return this.sex;
     }
     public void setSex(String sex){
-        values.remove(this.sex);
-        values.add(sex);
+        cvalues.put("Sex", sex);
+        
         
         this.sex = sex;
     }
@@ -111,8 +114,8 @@ public class Students extends Table{
         return this.age;
     }
     public void setAge(String age){
-        values.remove(this.age);
-        values.add(age);
+        cvalues.put("Age", age);
+        
         
         this.age = age;
     }
@@ -120,8 +123,8 @@ public class Students extends Table{
         return this.studentSchool;
     }
     public void setStudentSchool(String studentSchool){
-        values.remove(this.studentSchool);
-        values.add(studentSchool);
+        cvalues.put("StudentSchool", studentSchool);
+        
         
         this.studentSchool = studentSchool;
     }
@@ -129,8 +132,8 @@ public class Students extends Table{
         return this.address;
     }
     public void setAddress(String address){
-        values.remove(this.address);
-        values.add(address);
+        cvalues.put("Address", address);
+        
         
         this.address = address;
     }
@@ -138,8 +141,8 @@ public class Students extends Table{
         return this.userName;
     }
     public void setUserName(String userName){
-        values.remove(this.userName);
-        values.add(userName);
+        cvalues.put("UserName", userName);
+        
         
         this.userName = userName;
     }
@@ -147,17 +150,15 @@ public class Students extends Table{
         return this.password;
     }
     public void setPassword(String password){
-        values.remove(this.password);
-        values.add(password);
-        
+        cvalues.put("Password", password);
+       
         this.password = password;
     }
     public String getStatus(){
         return this.status;
     }
     public void setStatus(String status){
-        values.remove(this.status);
-        values.add(status);
+        cvalues.put("Status", status);
         
         this.status = status;
     }
@@ -198,21 +199,5 @@ public class Students extends Table{
             Logger.getLogger(Classes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    private void defaultData(){
-        columns.add("RegNo");
-        columns.add("FirstName");
-        columns.add("LastName");
-        columns.add("StudentClass");
-        columns.add("Sex");
-        columns.add("Age");
-        columns.add("StudentSchool");
-        columns.add("Address");
-        columns.add("UserName");
-        columns.add("Password");
-        columns.add("Status");
-        
-        
-        
-        super.tableName = "students";
-    }
+ 
 }

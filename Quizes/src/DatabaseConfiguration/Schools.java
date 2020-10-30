@@ -27,21 +27,22 @@ public class Schools extends Table{
     private HeadMaster headmaster;
     
     public Schools(){
-        defaultData();
+        super.tableName = "schools";
         
         
     }
     public Schools(String shId, String schoolName, String headMasterId, String provence, String district, 
             String sector, String cell, String type){
-        defaultData();
-        values.add(shId);
-        values.add(schoolName);
-        values.add(headMasterId);
-        values.add(provence);
-        values.add(district);
-        values.add(sector);
-        values.add(cell);
-        values.add(type);
+        super.tableName = "schools";
+        
+        cvalues.put("shId",shId);
+        cvalues.put("schoolName",schoolName);
+        cvalues.put("headMasterId",headMasterId);
+        cvalues.put("provence",provence);
+        cvalues.put("district",district);
+        cvalues.put("sector",sector);
+        cvalues.put("cell",cell);
+        cvalues.put("type",type );
         
         this.shId = shId;
         this.schoolName = schoolName;
@@ -56,8 +57,7 @@ public class Schools extends Table{
         return this.shId;
     }
     public void setShId(String shId){
-        values.remove(this.shId);
-        values.add(shId);
+        cvalues.put("shId",shId);
         
         this.shId = shId;
     }
@@ -65,8 +65,7 @@ public class Schools extends Table{
         return this.schoolName;
     }
     public void setSchoolName(String schoolName){
-        values.remove(this.schoolName);
-        values.add(schoolName);
+        cvalues.put("schoolName",schoolName);
         
         this.schoolName = schoolName;
     }
@@ -74,8 +73,7 @@ public class Schools extends Table{
         return this.headMasterId;
     }
     public void setHeadMasterId(String headMasterId){
-        values.remove(this.headMasterId);
-        values.add(headMasterId);
+        cvalues.put("headMasterId",headMasterId);
         
         this.headMasterId = headMasterId;
     }
@@ -83,8 +81,7 @@ public class Schools extends Table{
         return this.provence;
     }
     public void setProvence(String provence){
-        values.remove(this.provence);
-        values.add(provence);
+        cvalues.put("provence",provence);
         
         this.provence = provence;
     }
@@ -92,8 +89,9 @@ public class Schools extends Table{
         return this.district;
     }
     public void setDistrict(String district){
-        values.remove(this.district);
-        values.add(district);
+        
+        cvalues.put("district",district);
+        
         
         this.district = district;
     }
@@ -101,8 +99,8 @@ public class Schools extends Table{
         return this.sector;
     }
     public void setSector(String sector){
-        values.remove(this.sector);
-        values.add(sector);
+        cvalues.put("sector",sector);
+        
         
         this.sector = sector;
     }
@@ -110,8 +108,8 @@ public class Schools extends Table{
         return this.cell;
     }
     public void setCell(String cell){
-        values.remove(this.cell);
-        values.add(cell);
+        cvalues.put("cell",cell);
+        
         
         this.cell = cell;
     }
@@ -119,8 +117,7 @@ public class Schools extends Table{
         return this.type;
     }
     public void setType(String type){
-        values.remove(this.type);
-        values.add(type);
+        cvalues.put("type",type );
         
         this.type = type;
     }
@@ -143,22 +140,10 @@ public class Schools extends Table{
             Logger.getLogger(Schools.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    private void defaultData(){
-        columns.add("ShId");
-        columns.add("SchoolName");
-        columns.add("HeadMasterId");
-        columns.add("Provence");
-        columns.add("District");
-        columns.add("Sector");
-        columns.add("Cell");
-        columns.add("Type");
-        
-        
-        
-        super.tableName = "schools";
-    }
+    
     public static String[] getValiables(){
         String [] valiables = {"shId", "schoolName", "headMasterId", "provence", "district", "sector", "cell", "type"};
+        
         return valiables;
     }
 }

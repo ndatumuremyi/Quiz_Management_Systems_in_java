@@ -25,18 +25,21 @@ public class Quizes extends Table{
     private Classes qClass;
     
     Quizes(){
-        defaultData();
+        super.tableName = "quizes";
         
         
         quizCode = type = classPreparedFor = attemptDate = creator = "";
     }
     Quizes( String quizCode, String type, String classPreparedFor, String attemptDate, String creator){
-        defaultData();
-        values.add(quizCode);
-        values.add(type);
-        values.add(classPreparedFor);
-        values.add(attemptDate);
-        values.add(creator);
+        cvalues.put("QuizCode", quizCode);
+        cvalues.put("Type", type);
+        cvalues.put("ClassPreparedFor", classPreparedFor);
+        cvalues.put("AttemptDate", attemptDate);
+        cvalues.put("Creator", creator);
+        
+        
+        
+        super.tableName = "quizes";
         
         this.quizCode = quizCode;
         this.type = type;
@@ -48,8 +51,8 @@ public class Quizes extends Table{
         return this.quizCode;
     }
     public void setQuizCode(String quizCode){
-        values.remove(this.quizCode);
-        values.add(quizCode);
+        cvalues.put("QuizCode", quizCode);
+        
         
         this.quizCode = quizCode;
     }
@@ -57,8 +60,8 @@ public class Quizes extends Table{
         return this.type;
     }
     public void setType(String type){
-        values.remove(this.type);
-        values.add(type);
+        cvalues.put("Type", type);
+        
         
         this.type = type;
     }
@@ -66,8 +69,8 @@ public class Quizes extends Table{
         return this.classPreparedFor;
     }
     public void setClassPreparedFor(String classPreparedFor){
-        values.remove(this.classPreparedFor);
-        values.add(classPreparedFor);
+        cvalues.put("ClassPreparedFor", classPreparedFor);
+        
         
         this.classPreparedFor = classPreparedFor;
     }
@@ -75,8 +78,8 @@ public class Quizes extends Table{
         return this.attemptDate;
     }
     public void setAttemptDate(String attemptDate){
-        values.remove(this.attemptDate);
-        values.add(attemptDate);
+        cvalues.put("AttemptDate", attemptDate);
+        
         
         this.attemptDate = attemptDate;
     }
@@ -84,8 +87,7 @@ public class Quizes extends Table{
         return this.creator;
     }
     public void setCreator(String creator){
-        values.remove(this.creator);
-        values.add(creator);
+        cvalues.put("Creator", creator);
         
         this.creator = creator;
     }
@@ -128,17 +130,6 @@ public class Quizes extends Table{
         } catch (SQLException ex) {
             Logger.getLogger(Quizes.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    private void defaultData(){
-        columns.add("QuizCode");
-        columns.add("Type");
-        columns.add("ClassPreparedFor");
-        columns.add("AttemptDate");
-        columns.add("Creator");
-        
-        
-        
-        super.tableName = "quizes";
     }
     
 }

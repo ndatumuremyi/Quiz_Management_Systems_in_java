@@ -23,21 +23,25 @@ public class Answers extends Table {
     private Questions question;
     
     public Answers(String ansId, String questionId, String answer, String isItCorrect){
-        defaultData();
+        super.tableName = "answers";
+        
         this.ansId = ansId;
         this.answer = answer;
         this.questionId = questionId;
         this.isItCorrect =isItCorrect;
         
-        values.add(ansId);
-        values.add(questionId);
-        values.add(answer);
-        values.add(isItCorrect);
+        cvalues.put("AnsId", ansId);
+        cvalues.put("QuestionId",questionId);
+        cvalues.put("Answer", answer);
+        cvalues.put("IsItCorrect",isItCorrect);
+        
+        
+        
         
     }
 
     Answers() {
-        defaultData();
+        super.tableName = "answers";
                 
         questionId = null;
         answer = null;
@@ -45,8 +49,8 @@ public class Answers extends Table {
     }
     
     public void setAnsId(String ansId){
-        values.remove(this.ansId);
-        values.add(ansId);
+        cvalues.put("AnsId", ansId);
+        
         
         this.ansId = ansId;
     }
@@ -57,14 +61,14 @@ public class Answers extends Table {
         return questionId;
     }       
     public void setQuestionId(String questionId){
-        values.remove(this.questionId);
-        values.add(questionId);
+        cvalues.put("QuestionId",questionId);
+        
         
         this.questionId = questionId;
     }
     public void setAnswer(String answer){
-        values.remove(this.answer);
-        values.add(answer);
+        cvalues.put("Answer", answer);
+        
         
         this.answer = answer;
     }
@@ -75,8 +79,7 @@ public class Answers extends Table {
         return isItCorrect;
     }
     public void setIsItCorrect(String isItCorrect){
-        values.remove(this.isItCorrect);
-        values.add(isItCorrect);
+        cvalues.put("IsItCorrect",isItCorrect);
         
         this.isItCorrect = isItCorrect;
     }
@@ -98,14 +101,5 @@ public class Answers extends Table {
             Logger.getLogger(Answers.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-    }
-    private void defaultData(){
-        columns.add("AnsId");
-        columns.add("QuestionId");
-        columns.add("Answer");
-        columns.add("IsItCorrect");
-        
-        
-        super.tableName = "answers";
     }
 }

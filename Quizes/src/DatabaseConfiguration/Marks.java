@@ -28,19 +28,21 @@ public class Marks extends Table{
     private Quizes quiz;
     
     public Marks(){
-        defaultData();
+       super.tableName = "marks";
         
         
         mkId = studentReg = quizCode = courseId = marks = workedAt = "";
     }
     public Marks(String mkId, String studentReg, String quizCode,String courseId, String marks, String workedAt){
-        defaultData();
-        values.add(mkId);
-        values.add(studentReg);
-        values.add(quizCode);
-        values.add(courseId);
-        values.add(marks);
-        values.add(workedAt);
+        cvalues.put("MkId", mkId);
+        cvalues.put("StudentReg", studentReg);
+        cvalues.put("QuizCode", quizCode);
+        cvalues.put("CourseId", courseId);
+        cvalues.put("Marks", marks);
+        cvalues.put("WorkedAt", workedAt);
+        
+        
+        super.tableName = "marks";
         
         this.mkId = mkId;
         this.studentReg = studentReg;
@@ -53,8 +55,8 @@ public class Marks extends Table{
         return this.mkId;
     }
     public void setMkId(String mkId){
-        values.remove(this.mkId);
-        values.add(mkId);
+        cvalues.put("MkId", mkId);
+        
         
         this.mkId = mkId;
     }
@@ -62,8 +64,8 @@ public class Marks extends Table{
         return this.studentReg;
     }
     public void setStudentReg(String studentReg){
-        values.remove(this.studentReg);
-        values.add(studentReg);
+        cvalues.put("StudentReg", studentReg);
+        
         
         this.studentReg = studentReg;
     }
@@ -71,8 +73,8 @@ public class Marks extends Table{
         return this.quizCode;
     }
     public void setQuizCode(String quizCode){
-        values.remove(this.quizCode);
-        values.add(quizCode);
+        cvalues.put("QuizCode", quizCode);
+        
         
         this.quizCode = quizCode;
     }
@@ -80,8 +82,8 @@ public class Marks extends Table{
         return this.courseId;
     }
     public void setCourseId(String courseId){
-        values.remove(this.courseId);
-        values.add(courseId);
+        cvalues.put("CourseId", courseId);
+        
         
         this.courseId = courseId;
     }
@@ -89,8 +91,8 @@ public class Marks extends Table{
         return this.marks;
     }
     public void setMarks(String marks){
-        values.remove(this.marks);
-        values.add(marks);
+        cvalues.put("Marks", marks);
+        
         
         this.marks = marks;
     }
@@ -98,8 +100,7 @@ public class Marks extends Table{
         return this.workedAt;
     }
     public void setWorkedAt(String workedAt){
-        values.remove(this.workedAt);
-        values.add(workedAt);
+        cvalues.put("WorkedAt", workedAt);
         
         this.workedAt = workedAt;
     }
@@ -163,16 +164,5 @@ public class Marks extends Table{
         } catch (SQLException ex) {
             Logger.getLogger(Marks.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    private void defaultData(){
-        columns.add("MkId");
-        columns.add("StudentReg");
-        columns.add("QuizCode");
-        columns.add("CourseId");
-        columns.add("Marks");
-        columns.add("WorkedAt");
-        
-        
-        super.tableName = "marks";
     }
 }

@@ -26,7 +26,7 @@ public class Classes extends Table{
     private Instructor instructor;
     
     public Classes(){
-        defaultData();
+        super.tableName = "classes";
         
         
         clId = "";
@@ -35,11 +35,14 @@ public class Classes extends Table{
         instructorId = "";
     }
     public Classes(String clId, String classLevel, String schoolId, String instructorId){
-        defaultData();
-        values.add(clId);
-        values.add(classLevel);
-        values.add(schoolId);
-        values.add(instructorId);
+        cvalues.put("ClId",clId);
+        cvalues.put("ClassLevel",classLevel);
+        cvalues.put("SchoolId",schoolId);
+        cvalues.put("InstructorId", instructorId);
+        
+        
+        
+        super.tableName = "classes";
         
         this.clId = clId;
         this.classLevel = classLevel;
@@ -50,8 +53,8 @@ public class Classes extends Table{
         return this.clId;
     }
     public void setClId(String clId){
-        values.remove(this.clId);
-        values.add(clId);
+        cvalues.put("ClId",clId);
+        
         
         this.clId = clId;
     }
@@ -59,8 +62,8 @@ public class Classes extends Table{
         return this.classLevel;
     }
     public void setClassLevel(String classLevel){
-        values.remove(this.classLevel);
-        values.add(classLevel);
+        cvalues.put("ClassLevel",classLevel);
+        
         
         this.classLevel = classLevel;
     }
@@ -68,8 +71,8 @@ public class Classes extends Table{
         return this.schoolId;
     }
     public void setSchoolId(String schoolId){
-        values.remove(this.schoolId);
-        values.add(schoolId);
+        cvalues.put("SchoolId",schoolId);
+        
         
         this.schoolId = schoolId;
     }
@@ -77,8 +80,7 @@ public class Classes extends Table{
         return this.instructorId;
     }
     public void setInstructorId(String instructorId){
-        values.remove(this.instructorId);
-        values.add(instructorId);
+        cvalues.put("InstructorId", instructorId);
         
         this.instructorId = instructorId;
     }
@@ -137,16 +139,6 @@ public class Classes extends Table{
         } catch (SQLException ex) {
             Logger.getLogger(Classes.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    private void defaultData(){
-        columns.add("ClId");
-        columns.add("ClassLevel");
-        columns.add("SchoolId");
-        columns.add("InstructorId");
-        
-        
-        
-        super.tableName = "classes";
     }
     
 }

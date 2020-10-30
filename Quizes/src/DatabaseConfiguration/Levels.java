@@ -15,16 +15,17 @@ public class Levels extends Table{
     private String inFull;
     
     public Levels(){
-        defaultData();
+        super.tableName = "levels";
         
         
         levelName = "";
         inFull = "";
     }
     public Levels(String levelName, String inFull){
-        defaultData();
-        values.add(levelName);
-        values.add(inFull);
+        cvalues.put("LevelName", levelName);
+        cvalues.put("InFull", inFull);
+             
+        super.tableName = "levels";
         
         this.levelName = levelName;
         this.inFull = inFull;
@@ -40,8 +41,8 @@ public class Levels extends Table{
         return this.levelName;
     }
     public void setLevelName(String levelName){
-        values.remove(this.levelName);
-        values.add(levelName);
+        cvalues.put("LevelName", levelName);
+        
         
         this.levelName = levelName;
     }
@@ -49,18 +50,9 @@ public class Levels extends Table{
         return this.inFull;
     }
     public void setInFull(String inFull){
-        values.remove(this.inFull);
-        values.add(inFull);
+        cvalues.put("InFull", inFull);
         
         this.inFull = inFull;
-    }
-    private void defaultData(){
-        columns.add("LevelName");
-        columns.add("InFull");
-        
-        
-        
-        super.tableName = "levels";
     }
     
 }

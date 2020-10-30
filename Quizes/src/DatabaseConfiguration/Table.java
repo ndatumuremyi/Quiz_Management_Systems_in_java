@@ -6,6 +6,7 @@
 package DatabaseConfiguration;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -14,24 +15,30 @@ import java.util.ArrayList;
 public class Table {
     String tableName;
     DataOperations operation = new DataOperations();
-    ArrayList<String> columns = new ArrayList<>();
-    ArrayList<String> values = new ArrayList<>();
+    HashMap<String, String>cvalues = new HashMap<>();
 
     
     public void save(){
-        if(values.size()==columns.size() ){
-            
-            if(operation.insert(tableName, columns, values)){
-                System.out.println("well inserted");
-            }
-            else{
-                System.out.println("fail to insert");
-            }
-            
+        if(operation.insert(tableName, cvalues)){
+            System.out.println("well inserted");
         }
         else{
-            System.out.print("Error found");
+            System.out.println("fail to insert");
         }
+        
+
+//        if(values.size()==columns.size() ){
+//            if(operation.insert(tableName, columns, values)){
+//                System.out.println("well inserted");
+//            }
+//            else{
+//                System.out.println("fail to insert");
+//            }
+//            
+//        }
+//        else{
+//            System.out.print("Error found");
+//        }
     }
     
     public static void select(){

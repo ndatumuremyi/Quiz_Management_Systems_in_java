@@ -18,8 +18,35 @@ public class DataOperations {
     
     static Statement statement = Connections.getConnection();
     
-    
-    /*
+    String values = "";
+    String columns ="";
+    public boolean insert(String tableName, HashMap<String, String> cvalues){
+        String query="insert into "+tableName+"(";
+        
+        cvalues.forEach((key, value)->{
+            columns += key +",";
+            values += value + "\",\"";
+        });
+        columns = columns.substring(0, columns.length()-1);
+        values = values.substring(0, values.length()-2);
+        query += columns + ")values(\""+ values + ");";
+        
+        System.out.println(query);
+        
+        columns = values = "";
+        if(executeSet(query)){
+            return true;
+        }
+        else{
+            return false;
+        }
+        
+        
+        
+        
+    }
+    public boolean insert(String tableName, ArrayList<String> valiables,ArrayList<String> values){
+        /*
     **********************************************************************************************************************
     **********************************************************************************************************************
     
@@ -28,7 +55,6 @@ public class DataOperations {
     **********************************************************************************************************************
     **********************************************************************************************************************
     */
-    public boolean insert(String tableName, ArrayList<String> valiables,ArrayList<String> values){
         String query="insert into "+tableName+"(";
         for(String variable : valiables){
                 query += variable+',';
@@ -38,17 +64,12 @@ public class DataOperations {
                 query +=value +"\",\"";
             }
             query = query.substring(0, query.length()-2)+ ");";
-        try{
-            System.out.println(query);
-            statement.executeUpdate(query);
-            return true;
-        }
-        catch (SQLException ex){
-            System.out.println(ex);
-              //  ex.printStackTrace(System.out);
-                
-            return false;
-        }
+            if(executeSet(query)){
+                return true;
+            }
+            else{
+                return false;
+            }
         
     }
     
@@ -71,7 +92,7 @@ public class DataOperations {
         
         
         String query = "select * from "+ tableName +";";
-        ResultSet output = execute(query);
+        ResultSet output = executeGet(query);
 //        ResultSetMetaData metaData = output.getMetaData();
         
         switch (tableName) {
@@ -341,8 +362,20 @@ public class DataOperations {
         
         
     }
-    
-    ResultSet execute(String query){
+    public boolean executeSet(String query){
+        try{
+            System.out.println(query);
+            statement.executeUpdate(query);
+            return true;
+        }
+        catch (SQLException ex){
+            System.out.println(ex);
+              //  ex.printStackTrace(System.out);
+                
+            return false;
+        }
+    }
+    ResultSet executeGet(String query){
         /*
         ***************************************************************************************************************************
         ***************************************************************************************************************************

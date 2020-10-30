@@ -32,18 +32,17 @@ public class HeadMaster extends Table{
     
     
     public HeadMaster(){
-        defaultData();
+        super.tableName = "headmaster";
     }
     public HeadMaster(String firstName, String lastName, String nationalId, String sex, String degree, String tel){
-        values.add(firstName);
-        values.add(lastName);
-        values.add(nationalId);
-        values.add(sex);
-        values.add(degree);
-        values.add(tel);
+        super.tableName = "headmaster";
         
-        
-        defaultData();
+        cvalues.put("FirstName", firstName);
+        cvalues.put("LastName", lastName);
+        cvalues.put("NationalId", nationalId);
+        cvalues.put("Sex", sex);
+        cvalues.put("Degree", degree);
+        cvalues.put("Tel", tel);
         
         
         this.firstName = firstName;
@@ -60,8 +59,8 @@ public class HeadMaster extends Table{
         this.hmId = hmId;
     }
     public void setFirstName(String firstName){
-        values.remove(this.firstName);
-        values.add(firstName);
+        cvalues.put("FirstName", firstName);
+        
         
         this.firstName = firstName;
     }
@@ -69,8 +68,8 @@ public class HeadMaster extends Table{
         return this.firstName;
     }
     public void setLastName(String lastName){
-        values.remove(this.lastName);
-        values.add(lastName);
+        cvalues.put("LastName", lastName);
+        
         
         this.lastName = lastName;
     }
@@ -78,8 +77,8 @@ public class HeadMaster extends Table{
         return this.lastName;
     }
     public void setNationalId(String nationalId){
-        values.remove(this.nationalId);
-        values.add(nationalId);
+        cvalues.put("NationalId", nationalId);
+        
         
         this.nationalId = nationalId;
     }
@@ -87,8 +86,8 @@ public class HeadMaster extends Table{
         return this.nationalId;
     }
     public void setSex(String sex){
-        values.remove(this.sex);
-        values.add(sex);
+        cvalues.put("Sex", sex);
+        
         
         this.sex = sex;
     }
@@ -96,8 +95,8 @@ public class HeadMaster extends Table{
         return this.sex;
     }
     public void setDegree(String degree){
-        values.remove(this.degree);
-        values.add(degree);
+        cvalues.put("Degree", degree);
+        
         
         this.degree = degree;
     }
@@ -105,8 +104,7 @@ public class HeadMaster extends Table{
         return this.degree;
     }
     public void setTel(String tel){
-        values.remove(this.tel);
-        values.add(tel);
+        cvalues.put("Tel", tel);
         
         this.tel = tel;
     }
@@ -124,18 +122,6 @@ public class HeadMaster extends Table{
         
         
         return VALIABLES;
-    }
-    private void defaultData(){
-        super.tableName = "headmaster";
-        
-        columns.add("FirstName");
-        columns.add("LastName");
-        columns.add("NationalId");
-        columns.add("Sex");
-        columns.add("Degree");
-        columns.add("Tel");
-        
-        
     }
     
     

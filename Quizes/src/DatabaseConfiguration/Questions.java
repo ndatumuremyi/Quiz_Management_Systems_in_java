@@ -28,19 +28,22 @@ public class Questions extends Table{
     private Chapters chapter;
     
     Questions(){
-        defaultData();
+        super.tableName = "questions";
         
         
         qtId =  preparedByIns = belongInChap = preparedForLevel = createdOn = "";
     }
-    Questions(String qtId, String preparedByIns, String belongInChap, String preparedForLevel, String createdOn){
-        defaultData();
-        values.add(qtId);
-        values.add(question);
-        values.add(preparedByIns);
-        values.add(belongInChap);
-        values.add(preparedForLevel);
-        values.add(createdOn);
+    Questions(String qtId,String question, String preparedByIns, String belongInChap, String preparedForLevel, String createdOn){
+        cvalues.put("QtId", qtId);
+        cvalues.put("Question", question);
+        cvalues.put("PreparedByIns", preparedByIns);
+        cvalues.put("BelongInChap", belongInChap);
+        cvalues.put("PreparedForLevel", preparedForLevel);
+        cvalues.put("CreatedOn", createdOn);
+        
+        
+        
+        super.tableName = "questions";
         
         this.qtId = qtId;
         this.preparedByIns = preparedByIns;
@@ -52,8 +55,8 @@ public class Questions extends Table{
         return this.qtId;
     }
     public void setQtId(String qtId){
-        values.remove(this.qtId);
-        values.add(qtId);
+        cvalues.put("QtId", qtId);
+        
         
         this.qtId = qtId;
     }
@@ -61,8 +64,8 @@ public class Questions extends Table{
         return this.question;
     }
     public void setQuestion(String question){
-        values.remove(this.question);
-        values.add(question);
+        cvalues.put("Question", question);
+        
         
         this.question = question;
     }
@@ -70,8 +73,8 @@ public class Questions extends Table{
         return this.preparedByIns;
     }
     public void setPreparedByIns(String preparedByIns){
-        values.remove(this.preparedByIns);
-        values.add(preparedByIns);
+        cvalues.put("PreparedByIns", preparedByIns);
+        
         
         this.preparedByIns = preparedByIns;
     }
@@ -79,8 +82,8 @@ public class Questions extends Table{
         return this.belongInChap;
     }
     public void setBelongInChap(String belongInChap){
-        values.remove(this.belongInChap);
-        values.add(belongInChap);
+        cvalues.put("BelongInChap", belongInChap);
+        
         
         this.belongInChap = belongInChap;
     }
@@ -88,8 +91,8 @@ public class Questions extends Table{
         return this.preparedForLevel;
     }
     public void setPreparedForLevel(String preparedForLevel){
-        values.remove(this.preparedForLevel);
-        values.add(preparedForLevel);
+        cvalues.put("PreparedForLevel", preparedForLevel);
+       
         
         this.preparedForLevel = preparedForLevel;
     }
@@ -97,8 +100,7 @@ public class Questions extends Table{
         return this.createdOn;
     }
     public void setCreatedOn(String createdOn){
-        values.remove(this.createdOn);
-        values.add(createdOn);
+        cvalues.put("CreatedOn", createdOn);
         
         this.createdOn = createdOn;
     }
@@ -154,17 +156,5 @@ public class Questions extends Table{
         } catch (SQLException ex) {
             Logger.getLogger(Questions.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    private void defaultData(){
-        columns.add("QtId");
-        columns.add("Question");
-        columns.add("PreparedByIns");
-        columns.add("BelongInChap");
-        columns.add("PreparedForLevel");
-        columns.add("CreatedOn");
-        
-        
-        
-        super.tableName = "questions";
     }
 }
