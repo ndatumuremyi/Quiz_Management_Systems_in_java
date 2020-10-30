@@ -7,13 +7,10 @@ package quizes;
 
 import DatabaseConfiguration.*;
 import DatabaseConfiguration.HeadMaster;
-import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -30,8 +27,6 @@ public class HeadMasterPane extends VBox {
 
     DataOperations operations = new DataOperations();
 
-    TabPane headMasterTabs = new TabPane();
-    ArrayList<TableColumn> columns = new ArrayList<>();
     TableView<HeadMaster> headMasterTable = new TableView<>();
     ObservableList<HeadMaster> headMasters = FXCollections.observableArrayList(operations.selectAll("headmaster"));
     
@@ -58,18 +53,17 @@ public class HeadMasterPane extends VBox {
         for (String i : HeadMaster.getValiables()) {
             TableColumn<HeadMaster, String> column = new TableColumn<>(i);
             column.setCellValueFactory(new PropertyValueFactory<>(i));
-            columns.add(column);
+  
+            headMasterTable.getColumns().add(column);
         }
 
         
         headMasterTable.setEditable(true);
 
-        columns.forEach((column) -> {
-            headMasterTable.getColumns().add(column);
-        });
+        
         headMasterTable.setItems(headMasters);
         
-        addPane.getChildren().addAll(firstName, lastName, nationalId, degree, sex, tel, save);
+        
         addSelf();
         
         save.setOnAction(ev ->{
@@ -90,7 +84,7 @@ public class HeadMasterPane extends VBox {
         
     }
     private void addSelf(){
-        
+        addPane.getChildren().addAll(firstName, lastName, nationalId, degree, sex, tel, save);
         getChildren().add(headMasterTable);
         getChildren().add(addPane);
         

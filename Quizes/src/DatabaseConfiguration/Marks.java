@@ -35,6 +35,12 @@ public class Marks extends Table{
     }
     public Marks(String mkId, String studentReg, String quizCode,String courseId, String marks, String workedAt){
         defaultData();
+        values.add(mkId);
+        values.add(studentReg);
+        values.add(quizCode);
+        values.add(courseId);
+        values.add(marks);
+        values.add(workedAt);
         
         this.mkId = mkId;
         this.studentReg = studentReg;
@@ -47,36 +53,54 @@ public class Marks extends Table{
         return this.mkId;
     }
     public void setMkId(String mkId){
+        values.remove(this.mkId);
+        values.add(mkId);
+        
         this.mkId = mkId;
     }
     public String getStudentReg(){
         return this.studentReg;
     }
     public void setStudentReg(String studentReg){
+        values.remove(this.studentReg);
+        values.add(studentReg);
+        
         this.studentReg = studentReg;
     }
     public String getQuizCode(){
         return this.quizCode;
     }
     public void setQuizCode(String quizCode){
+        values.remove(this.quizCode);
+        values.add(quizCode);
+        
         this.quizCode = quizCode;
     }
     public String getCourseId(){
         return this.courseId;
     }
     public void setCourseId(String courseId){
+        values.remove(this.courseId);
+        values.add(courseId);
+        
         this.courseId = courseId;
     }
     public String getMarks(){
         return this.marks;
     }
     public void setMarks(String marks){
+        values.remove(this.marks);
+        values.add(marks);
+        
         this.marks = marks;
     }
     public String getWorkedAt(){
         return this.workedAt;
     }
     public void setWorkedAt(String workedAt){
+        values.remove(this.workedAt);
+        values.add(workedAt);
+        
         this.workedAt = workedAt;
     }
     
@@ -148,12 +172,6 @@ public class Marks extends Table{
         columns.add("Marks");
         columns.add("WorkedAt");
         
-        values.add(mkId);
-        values.add(studentReg);
-        values.add(quizCode);
-        values.add(courseId);
-        values.add(marks);
-        values.add(workedAt);
         
         super.tableName = "marks";
     }

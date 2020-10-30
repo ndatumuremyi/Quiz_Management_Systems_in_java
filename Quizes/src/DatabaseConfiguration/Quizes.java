@@ -32,6 +32,11 @@ public class Quizes extends Table{
     }
     Quizes( String quizCode, String type, String classPreparedFor, String attemptDate, String creator){
         defaultData();
+        values.add(quizCode);
+        values.add(type);
+        values.add(classPreparedFor);
+        values.add(attemptDate);
+        values.add(creator);
         
         this.quizCode = quizCode;
         this.type = type;
@@ -43,30 +48,45 @@ public class Quizes extends Table{
         return this.quizCode;
     }
     public void setQuizCode(String quizCode){
+        values.remove(this.quizCode);
+        values.add(quizCode);
+        
         this.quizCode = quizCode;
     }
     public String getType(){
         return this.type;
     }
     public void setType(String type){
+        values.remove(this.type);
+        values.add(type);
+        
         this.type = type;
     }
     public String getClassPreparedFor(){
         return this.classPreparedFor;
     }
     public void setClassPreparedFor(String classPreparedFor){
+        values.remove(this.classPreparedFor);
+        values.add(classPreparedFor);
+        
         this.classPreparedFor = classPreparedFor;
     }
     public String getAttemptDate(){
         return this.attemptDate;
     }
     public void setAttemptDate(String attemptDate){
+        values.remove(this.attemptDate);
+        values.add(attemptDate);
+        
         this.attemptDate = attemptDate;
     }
     public String getCreator(){
         return this.creator;
     }
     public void setCreator(String creator){
+        values.remove(this.creator);
+        values.add(creator);
+        
         this.creator = creator;
     }
     
@@ -116,11 +136,7 @@ public class Quizes extends Table{
         columns.add("AttemptDate");
         columns.add("Creator");
         
-        values.add(quizCode);
-        values.add(type);
-        values.add(classPreparedFor);
-        values.add(attemptDate);
-        values.add(creator);
+        
         
         super.tableName = "quizes";
     }

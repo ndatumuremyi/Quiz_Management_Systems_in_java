@@ -35,6 +35,12 @@ public class Questions extends Table{
     }
     Questions(String qtId, String preparedByIns, String belongInChap, String preparedForLevel, String createdOn){
         defaultData();
+        values.add(qtId);
+        values.add(question);
+        values.add(preparedByIns);
+        values.add(belongInChap);
+        values.add(preparedForLevel);
+        values.add(createdOn);
         
         this.qtId = qtId;
         this.preparedByIns = preparedByIns;
@@ -46,36 +52,54 @@ public class Questions extends Table{
         return this.qtId;
     }
     public void setQtId(String qtId){
+        values.remove(this.qtId);
+        values.add(qtId);
+        
         this.qtId = qtId;
     }
     public String getQuestion(){
         return this.question;
     }
     public void setQuestion(String question){
+        values.remove(this.question);
+        values.add(question);
+        
         this.question = question;
     }
     public String getPreparedByIns(){
         return this.preparedByIns;
     }
     public void setPreparedByIns(String preparedByIns){
+        values.remove(this.preparedByIns);
+        values.add(preparedByIns);
+        
         this.preparedByIns = preparedByIns;
     }
     public String getBelongInChap(){
         return this.belongInChap;
     }
     public void setBelongInChap(String belongInChap){
+        values.remove(this.belongInChap);
+        values.add(belongInChap);
+        
         this.belongInChap = belongInChap;
     }
     public String getPreparedForLevel(){
         return this.preparedForLevel;
     }
     public void setPreparedForLevel(String preparedForLevel){
+        values.remove(this.preparedForLevel);
+        values.add(preparedForLevel);
+        
         this.preparedForLevel = preparedForLevel;
     }
     public String getCreatedOn(){
         return this.createdOn;
     }
     public void setCreatedOn(String createdOn){
+        values.remove(this.createdOn);
+        values.add(createdOn);
+        
         this.createdOn = createdOn;
     }
     
@@ -139,12 +163,7 @@ public class Questions extends Table{
         columns.add("PreparedForLevel");
         columns.add("CreatedOn");
         
-        values.add(qtId);
-        values.add(question);
-        values.add(preparedByIns);
-        values.add(belongInChap);
-        values.add(preparedForLevel);
-        values.add(createdOn);
+        
         
         super.tableName = "questions";
     }

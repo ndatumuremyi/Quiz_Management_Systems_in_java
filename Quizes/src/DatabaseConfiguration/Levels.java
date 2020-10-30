@@ -23,6 +23,8 @@ public class Levels extends Table{
     }
     public Levels(String levelName, String inFull){
         defaultData();
+        values.add(levelName);
+        values.add(inFull);
         
         this.levelName = levelName;
         this.inFull = inFull;
@@ -30,24 +32,33 @@ public class Levels extends Table{
     public String getLvId(){
         return this.lvId ;
     }
+    public void setLvId(String lvId){
+
+        this.lvId = lvId;
+    }
     public String getLevelName(){
         return this.levelName;
     }
     public void setLevelName(String levelName){
+        values.remove(this.levelName);
+        values.add(levelName);
+        
         this.levelName = levelName;
     }
     public String getInFull(){
         return this.inFull;
     }
     public void setInFull(String inFull){
+        values.remove(this.inFull);
+        values.add(inFull);
+        
         this.inFull = inFull;
     }
     private void defaultData(){
         columns.add("LevelName");
         columns.add("InFull");
         
-        values.add(levelName);
-        values.add(inFull);
+        
         
         super.tableName = "levels";
     }

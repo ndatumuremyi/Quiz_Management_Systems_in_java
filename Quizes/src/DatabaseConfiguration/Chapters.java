@@ -30,9 +30,13 @@ public class Chapters extends Table{
         chapterName = "";
         courseId = "";
     }
-    public Chapters(String chapterName, String courseId){
+    public Chapters(String cpId, String chapterName, String courseId){
         defaultData();
+        values.add(cpId);
+        values.add(chapterName);
+        values.add(courseId);
         
+        this.cpId = cpId;
         this.chapterName = chapterName;
         this.courseId = courseId;
     }
@@ -40,18 +44,27 @@ public class Chapters extends Table{
         return cpId;
     }
     public void setCpId(String cpId){
+        values.remove(this.cpId);
+        values.add(cpId);
+        
         this.cpId = cpId;
     }
     public String getChapterName(){
         return chapterName;
     }
     public void setChapterName(String chapterName){
+        values.remove(this.chapterName);
+        values.add(chapterName);
+        
         this.chapterName = chapterName;
     }
     public String getCourseId(){
         return courseId;
     }
     public void setCourseId(String courseId){
+        values.remove(this.courseId);
+        values.add(courseId);
+        
         this.courseId = courseId;
     }
     public Courses getCourse(){
@@ -70,10 +83,7 @@ public class Chapters extends Table{
         }
     }
     private void defaultData(){
-        values.add(cpId);
-        values.add(cpId);
-        values.add(chapterName);
-        values.add(courseId);
+        
         
         columns.add("CpId");
         columns.add("CpId");

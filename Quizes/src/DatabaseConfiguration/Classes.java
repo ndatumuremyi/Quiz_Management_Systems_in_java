@@ -36,6 +36,10 @@ public class Classes extends Table{
     }
     public Classes(String clId, String classLevel, String schoolId, String instructorId){
         defaultData();
+        values.add(clId);
+        values.add(classLevel);
+        values.add(schoolId);
+        values.add(instructorId);
         
         this.clId = clId;
         this.classLevel = classLevel;
@@ -46,24 +50,36 @@ public class Classes extends Table{
         return this.clId;
     }
     public void setClId(String clId){
+        values.remove(this.clId);
+        values.add(clId);
+        
         this.clId = clId;
     }
     public String getClassLevel(){
         return this.classLevel;
     }
     public void setClassLevel(String classLevel){
+        values.remove(this.classLevel);
+        values.add(classLevel);
+        
         this.classLevel = classLevel;
     }
     public String getSchoolId(){
         return this.schoolId;
     }
     public void setSchoolId(String schoolId){
+        values.remove(this.schoolId);
+        values.add(schoolId);
+        
         this.schoolId = schoolId;
     }
     public String getInstructorId(){
         return this.instructorId;
     }
     public void setInstructorId(String instructorId){
+        values.remove(this.instructorId);
+        values.add(instructorId);
+        
         this.instructorId = instructorId;
     }
     public Levels getLevel(){
@@ -128,10 +144,7 @@ public class Classes extends Table{
         columns.add("SchoolId");
         columns.add("InstructorId");
         
-        values.add(clId);
-        values.add(classLevel);
-        values.add(schoolId);
-        values.add(instructorId);
+        
         
         super.tableName = "classes";
     }

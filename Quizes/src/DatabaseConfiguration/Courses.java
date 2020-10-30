@@ -29,6 +29,9 @@ public class Courses extends Table{
     }
     public Courses(String csId, String courseName, String level){
         defaultData();
+        values.add(csId);
+        values.add(courseName);
+        values.add(level);
         
         this.csId = csId;
         this.courseName = courseName;
@@ -38,18 +41,27 @@ public class Courses extends Table{
         return this.csId;
     }
     public void setCsId(String csId){
+        values.remove(this.csId);
+        values.add(csId);
+        
         this.csId = csId;
     }
     public String getCourseName(){
         return this.courseName;
     } 
     public void setCourseName(String courseName){
+        values.remove(this.courseName);
+        values.add(courseName);
+        
         this.courseName = courseName;
     }
     public String getLevel(){
         return this.level;
     }
     public void setLevel(String level){
+        values.remove(this.level);
+        values.add(level);
+        
         this.level = level;
     }
     public Levels getCLevel(){
@@ -71,9 +83,7 @@ public class Courses extends Table{
         columns.add("CourseName");
         columns.add("Level");
         
-        values.add(csId);
-        values.add(courseName);
-        values.add(level);
+        
         
         super.tableName = "courses";
     }

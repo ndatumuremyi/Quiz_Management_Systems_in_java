@@ -26,14 +26,22 @@ public class Schools extends Table{
     
     private HeadMaster headmaster;
     
-    Schools(){
+    public Schools(){
         defaultData();
         
         
     }
-    Schools(String shId, String schoolName, String headMasterId, String provence, String district, 
+    public Schools(String shId, String schoolName, String headMasterId, String provence, String district, 
             String sector, String cell, String type){
         defaultData();
+        values.add(shId);
+        values.add(schoolName);
+        values.add(headMasterId);
+        values.add(provence);
+        values.add(district);
+        values.add(sector);
+        values.add(cell);
+        values.add(type);
         
         this.shId = shId;
         this.schoolName = schoolName;
@@ -48,48 +56,72 @@ public class Schools extends Table{
         return this.shId;
     }
     public void setShId(String shId){
+        values.remove(this.shId);
+        values.add(shId);
+        
         this.shId = shId;
     }
     public String getSchoolName(){
         return this.schoolName;
     }
     public void setSchoolName(String schoolName){
+        values.remove(this.schoolName);
+        values.add(schoolName);
+        
         this.schoolName = schoolName;
     }
     public String getHeadMasterId(){
         return this.headMasterId;
     }
     public void setHeadMasterId(String headMasterId){
+        values.remove(this.headMasterId);
+        values.add(headMasterId);
+        
         this.headMasterId = headMasterId;
     }
     public String getProvence(){
         return this.provence;
     }
     public void setProvence(String provence){
+        values.remove(this.provence);
+        values.add(provence);
+        
         this.provence = provence;
     }
     public String getDistrict(){
         return this.district;
     }
     public void setDistrict(String district){
+        values.remove(this.district);
+        values.add(district);
+        
         this.district = district;
     }
     public String getSector(){
         return this.sector;
     }
     public void setSector(String sector){
+        values.remove(this.sector);
+        values.add(sector);
+        
         this.sector = sector;
     }
     public String getCell(){
         return this.cell;
     }
     public void setCell(String cell){
+        values.remove(this.cell);
+        values.add(cell);
+        
         this.cell = cell;
     }
     public String getType(){
         return this.type;
     }
     public void setType(String type){
+        values.remove(this.type);
+        values.add(type);
+        
         this.type = type;
     }
     
@@ -121,15 +153,12 @@ public class Schools extends Table{
         columns.add("Cell");
         columns.add("Type");
         
-        values.add(shId);
-        values.add(schoolName);
-        values.add(headMasterId);
-        values.add(provence);
-        values.add(district);
-        values.add(sector);
-        values.add(cell);
-        values.add(type);
+        
         
         super.tableName = "schools";
+    }
+    public static String[] getValiables(){
+        String [] valiables = {"shId", "schoolName", "headMasterId", "provence", "district", "sector", "cell", "type"};
+        return valiables;
     }
 }

@@ -21,11 +21,16 @@ public class Table {
     public void save(){
         if(values.size()==columns.size() ){
             
-            operation.insert(tableName, columns, values);
-            System.out.println("well inserted");
+            if(operation.insert(tableName, columns, values)){
+                System.out.println("well inserted");
+            }
+            else{
+                System.out.println("fail to insert");
+            }
+            
         }
         else{
-            System.out.print("fail to insert data in headmaster table");
+            System.out.print("Error found");
         }
     }
     

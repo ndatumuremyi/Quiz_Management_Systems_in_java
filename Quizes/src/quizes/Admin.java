@@ -44,6 +44,7 @@ public final class Admin {
     Tab StudentTab = new Tab("Student");
     Tab HeadMasterTab = new Tab("HeadMaster");
     Tab LevelsTab = new Tab("School Levels");
+    Tab schoolsTab = new Tab("Schools");
 
     Label Students = new Label("Student Description");
     Label addStudent = new Label("Add_Student");
@@ -114,7 +115,8 @@ public final class Admin {
         } catch (SQLException ex) {
             Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        AdminTabs.getTabs().addAll(HeadMasterTab, InstructorTab, StudentTab, LevelsTab);
+        schoolsTab.setContent(new SchoolPane());
+        AdminTabs.getTabs().addAll(HeadMasterTab, InstructorTab, StudentTab, LevelsTab, schoolsTab);
         InstMenu[1].setContent(new Add_Instructor().AddInst());
 
         addItems();
@@ -128,11 +130,8 @@ public final class Admin {
 
     public MenuBar GetMenuBar(Stage stage, BorderPane borderpane) {
 
-        logout.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                new GetUserName().Logout(stage);
-            }
+        logout.setOnAction((ActionEvent e) -> {
+            new GetUserName().Logout(stage);
         });
         exit.setOnAction(e
                 -> {

@@ -38,6 +38,17 @@ public class Students extends Table{
     public Students(String regNo, String firstName, String lastName, String studentClass, String sex, String age,
             String studentSchool, String address, String userName, String password, String status){
         defaultData();
+        values.add(regNo);
+        values.add(firstName);
+        values.add(lastName);
+        values.add(studentClass);
+        values.add(sex);
+        values.add(age);
+        values.add(studentSchool);
+        values.add(address);
+        values.add(userName);
+        values.add(password);
+        values.add(status);
         
         this.regNo = regNo;
         this.firstName = firstName;
@@ -55,66 +66,99 @@ public class Students extends Table{
         return this.regNo;
     }
     public void setRegNo(String regNo){
+        values.remove(this.regNo);
+        values.add(regNo);
+        
         this.regNo = regNo;
     }
     public String getFirstName(){
         return this.firstName;
     }
     public void setFirstName(String firstName){
+        values.remove(this.firstName);
+        values.add(firstName);
+        
         this.firstName = firstName;
     }
     public String getLastName(){
         return this.lastName;
     }
     public void setLastName(String lastName){
+        values.remove(this.lastName);
+        values.add(lastName);
+        
         this.lastName = lastName;
     }
     public String getStudentClass(){
         return this.studentClass;
     }
     public void setStudentClass(String studentClass){
+        values.remove(this.studentClass);
+        values.add(studentClass);
+        
         this.studentClass = studentClass;
     }
     public String getSex(){
         return this.sex;
     }
     public void setSex(String sex){
+        values.remove(this.sex);
+        values.add(sex);
+        
         this.sex = sex;
     }
     public String getAge(){
         return this.age;
     }
     public void setAge(String age){
+        values.remove(this.age);
+        values.add(age);
+        
         this.age = age;
     }
     public String getStudentSchool(){
         return this.studentSchool;
     }
     public void setStudentSchool(String studentSchool){
+        values.remove(this.studentSchool);
+        values.add(studentSchool);
+        
         this.studentSchool = studentSchool;
     }
     public String getAddress(){
         return this.address;
     }
     public void setAddress(String address){
+        values.remove(this.address);
+        values.add(address);
+        
         this.address = address;
     }
     public String getUserName(){
         return this.userName;
     }
     public void setUserName(String userName){
+        values.remove(this.userName);
+        values.add(userName);
+        
         this.userName = userName;
     }
     public String getPassword(){
         return this.password;
     }
     public void setPassword(String password){
+        values.remove(this.password);
+        values.add(password);
+        
         this.password = password;
     }
     public String getStatus(){
         return this.status;
     }
     public void setStatus(String status){
+        values.remove(this.status);
+        values.add(status);
+        
         this.status = status;
     }
     
@@ -167,17 +211,7 @@ public class Students extends Table{
         columns.add("Password");
         columns.add("Status");
         
-        values.add(regNo);
-        values.add(firstName);
-        values.add(lastName);
-        values.add(studentClass);
-        values.add(sex);
-        values.add(age);
-        values.add(studentSchool);
-        values.add(address);
-        values.add(userName);
-        values.add(password);
-        values.add(status);
+        
         
         super.tableName = "students";
     }

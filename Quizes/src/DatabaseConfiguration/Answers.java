@@ -22,12 +22,17 @@ public class Answers extends Table {
     
     private Questions question;
     
-    public Answers(String questionId, String answer, String isItCorrect){
+    public Answers(String ansId, String questionId, String answer, String isItCorrect){
         defaultData();
-                
+        this.ansId = ansId;
         this.answer = answer;
         this.questionId = questionId;
         this.isItCorrect =isItCorrect;
+        
+        values.add(ansId);
+        values.add(questionId);
+        values.add(answer);
+        values.add(isItCorrect);
         
     }
 
@@ -40,6 +45,9 @@ public class Answers extends Table {
     }
     
     public void setAnsId(String ansId){
+        values.remove(this.ansId);
+        values.add(ansId);
+        
         this.ansId = ansId;
     }
     public String getAnsId(){
@@ -49,9 +57,15 @@ public class Answers extends Table {
         return questionId;
     }       
     public void setQuestionId(String questionId){
+        values.remove(this.questionId);
+        values.add(questionId);
+        
         this.questionId = questionId;
     }
     public void setAnswer(String answer){
+        values.remove(this.answer);
+        values.add(answer);
+        
         this.answer = answer;
     }
     public String getAnswer(){
@@ -61,6 +75,9 @@ public class Answers extends Table {
         return isItCorrect;
     }
     public void setIsItCorrect(String isItCorrect){
+        values.remove(this.isItCorrect);
+        values.add(isItCorrect);
+        
         this.isItCorrect = isItCorrect;
     }
     public Questions getQuestion(){
@@ -88,10 +105,6 @@ public class Answers extends Table {
         columns.add("Answer");
         columns.add("IsItCorrect");
         
-        values.add(ansId);
-        values.add(questionId);
-        values.add(answer);
-        values.add(isItCorrect);
         
         super.tableName = "answers";
     }

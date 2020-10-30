@@ -49,6 +49,16 @@ public class Instructor extends Table{
     public Instructor(String insId, String firstName, String lastName, String course, String nationalId, String school,
             String userName, String password, String degree, String status){
         defaultData();
+        values.add(inId);
+        values.add(firstName);
+        values.add(lastName);
+        values.add(course);
+        values.add(nationalId);
+        values.add(school);
+        values.add( userName);
+        values.add( password);
+        values.add( degree);
+        values.add( status);
         
         this.inId = insId;
         this.firstName = firstName;
@@ -65,60 +75,90 @@ public class Instructor extends Table{
         return this.inId;
     }
     public void setInsId (String insId){
+        values.remove(this.inId);
+        values.add(insId);
+        
         this.inId = insId;
     }
     public String getFirstName(){
         return this.firstName;
     }
     public void setFirstName(String firstName){
+        values.remove(this.firstName);
+        values.add(firstName);
+        
         this.firstName = firstName;
     }
     public String getLastName(){
         return this.lastName;
     }
     public void setLastName(String lastName){
+        values.remove(this.lastName);
+        values.add(lastName);
+        
         this.lastName = lastName;
     }
     public String getCourse(){
         return this.course;
     }
     public void setCourse(String course){
+        values.remove(this.course);
+        values.add(course);
+        
         this.course = course;
     }
     public String getNationalId(){
         return this.nationalId;
     }
     public void setNationalId(String nationalId){
+        values.remove(this.nationalId);
+        values.add(nationalId);
+        
         this.nationalId = nationalId;
     }
     public String getSchool(){
         return this.school;
     }
     public void setSchool(String school){
+        values.remove(this.school);
+        values.add(school);
+        
         this.school = school;
     }
     public String getUserName(){
         return this.userName;
     }
     public void setUserName(String userName){
+        values.remove(this.userName);
+        values.add(userName);
+        
         this.userName = userName;
     }
     public String getPassword(){
         return this.password;
     }
     public void setPassword(String password){
+        values.remove(this.password);
+        values.add(password);
+        
         this.password = password;
     }
     public String getDegree(){
         return this.degree;
     }
     public void setDegree(String degree){
+        values.remove(this.degree);
+        values.add(degree);
+        
         this.degree = degree;
     }
     public String getStatus(){
         return this.status;
     }
     public void setStatus(String status){
+        values.remove(this.status);
+        values.add(status);
+        
         this.status = status;
     }
         
@@ -170,16 +210,7 @@ public class Instructor extends Table{
         columns.add("Degree");
         columns.add("Status");
         
-        values.add(inId);
-        values.add(firstName);
-        values.add(lastName);
-        values.add(course);
-        values.add(nationalId);
-        values.add(school);
-        values.add( userName);
-        values.add( password);
-        values.add( degree);
-        values.add( status);
+        
         
         super.tableName = "instructor";
     }

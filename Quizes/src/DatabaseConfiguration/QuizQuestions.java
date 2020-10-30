@@ -32,6 +32,9 @@ public class QuizQuestions extends Table{
     }
     QuizQuestions(String questionId, String answerId, String quizCode){
         defaultData();
+        values.add(questionId);
+        values.add(answerId);
+        values.add(quizCode);
         
         this.questionId = questionId;
         this.answerId = answerId;
@@ -41,18 +44,27 @@ public class QuizQuestions extends Table{
         return this.questionId;
     }
     public void setQuestionId(String questionId){
+        values.remove(this.questionId);
+        values.add(questionId);
+        
         this.questionId = questionId;
     }
     public String getAnswerId(){
         return this.answerId;
     }
     public void setAnswerId(String answerId){
+        values.remove(this.answerId);
+        values.add(answerId);
+        
         this.answerId = answerId;
     }
     public String getQuizCode(){
         return this.quizCode;
     }
     public void setQuizCode(String quizCode){
+        values.remove(this.quizCode);
+        values.add(quizCode);
+        
         this.quizCode = quizCode;
     }
     
@@ -105,9 +117,7 @@ public class QuizQuestions extends Table{
         columns.add("AnswerId");
         columns.add("QuizCode");
         
-        values.add(questionId);
-        values.add(answerId);
-        values.add(quizCode);
+        
         
         super.tableName = "quizquestions";
     }
