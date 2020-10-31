@@ -27,13 +27,13 @@ public class Questions extends Table{
     private Instructor instructor;
     private Chapters chapter;
     
-    Questions(){
+   public Questions(){
         super.tableName = "questions";
         
         
         qtId =  preparedByIns = belongInChap = preparedForLevel = createdOn = "";
     }
-    Questions(String qtId,String question, String preparedByIns, String belongInChap, String preparedForLevel, String createdOn){
+   public Questions(String qtId,String question, String preparedByIns, String belongInChap, String preparedForLevel, String createdOn){
         cvalues.put("QtId", qtId);
         cvalues.put("Question", question);
         cvalues.put("PreparedByIns", preparedByIns);

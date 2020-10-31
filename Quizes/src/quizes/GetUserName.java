@@ -36,6 +36,7 @@ public class GetUserName {
         user.getChildren().add(vbox);
     }
     /* Method to return  the loggedin person so that it will be used to the dissplay method*/
+  
    public VBox getLoggedinUser()
    {
        return user;
@@ -77,7 +78,7 @@ public class GetUserName {
       if (result.next())
                  {
                      username1 = result.getString("UserName");
-                    String password1 = result.getString("password");
+                    String password1 = result.getString("Password");
                    return username1;   
                  }
       else

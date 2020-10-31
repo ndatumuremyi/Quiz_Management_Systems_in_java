@@ -27,8 +27,7 @@ import javax.swing.JOptionPane;
  *
  * @author Kwizera
  */
-public final class Admin
-{
+public final class Admin{
     TabPane AdminTabs=new TabPane();
     TabPane InstaTabPane=new TabPane();
     Tab InstructorTab=new Tab("Instructor");

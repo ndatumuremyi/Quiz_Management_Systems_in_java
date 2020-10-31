@@ -101,9 +101,28 @@ public class Forms {
                 }
         
             } 
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, e);
-            Logger.getLogger(Forms.class.getName()).log(Level.SEVERE, null, ex);
+            if(as.getValue().equals("Instructor"))
+            {
+              GetUserName User=new GetUserName();//creating an instance of Getuser class
+                  String tabelname="instructor";  
+                  String UserName= User.AuthenticateUser(tabelname,email.getText(), passwordfield.getText());
+                 if (UserName!=null)
+                 {
+                    
+                    setUsername(UserName);
+                   
+                    User.setLoggedinUser(getuser());
+                    InstructorHomePage Instructor=new InstructorHomePage();
+                    Instructor.setLoggedinUser(User.DisplayLoggedin());
+                    Instructor.setusername(UserName);
+                    
+                    Loginstage.close();
+                    Stage stage=new Stage();
+                    Instructor.start(stage);
+                    
+                  
+            }
+           
         }
         
         
@@ -113,7 +132,11 @@ public class Forms {
         
         
         //default user name and password
-    });
+    }   catch (SQLException ex) {
+            Logger.getLogger(Forms.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+);
      Label loginHere = new Label("Login here");
      loginHere.getStyleClass().add("title");
      loginPane.getChildren().addAll(loginHere, username, email, password, passwordfield,

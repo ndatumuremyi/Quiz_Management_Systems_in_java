@@ -5,6 +5,9 @@
  */
 package quizes;
 
+import DatabaseConfiguration.Questions;
+import java.sql.Date;
+
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.geometry.Insets;
@@ -40,9 +43,11 @@ import javafx.util.Callback;
  *
  * @author THERESE
  */
-public class Instructor extends Application {
+public class InstructorHomePage{
      int i = 0;
-    @Override
+    private VBox logged;
+    private String username;
+    
     public void start(Stage primaryStage){
         
         BorderPane panee = new BorderPane();
@@ -64,9 +69,10 @@ public class Instructor extends Application {
           Menu settings = new Menu("Settings");
         Menu exit = new Menu("Exit");
          MenuBar menuBarr = new MenuBar();
+         VBox user=getLoggedinUser();
         menuBarr.getMenus().addAll(settings,exit);
         HBox hbbMenubarr = new HBox();
-         hbbMenubarr.getChildren().add(menuBarr);
+         hbbMenubarr.getChildren().addAll(user,menuBarr);
          panee.setRight(hbbMenubarr);
         settings.setId("settings");
         panee.setId("background");
@@ -214,7 +220,7 @@ public class Instructor extends Application {
  
     public GridPane createPage(int pageIndex) {
          GridPane anchorr = new GridPane();
-        int page = (pageIndex+1);
+  int page = (pageIndex+1);
         
         int y;
         int i;
@@ -226,7 +232,6 @@ public class Instructor extends Application {
             Label label = new Label("New Quiz");
          Hyperlink label1 = new Hyperlink("Question " + y );
        label1.setVisited(true);
-       
        
         
         TextField question1 = new TextField();
@@ -263,8 +268,18 @@ public class Instructor extends Application {
         vbox.getChildren().add(vbox12);
        
         
-        
+       /*Questions questions=new Questions();
+       questions.setPreparedByIns(username);
+       questions.setQuestion(question1.getText());
+       questions.setPreparedForLevel("S4LKK");
+       questions.setQtId("1");
+       questions.setBelongInChap("Chapter 1");
+       
+     questions.save();
+*/
     });
+          
+      
          anchorr.add(vbox,0,8);
 
                       
@@ -291,7 +306,6 @@ public class Instructor extends Application {
          
          
         anchorr.setId("pane");
-        
             
             //Hyperlink link = new Hyperlink( + (i+1));
             //vboxs.setVisited(true);
@@ -299,10 +313,22 @@ public class Instructor extends Application {
             //element.getChildren().addAll(vboxs);
             
         }
-        
-        
         return anchorr;
     }
+     public void setLoggedinUser(VBox user)
+   {
+       this.logged=user;
+       
+   }
+    public VBox getLoggedinUser()
+   {
+       return logged;
+   }
+    public void setusername(String username)
+    {
+        this.username=username;
+    }
+  
 }
 
 
