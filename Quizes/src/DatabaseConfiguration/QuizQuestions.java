@@ -26,9 +26,19 @@ public class QuizQuestions extends Table{
     
     QuizQuestions(){
         super.tableName = "quizquestions";
+        
+        
         questionId = answerId = quizCode = "";
     }
     QuizQuestions(String questionId, String answerId, String quizCode){
+        cvalues.put("QuestionId", questionId);
+        cvalues.put("AnswerId", answerId);
+        cvalues.put("QuizCode", quizCode);
+        
+        
+        
+        super.tableName = "quizquestions";
+        
         this.questionId = questionId;
         this.answerId = answerId;
         this.quizCode = quizCode;
@@ -37,18 +47,26 @@ public class QuizQuestions extends Table{
         return this.questionId;
     }
     public void setQuestionId(String questionId){
+        cvalues.put("QuestionId", questionId);
+        
+        
         this.questionId = questionId;
     }
     public String getAnswerId(){
         return this.answerId;
     }
     public void setAnswerId(String answerId){
+        cvalues.put("AnswerId", answerId);
+        
+        
         this.answerId = answerId;
     }
     public String getQuizCode(){
         return this.quizCode;
     }
     public void setQuizCode(String quizCode){
+        cvalues.put("QuizCode", quizCode);
+        
         this.quizCode = quizCode;
     }
     

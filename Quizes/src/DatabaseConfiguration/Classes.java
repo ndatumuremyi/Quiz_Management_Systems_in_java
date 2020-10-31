@@ -20,18 +20,30 @@ public class Classes extends Table{
     private String classLevel;
     private String schoolId;
     private String instructorId;
+    
     private Levels level;
     private Schools school;
     private Instructor instructor;
     
     public Classes(){
         super.tableName = "classes";
+        
+        
         clId = "";
         classLevel = "";
         schoolId = "";
         instructorId = "";
     }
     public Classes(String clId, String classLevel, String schoolId, String instructorId){
+        cvalues.put("ClId",clId);
+        cvalues.put("ClassLevel",classLevel);
+        cvalues.put("SchoolId",schoolId);
+        cvalues.put("InstructorId", instructorId);
+        
+        
+        
+        super.tableName = "classes";
+        
         this.clId = clId;
         this.classLevel = classLevel;
         this.schoolId = schoolId;
@@ -41,24 +53,35 @@ public class Classes extends Table{
         return this.clId;
     }
     public void setClId(String clId){
+        cvalues.put("ClId",clId);
+        
+        
         this.clId = clId;
     }
     public String getClassLevel(){
         return this.classLevel;
     }
     public void setClassLevel(String classLevel){
+        cvalues.put("ClassLevel",classLevel);
+        
+        
         this.classLevel = classLevel;
     }
     public String getSchoolId(){
         return this.schoolId;
     }
     public void setSchoolId(String schoolId){
+        cvalues.put("SchoolId",schoolId);
+        
+        
         this.schoolId = schoolId;
     }
     public String getInstructorId(){
         return this.instructorId;
     }
     public void setInstructorId(String instructorId){
+        cvalues.put("InstructorId", instructorId);
+        
         this.instructorId = instructorId;
     }
     public Levels getLevel(){

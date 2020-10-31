@@ -69,7 +69,7 @@ public class GetUserName {
    public String AuthenticateUser(String TabelName,String UserName,String UserPassword) throws SQLException//User Authentiction funtion
    {
        
-        Statement st= Connections.getcon();
+        Statement st= Connections.getConnection();
                     
       String query="SELECT * FROM "+TabelName+" WHERE `UserName`='"+UserName+"'and password='"+UserPassword+"'"; 
       ResultSet  result= st.executeQuery(query);

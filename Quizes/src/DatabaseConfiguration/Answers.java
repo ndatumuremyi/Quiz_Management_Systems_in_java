@@ -19,22 +19,39 @@ public class Answers extends Table {
     private String questionId;
     private String answer;
     private String isItCorrect;
+    
     private Questions question;
     
-    public Answers(String questionId, String answer, String isItCorrect){
+    public Answers(String ansId, String questionId, String answer, String isItCorrect){
+        super.tableName = "answers";
+        
+        this.ansId = ansId;
         this.answer = answer;
         this.questionId = questionId;
         this.isItCorrect =isItCorrect;
-        super.tableName = "answers";
+        
+        cvalues.put("AnsId", ansId);
+        cvalues.put("QuestionId",questionId);
+        cvalues.put("Answer", answer);
+        cvalues.put("IsItCorrect",isItCorrect);
+        
+        
+        
+        
     }
 
     Answers() {
+        super.tableName = "answers";
+                
         questionId = null;
         answer = null;
         isItCorrect = null;
     }
     
     public void setAnsId(String ansId){
+        cvalues.put("AnsId", ansId);
+        
+        
         this.ansId = ansId;
     }
     public String getAnsId(){
@@ -44,9 +61,15 @@ public class Answers extends Table {
         return questionId;
     }       
     public void setQuestionId(String questionId){
+        cvalues.put("QuestionId",questionId);
+        
+        
         this.questionId = questionId;
     }
     public void setAnswer(String answer){
+        cvalues.put("Answer", answer);
+        
+        
         this.answer = answer;
     }
     public String getAnswer(){
@@ -56,6 +79,8 @@ public class Answers extends Table {
         return isItCorrect;
     }
     public void setIsItCorrect(String isItCorrect){
+        cvalues.put("IsItCorrect",isItCorrect);
+        
         this.isItCorrect = isItCorrect;
     }
     public Questions getQuestion(){

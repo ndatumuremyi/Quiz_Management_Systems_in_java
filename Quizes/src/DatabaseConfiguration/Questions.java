@@ -29,9 +29,22 @@ public class Questions extends Table{
     
     Questions(){
         super.tableName = "questions";
+        
+        
         qtId =  preparedByIns = belongInChap = preparedForLevel = createdOn = "";
     }
-    Questions(String qtId, String preparedByIns, String belongInChap, String preparedForLevel, String createdOn){
+    Questions(String qtId,String question, String preparedByIns, String belongInChap, String preparedForLevel, String createdOn){
+        cvalues.put("QtId", qtId);
+        cvalues.put("Question", question);
+        cvalues.put("PreparedByIns", preparedByIns);
+        cvalues.put("BelongInChap", belongInChap);
+        cvalues.put("PreparedForLevel", preparedForLevel);
+        cvalues.put("CreatedOn", createdOn);
+        
+        
+        
+        super.tableName = "questions";
+        
         this.qtId = qtId;
         this.preparedByIns = preparedByIns;
         this.belongInChap = belongInChap;
@@ -42,36 +55,53 @@ public class Questions extends Table{
         return this.qtId;
     }
     public void setQtId(String qtId){
+        cvalues.put("QtId", qtId);
+        
+        
         this.qtId = qtId;
     }
     public String getQuestion(){
         return this.question;
     }
     public void setQuestion(String question){
+        cvalues.put("Question", question);
+        
+        
         this.question = question;
     }
     public String getPreparedByIns(){
         return this.preparedByIns;
     }
     public void setPreparedByIns(String preparedByIns){
+        cvalues.put("PreparedByIns", preparedByIns);
+        
+        
         this.preparedByIns = preparedByIns;
     }
     public String getBelongInChap(){
         return this.belongInChap;
     }
     public void setBelongInChap(String belongInChap){
+        cvalues.put("BelongInChap", belongInChap);
+        
+        
         this.belongInChap = belongInChap;
     }
     public String getPreparedForLevel(){
         return this.preparedForLevel;
     }
     public void setPreparedForLevel(String preparedForLevel){
+        cvalues.put("PreparedForLevel", preparedForLevel);
+       
+        
         this.preparedForLevel = preparedForLevel;
     }
     public String getCreatedOn(){
         return this.createdOn;
     }
     public void setCreatedOn(String createdOn){
+        cvalues.put("CreatedOn", createdOn);
+        
         this.createdOn = createdOn;
     }
     

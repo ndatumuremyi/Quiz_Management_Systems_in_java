@@ -6,6 +6,8 @@
 package DatabaseConfiguration;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,18 +16,30 @@ import java.util.ArrayList;
 public class Table {
     String tableName;
     DataOperations operation = new DataOperations();
-    ArrayList<String> valiables = new ArrayList<>();
-    ArrayList<String> values = new ArrayList<>();
+    HashMap<String, String>cvalues = new HashMap<>();
+
     
     public void save(){
-        if(values.size()==valiables.size() ){
-            
-            operation.insert(tableName, valiables, values);
-            System.out.println("well inserted");
+        if(operation.insert(tableName, cvalues)){
+            JOptionPane.showMessageDialog(null,"well inserted");
         }
         else{
-            System.out.print("fail to insert data in headmaster table");
+            System.out.println("fail to insert");
         }
+        
+
+//        if(values.size()==columns.size() ){
+//            if(operation.insert(tableName, columns, values)){
+//                System.out.println("well inserted");
+//            }
+//            else{
+//                System.out.println("fail to insert");
+//            }
+//            
+//        }
+//        else{
+//            System.out.print("Error found");
+//        }
     }
     
     public static void select(){

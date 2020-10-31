@@ -63,7 +63,7 @@ public class TakeQuiz extends Application {
             {
                 ArrayList<String> Problems=new ArrayList<>();
                 try{
-                 Statement st= Connections.getcon();
+                 Statement st= Connections.getConnection();
                  ResultSet Result=st.executeQuery("SELECT `Question` FROM `quizes`");
                  while(Result.next())
                  {

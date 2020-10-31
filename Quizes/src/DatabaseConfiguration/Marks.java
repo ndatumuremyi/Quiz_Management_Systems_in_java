@@ -28,10 +28,22 @@ public class Marks extends Table{
     private Quizes quiz;
     
     public Marks(){
-        super.tableName = "marks";
+       super.tableName = "marks";
+        
+        
         mkId = studentReg = quizCode = courseId = marks = workedAt = "";
     }
     public Marks(String mkId, String studentReg, String quizCode,String courseId, String marks, String workedAt){
+        cvalues.put("MkId", mkId);
+        cvalues.put("StudentReg", studentReg);
+        cvalues.put("QuizCode", quizCode);
+        cvalues.put("CourseId", courseId);
+        cvalues.put("Marks", marks);
+        cvalues.put("WorkedAt", workedAt);
+        
+        
+        super.tableName = "marks";
+        
         this.mkId = mkId;
         this.studentReg = studentReg;
         this.quizCode = quizCode;
@@ -43,36 +55,53 @@ public class Marks extends Table{
         return this.mkId;
     }
     public void setMkId(String mkId){
+        cvalues.put("MkId", mkId);
+        
+        
         this.mkId = mkId;
     }
     public String getStudentReg(){
         return this.studentReg;
     }
     public void setStudentReg(String studentReg){
+        cvalues.put("StudentReg", studentReg);
+        
+        
         this.studentReg = studentReg;
     }
     public String getQuizCode(){
         return this.quizCode;
     }
     public void setQuizCode(String quizCode){
+        cvalues.put("QuizCode", quizCode);
+        
+        
         this.quizCode = quizCode;
     }
     public String getCourseId(){
         return this.courseId;
     }
     public void setCourseId(String courseId){
+        cvalues.put("CourseId", courseId);
+        
+        
         this.courseId = courseId;
     }
     public String getMarks(){
         return this.marks;
     }
     public void setMarks(String marks){
+        cvalues.put("Marks", marks);
+        
+        
         this.marks = marks;
     }
     public String getWorkedAt(){
         return this.workedAt;
     }
     public void setWorkedAt(String workedAt){
+        cvalues.put("WorkedAt", workedAt);
+        
         this.workedAt = workedAt;
     }
     

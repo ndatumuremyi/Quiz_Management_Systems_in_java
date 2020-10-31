@@ -32,9 +32,26 @@ public class Students extends Table{
     
     public Students(){
         super.tableName = "students";
+        
+        
     }
     public Students(String regNo, String firstName, String lastName, String studentClass, String sex, String age,
             String studentSchool, String address, String userName, String password, String status){
+        cvalues.put("RegNo", regNo);
+        cvalues.put("FirstName", firstName);
+        cvalues.put("LastName", lastName);
+        cvalues.put("StudentClass", studentClass);
+        cvalues.put("Sex", sex);
+        cvalues.put("Age", age);
+        cvalues.put("StudentSchool", studentSchool);
+        cvalues.put("Address", address);
+        cvalues.put("UserName", userName);
+        cvalues.put("Password", password);
+        cvalues.put("Status", status);
+        
+        
+        
+        super.tableName = "students";
         
         this.regNo = regNo;
         this.firstName = firstName;
@@ -52,66 +69,97 @@ public class Students extends Table{
         return this.regNo;
     }
     public void setRegNo(String regNo){
+        cvalues.put("RegNo", regNo);
+        
+        
         this.regNo = regNo;
     }
     public String getFirstName(){
         return this.firstName;
     }
     public void setFirstName(String firstName){
+        cvalues.put("FirstName", firstName);
+        
+        
         this.firstName = firstName;
     }
     public String getLastName(){
         return this.lastName;
     }
     public void setLastName(String lastName){
+        cvalues.put("LastName", lastName);
+        
+        
         this.lastName = lastName;
     }
     public String getStudentClass(){
         return this.studentClass;
     }
     public void setStudentClass(String studentClass){
+        cvalues.put("StudentClass", studentClass);
+        
+        
         this.studentClass = studentClass;
     }
     public String getSex(){
         return this.sex;
     }
     public void setSex(String sex){
+        cvalues.put("Sex", sex);
+        
+        
         this.sex = sex;
     }
     public String getAge(){
         return this.age;
     }
     public void setAge(String age){
+        cvalues.put("Age", age);
+        
+        
         this.age = age;
     }
     public String getStudentSchool(){
         return this.studentSchool;
     }
     public void setStudentSchool(String studentSchool){
+        cvalues.put("StudentSchool", studentSchool);
+        
+        
         this.studentSchool = studentSchool;
     }
     public String getAddress(){
         return this.address;
     }
     public void setAddress(String address){
+        cvalues.put("Address", address);
+        
+        
         this.address = address;
     }
     public String getUserName(){
         return this.userName;
     }
     public void setUserName(String userName){
+        cvalues.put("UserName", userName);
+        
+        
         this.userName = userName;
     }
     public String getPassword(){
         return this.password;
     }
     public void setPassword(String password){
+        cvalues.put("Password", password);
+       
         this.password = password;
     }
     public String getStatus(){
         return this.status;
     }
     public void setStatus(String status){
+        cvalues.put("Status", status);
+        
         this.status = status;
     }
     
@@ -151,4 +199,5 @@ public class Students extends Table{
             Logger.getLogger(Classes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+ 
 }

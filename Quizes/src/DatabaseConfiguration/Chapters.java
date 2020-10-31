@@ -19,15 +19,25 @@ public class Chapters extends Table{
     private String cpId;
     private String chapterName;
     private String courseId;
+    
     private Courses course;
     
     public Chapters(){
         super.tableName = "chapters";
+        
+        
         cpId = "";
         chapterName = "";
         courseId = "";
     }
-    public Chapters(String chapterName, String courseId){
+    public Chapters(String cpId, String chapterName, String courseId){
+        cvalues.put("CpId", cpId);
+        cvalues.put("ChapterName", chapterName);
+        cvalues.put("CourseId", courseId);
+        
+        super.tableName = "chapters";
+        
+        this.cpId = cpId;
         this.chapterName = chapterName;
         this.courseId = courseId;
     }
@@ -35,18 +45,26 @@ public class Chapters extends Table{
         return cpId;
     }
     public void setCpId(String cpId){
+        cvalues.put("CpId", cpId);
+        
+        
         this.cpId = cpId;
     }
     public String getChapterName(){
         return chapterName;
     }
     public void setChapterName(String chapterName){
+        cvalues.put("ChapterName", chapterName);
+        
+        
         this.chapterName = chapterName;
     }
     public String getCourseId(){
         return courseId;
     }
     public void setCourseId(String courseId){
+        cvalues.put("CourseId", courseId);
+        
         this.courseId = courseId;
     }
     public Courses getCourse(){
@@ -64,4 +82,5 @@ public class Chapters extends Table{
             Logger.getLogger(Chapters.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
 }

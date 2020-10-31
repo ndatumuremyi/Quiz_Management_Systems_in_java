@@ -16,10 +16,37 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 public class DataOperations {
     
-    static Statement statement = Connections.getcon();
+    static Statement statement = Connections.getConnection();
     
-    
-    /*
+    String values = "";
+    String columns ="";
+    public boolean insert(String tableName, HashMap<String, String> cvalues){
+        String query="insert into "+tableName+"(";
+        
+        cvalues.forEach((key, value)->{
+            columns += key +",";
+            values += value + "\",\"";
+        });
+        columns = columns.substring(0, columns.length()-1);
+        values = values.substring(0, values.length()-2);
+        query += columns + ")values(\""+ values + ");";
+        
+        System.out.println(query);
+        
+        columns = values = "";
+        if(executeSet(query)){
+            return true;
+        }
+        else{
+            return false;
+        }
+        
+        
+        
+        
+    }
+    public boolean insert(String tableName, ArrayList<String> valiables,ArrayList<String> values){
+        /*
     **********************************************************************************************************************
     **********************************************************************************************************************
     
@@ -28,23 +55,21 @@ public class DataOperations {
     **********************************************************************************************************************
     **********************************************************************************************************************
     */
-    public void insert(String tableName, ArrayList<String> valiables,ArrayList<String> values){
         String query="insert into "+tableName+"(";
-        query = valiables.stream().map((variable) -> variable+',').reduce(query, String::concat);
+        for(String variable : valiables){
+                query += variable+',';
+            }
             query = query.substring(0, query.length()-1)+ ")values(\"";
-            query = values.stream().map((value) -> value +"\",\"").reduce(query, String::concat);
+            for(String value : values){
+                query +=value +"\",\"";
+            }
             query = query.substring(0, query.length()-2)+ ");";
-        try{
-            
-            statement.executeUpdate(query);
-            System.out.println(query);
-        //    return true;
-        }
-        catch (SQLException ex){
-              //  ex.printStackTrace(System.out);
-                
-        //    return false;
-        }
+            if(executeSet(query)){
+                return true;
+            }
+            else{
+                return false;
+            }
         
     }
     
@@ -67,7 +92,7 @@ public class DataOperations {
         
         
         String query = "select * from "+ tableName +";";
-        ResultSet output = execute(query);
+        ResultSet output = executeGet(query);
 //        ResultSetMetaData metaData = output.getMetaData();
         
         switch (tableName) {
@@ -106,7 +131,6 @@ public class DataOperations {
                         questions.setPreparedByIns(output.getString("PreparedByIns"));
                         questions.setPreparedForLevel(output.getString("PreparedForLevel"));
                         questions.setQtId(output.getString("QtId"));
-                        questions.setQuestion(output.getString("question"));
                         
                         result.add(questions);
                         return result;
@@ -127,6 +151,7 @@ public class DataOperations {
                     while(output.next()){
                         HeadMaster headmaster = new HeadMaster();
                         
+                        headmaster.setHmId(output.getString("HmId"));
                         headmaster.setDegree(output.getString("Degree"));
                         headmaster.setFirstName(output.getString("FirstName"));
                         headmaster.setLastName(output.getString("LastName"));
@@ -337,8 +362,20 @@ public class DataOperations {
         
         
     }
-    
-    ResultSet execute(String query){
+    public boolean executeSet(String query){
+        try{
+            System.out.println(query);
+            statement.executeUpdate(query);
+            return true;
+        }
+        catch (SQLException ex){
+            System.out.println(ex);
+              //  ex.printStackTrace(System.out);
+                
+            return false;
+        }
+    }
+    ResultSet executeGet(String query){
         /*
         ***************************************************************************************************************************
         ***************************************************************************************************************************
@@ -361,8 +398,7 @@ public class DataOperations {
     
     
     
-    public void select(String tableName, String... columns)
-    {
+    public ResultSet select(String tableName, String... columns){
         /*
         **********************************************************************************************************************
         **********************************************************************************************************************
@@ -372,10 +408,22 @@ public class DataOperations {
         **********************************************************************************************************************
         **********************************************************************************************************************
         */
+        String query = "select ";
         
-        for(String column : columns)
-        {
-           
+        for(String column : columns){
+           query += column + ",";
+        }
+        query = query.substring(0, query.length() - 1);
+        query += "from "+tableName + ";";
+        try {
+            ResultSet output = statement.executeQuery(query);
+            return output;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DataOperations.class.getName()).log(Level.SEVERE, null, ex);
+            
+            System.out.println("fail to get data \n" + query);
+            return null;
         }
     }
     
@@ -402,6 +450,10 @@ public class DataOperations {
             return null;
         }
     }
+    public String lowerFC(String string){
+        return string.substring(0,1).toLowerCase() + string.substring(1);
+    }
+            
         
     
 }

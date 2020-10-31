@@ -114,7 +114,7 @@ public class Add_Instructor{
             if(b==true){
                 try{
                     
-                      Statement st= Connections.getcon();
+                      Statement st= Connections.getConnection();
                       
                     st.executeUpdate("INSERT INTO `instructors`(`FName`, `LName`, `Email`, `Course`, `Class`,`Phone_number`) VALUES"
                             + "('"+addFirstName.getText()+"','"+addLastName.getText()+"','"+addEmail.getText()+"','"+addCourse.getText()+"','"+addYear.getText()+"','0788722091')");

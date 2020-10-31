@@ -11,18 +11,18 @@ import java.sql.*;
  */
 public class Connections {
 
-    public static Statement getcon(){
+    public static Statement getConnection(){
         try{
             Class.forName("com.mysql.jdbc.Driver");
             
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Quiz_Management_System","root","");
-            Statement statement=connection.createStatement();
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Quiz_Management_System", "root", "");
+            Statement statement = connection.createStatement();
             
-            return  statement;
+            return statement;
         }
         
         catch (ClassNotFoundException | SQLException ex){
-            System.out.println("fails to connect to database");
+            System.out.println("fail to connect to database");
         }
         return null;
         

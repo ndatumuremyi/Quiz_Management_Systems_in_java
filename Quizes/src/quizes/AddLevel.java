@@ -5,11 +5,9 @@
  */
 package quizes;
 
-import DatabaseConfiguration.Connections;
 import DatabaseConfiguration.DataOperations;
 import DatabaseConfiguration.Levels;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,6 +22,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -69,18 +68,22 @@ final VBox vbox = new VBox();
        Leveldescription.setMinWidth(NameInFull.getPrefWidth());
        final Button AddAndSave=new Button("Add And Save");
        AddAndSave.setOnAction(e->{
-           DataOperations dataoperations=new DataOperations();
-           ArrayList<String> Variabels=new ArrayList<>();
-           Variabels.add("LevelName");
-           Variabels.add("InFull");
-           ArrayList<String> Values=new ArrayList<>();
-           Values.add(Leveltextfield.getText());
-           Values.add(Leveldescription.getText());
-           data.add(new Levels(Leveltextfield.getText(),Leveldescription.getText()) );
-           
-           dataoperations.insert("levels",Variabels, Values);
+          // DataOperations dataoperations=new DataOperations();
+          // ArrayList<String> Variabels=new ArrayList<>();
+           //Variabels.add("LevelName");
+          // Variabels.add("InFull");
+          // ArrayList<String> Values=new ArrayList<>();
+          // Values.add(Leveltextfield.getText());
+           //Values.add(Leveldescription.getText());
+           Levels Level=new Levels(Leveltextfield.getText(),Leveldescription.getText());
+           int ask=JOptionPane.showConfirmDialog(null, "Do you want to add level ?","Confirm!",JOptionPane.YES_NO_OPTION);
+           if(ask==0){
+           data.add(Level);
+           Level.save();
+          // dataoperations.insert("levels",Variabels, Values);
            Leveltextfield.clear();
            Leveldescription.clear();
+           }
        });
       
       hb.getChildren().addAll(Leveltextfield,Leveldescription,AddAndSave);

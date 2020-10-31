@@ -26,11 +26,24 @@ public class Schools extends Table{
     
     private HeadMaster headmaster;
     
-    Schools(){
+    public Schools(){
         super.tableName = "schools";
+        
+        
     }
-    Schools(String shId, String schoolName, String headMasterId, String provence, String district, 
+    public Schools(String shId, String schoolName, String headMasterId, String provence, String district, 
             String sector, String cell, String type){
+        super.tableName = "schools";
+        
+        cvalues.put("shId",shId);
+        cvalues.put("schoolName",schoolName);
+        cvalues.put("headMasterId",headMasterId);
+        cvalues.put("provence",provence);
+        cvalues.put("district",district);
+        cvalues.put("sector",sector);
+        cvalues.put("cell",cell);
+        cvalues.put("type",type );
+        
         this.shId = shId;
         this.schoolName = schoolName;
         this.headMasterId = headMasterId;
@@ -44,48 +57,68 @@ public class Schools extends Table{
         return this.shId;
     }
     public void setShId(String shId){
+        cvalues.put("shId",shId);
+        
         this.shId = shId;
     }
     public String getSchoolName(){
         return this.schoolName;
     }
     public void setSchoolName(String schoolName){
+        cvalues.put("schoolName",schoolName);
+        
         this.schoolName = schoolName;
     }
     public String getHeadMasterId(){
         return this.headMasterId;
     }
     public void setHeadMasterId(String headMasterId){
+        cvalues.put("headMasterId",headMasterId);
+        
         this.headMasterId = headMasterId;
     }
     public String getProvence(){
         return this.provence;
     }
     public void setProvence(String provence){
+        cvalues.put("provence",provence);
+        
         this.provence = provence;
     }
     public String getDistrict(){
         return this.district;
     }
     public void setDistrict(String district){
+        
+        cvalues.put("district",district);
+        
+        
         this.district = district;
     }
     public String getSector(){
         return this.sector;
     }
     public void setSector(String sector){
+        cvalues.put("sector",sector);
+        
+        
         this.sector = sector;
     }
     public String getCell(){
         return this.cell;
     }
     public void setCell(String cell){
+        cvalues.put("cell",cell);
+        
+        
         this.cell = cell;
     }
     public String getType(){
         return this.type;
     }
     public void setType(String type){
+        cvalues.put("type",type );
+        
         this.type = type;
     }
     
@@ -106,5 +139,11 @@ public class Schools extends Table{
         } catch (SQLException ex) {
             Logger.getLogger(Schools.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public static String[] getValiables(){
+        String [] valiables = {"shId", "schoolName", "headMasterId", "provence", "district", "sector", "cell", "type"};
+        
+        return valiables;
     }
 }

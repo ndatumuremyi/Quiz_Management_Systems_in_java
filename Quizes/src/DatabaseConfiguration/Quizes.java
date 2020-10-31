@@ -26,9 +26,21 @@ public class Quizes extends Table{
     
     Quizes(){
         super.tableName = "quizes";
+        
+        
         quizCode = type = classPreparedFor = attemptDate = creator = "";
     }
     Quizes( String quizCode, String type, String classPreparedFor, String attemptDate, String creator){
+        cvalues.put("QuizCode", quizCode);
+        cvalues.put("Type", type);
+        cvalues.put("ClassPreparedFor", classPreparedFor);
+        cvalues.put("AttemptDate", attemptDate);
+        cvalues.put("Creator", creator);
+        
+        
+        
+        super.tableName = "quizes";
+        
         this.quizCode = quizCode;
         this.type = type;
         this.classPreparedFor = classPreparedFor;
@@ -39,30 +51,44 @@ public class Quizes extends Table{
         return this.quizCode;
     }
     public void setQuizCode(String quizCode){
+        cvalues.put("QuizCode", quizCode);
+        
+        
         this.quizCode = quizCode;
     }
     public String getType(){
         return this.type;
     }
     public void setType(String type){
+        cvalues.put("Type", type);
+        
+        
         this.type = type;
     }
     public String getClassPreparedFor(){
         return this.classPreparedFor;
     }
     public void setClassPreparedFor(String classPreparedFor){
+        cvalues.put("ClassPreparedFor", classPreparedFor);
+        
+        
         this.classPreparedFor = classPreparedFor;
     }
     public String getAttemptDate(){
         return this.attemptDate;
     }
     public void setAttemptDate(String attemptDate){
+        cvalues.put("AttemptDate", attemptDate);
+        
+        
         this.attemptDate = attemptDate;
     }
     public String getCreator(){
         return this.creator;
     }
     public void setCreator(String creator){
+        cvalues.put("Creator", creator);
+        
         this.creator = creator;
     }
     
