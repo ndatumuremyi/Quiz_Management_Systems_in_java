@@ -1,0 +1,103 @@
+
+#EnteredName{
+    -fx-background-color:skyblue;
+    -fx-font-size: 25pt;
+    -fx-font-family:"Courier New"; 
+    -fx-alignment:CENTER_RIGHT ;
+    -fx-end-margin: 0;
+}
+#banner
+{
+    -fx-background-color: gray;
+    
+}
+#title{
+    
+    -fx-font-size: 25pt;
+    -fx-font-family:"algerian"; 
+    -fx-alignment:CENTER_RIGHT ;
+    -fx-end-margin: 0;
+}
+#type{
+    
+    -fx-font-size: 15pt;
+    -fx-font-family:"arial rounded mt bold"; 
+   
+}
+#radiobtn{
+    
+    -fx-font-size: 15pt;
+    -fx-font-family:"arial rounded mt bold"; 
+    -fx-alignment:CENTER_RIGHT ;
+    -fx-end-margin: 0;
+}
+#radiobtn1{
+    
+    -fx-font-size: 15pt;
+    -fx-font-family:"arial rounded mt bold"; 
+    -fx-alignment:CENTER_RIGHT ;
+    -fx-end-margin: 0;
+    
+}
+#text{
+    -fx-font-size: 10pt;
+    -fx-font-family:"bookman old style"; 
+    
+    -fx-end-margin: 0;
+}
+#view{
+    -fx-background-color: white;
+}
+#box{
+    -fx-background-color: gray;
+}
+#panee{
+    -fx-background-color: gray;
+}
+#entered{
+    -fx-background-color: white;
+    -fx-font-size: 20pt;
+    -fx-font-family:"bookman old style"; 
+    
+    -fx-padding: 30;
+}
+#entere{
+    
+    -fx-font-size: 15pt;
+     
+    
+    
+}
+#menubar{
+    -fx-font-size: 10pt;
+    -fx-font-family:"bookman old style"; 
+    
+    
+}
+#settings{
+    -fx-font-size: 10pt;
+    -fx-font-family:"bookman old style"; 
+    
+    
+}
+#background
+{
+    -fx-background-color:skyblue;
+    
+}
+#lab{
+    -fx-background-color: white;
+    -fx-font-size: 20pt;
+    -fx-font-family:"bookman old style"; 
+    
+    -fx-padding: 30;
+}
+#pane
+{
+    -fx-background-color:pink;
+    
+}
+#question1{
+    -fx-font-width: 2pt;
+    
+}

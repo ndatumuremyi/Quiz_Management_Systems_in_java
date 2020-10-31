@@ -214,13 +214,19 @@ public class Instructor extends Application {
  
     public GridPane createPage(int pageIndex) {
          GridPane anchorr = new GridPane();
-        int page = (pageIndex-6);
-        for (int i = page; i <page + itemsPerPage();i++) {
+        int page = (pageIndex+1);
+        
+        int y;
+        int i;
+        for (y=i = page; i <page + itemsPerPage();i++) 
+        {
+            
            
            
             Label label = new Label("New Quiz");
-         Hyperlink label1 = new Hyperlink("Question" + i );
+         Hyperlink label1 = new Hyperlink("Question " + y );
        label1.setVisited(true);
+       
        
         
         TextField question1 = new TextField();
@@ -285,6 +291,7 @@ public class Instructor extends Application {
          
          
         anchorr.setId("pane");
+        
             
             //Hyperlink link = new Hyperlink( + (i+1));
             //vboxs.setVisited(true);
@@ -292,6 +299,8 @@ public class Instructor extends Application {
             //element.getChildren().addAll(vboxs);
             
         }
+        
+        
         return anchorr;
     }
 }
